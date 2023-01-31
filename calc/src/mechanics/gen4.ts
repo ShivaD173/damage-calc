@@ -5,6 +5,7 @@ import {Field} from '../field';
 import {Move} from '../move';
 import {Pokemon} from '../pokemon';
 import {Result} from '../result';
+import {toID} from '../util';
 import {
   getModifiedStat,
   getEVDescriptionText,
@@ -214,6 +215,10 @@ export function calculateDPP(
     basePower = Math.floor((defender.curHP() * 120) / defender.maxHP()) + 1;
     desc.moveBP = basePower;
     break;
+  case 'Knock Off':
+    basePower = Math.floor(basePower * 1.5)
+    desc.moveBP = basePower;
+    break;
   default:
     basePower = move.bp;
   }
@@ -356,6 +361,12 @@ export function calculateDPP(
     defense = Math.floor(defense * 1.5);
     desc.defenderAbility = defender.ability;
     desc.weather = field.weather;
+  }
+
+  if ((defender.hasItem('Eviolite') && gen.species.get(toID(defender.name))?.nfe) ||
+      (!isPhysical && defender.hasItem('Assault Vest'))) {
+    defense = Math.floor(defense * 1.5);
+    desc.defenderItem = defender.item;
   }
 
   if (defender.hasItem('Soul Dew') && defender.named('Latios', 'Latias') && !isPhysical) {
