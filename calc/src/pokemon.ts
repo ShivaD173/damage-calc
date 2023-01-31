@@ -20,7 +20,10 @@ export class Pokemon implements State.Pokemon {
   ability?: I.AbilityName;
   abilityOn?: boolean;
   isDynamaxed?: boolean;
+  isSaltCure?: boolean;
+  alliesFainted?: number;
   item?: I.ItemName;
+  teraType?: I.TypeName;
 
   nature: I.NatureName;
   ivs: I.StatsTable;
@@ -50,24 +53,28 @@ export class Pokemon implements State.Pokemon {
     this.gen = gen;
     this.name = options.name || name as I.SpeciesName;
     this.types = this.species.types;
-    this.isDynamaxed = !!options.isDynamaxed;
     this.weightkg = this.species.weightkg;
-    // Gigantamax 'forms' inherit weight from their base species when not dynamaxed
-    // TODO: clean this up with proper Gigantamax support
-    if (this.weightkg === 0 && !this.isDynamaxed && this.species.baseSpecies) {
-      this.weightkg = gen.species.get(toID(this.species.baseSpecies))!.weightkg;
-    }
 
     this.level = options.level || 100;
     this.gender = options.gender || this.species.gender || 'M';
     this.ability = options.ability || this.species.abilities?.[0] || undefined;
     this.abilityOn = !!options.abilityOn;
 
+    this.isDynamaxed = !!options.isDynamaxed;
+    this.isSaltCure = !!options.isSaltCure;
+    this.alliesFainted = options.alliesFainted;
+    this.teraType = options.teraType;
     this.item = options.item;
     this.nature = options.nature || ('Serious' as I.NatureName);
     this.ivs = Pokemon.withDefault(gen, options.ivs, 31);
     this.evs = Pokemon.withDefault(gen, options.evs, gen.num >= 3 ? 0 : 252);
     this.boosts = Pokemon.withDefault(gen, options.boosts, 0, false);
+
+    // Gigantamax 'forms' inherit weight from their base species when not dynamaxed
+    // TODO: clean this up with proper Gigantamax support
+    if (this.weightkg === 0 && !this.isDynamaxed && this.species.baseSpecies) {
+      this.weightkg = gen.species.get(toID(this.species.baseSpecies))!.weightkg;
+    }
 
     if (gen.num < 3) {
       this.ivs.hp = Stats.DVToIV(
@@ -123,6 +130,14 @@ export class Pokemon implements State.Pokemon {
 
   hasType(...types: I.TypeName[]) {
     for (const type of types) {
+      if (this.teraType ? this.teraType === type : this.types.includes(type)) return true;
+    }
+    return false;
+  }
+
+  /** Ignores Tera type */
+  hasOriginalType(...types: I.TypeName[]) {
+    for (const type of types) {
       if (this.types.includes(type)) return true;
     }
     return false;
@@ -138,6 +153,8 @@ export class Pokemon implements State.Pokemon {
       ability: this.ability,
       abilityOn: this.abilityOn,
       isDynamaxed: this.isDynamaxed,
+      isSaltCure: this.isSaltCure,
+      alliesFainted: this.alliesFainted,
       item: this.item,
       gender: this.gender,
       nature: this.nature,
@@ -146,6 +163,7 @@ export class Pokemon implements State.Pokemon {
       boosts: extend(true, {}, this.boosts),
       originalCurHP: this.originalCurHP,
       status: this.status,
+      teraType: this.teraType,
       toxicCounter: this.toxicCounter,
       moves: this.moves.slice(),
       overrides: this.species,
@@ -171,7 +189,7 @@ export class Pokemon implements State.Pokemon {
     moveName?: I.MoveName
   ) {
     const species = gen.species.get(toID(speciesName));
-    if (!species || !species.otherFormes) {
+    if (!species?.otherFormes) {
       return speciesName;
     }
 

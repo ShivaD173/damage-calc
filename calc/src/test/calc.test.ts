@@ -26,7 +26,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(1, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(1, 9, ({gen, calculate, Pokemon, Move}) => {
       test(`Night Shade / Seismic Toss (gen ${gen})`, () => {
         const mew = Pokemon('Mew', {level: 50});
         const vulpix = Pokemon('Vulpix');
@@ -50,13 +50,13 @@ describe('calc', () => {
       });
     });
 
-    inGens(1, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(1, 9, ({gen, calculate, Pokemon, Move}) => {
       test(`Immunity (gen ${gen})`, () => {
         expect(calculate(Pokemon('Snorlax'), Pokemon('Gengar'), Move('Hyper Beam')).damage).toBe(0);
       });
     });
 
-    inGens(1, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(1, 9, ({gen, calculate, Pokemon, Move}) => {
       test(`Non-damaging (gen ${gen})`, () => {
         const result = calculate(Pokemon('Snorlax'), Pokemon('Vulpix'), Move('Barrier'));
         expect(result.damage).toBe(0);
@@ -64,7 +64,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(1, 8, ({gen, calculate, Pokemon, Move, Field}) => {
+    inGens(1, 9, ({gen, calculate, Pokemon, Move, Field}) => {
       test(`Protect (gen ${gen})`, () => {
         const field = Field({defenderSide: {isProtected: true}});
         const snorlax = Pokemon('Snorlax');
@@ -73,7 +73,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(1, 8, ({gen, calculate, Pokemon, Move, Field}) => {
+    inGens(1, 9, ({gen, calculate, Pokemon, Move, Field}) => {
       test(`Critical hits ignore attack decreases (gen ${gen})`, () => {
         const field = Field({defenderSide: {isReflect: true}});
 
@@ -118,7 +118,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(1, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(1, 9, ({gen, calculate, Pokemon, Move}) => {
       test(`Struggle vs. Ghost (gen ${gen})`, () => {
         const result = calculate(Pokemon('Mew'), Pokemon('Gengar'), Move('Struggle'));
         if (gen < 2) {
@@ -129,7 +129,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(3, 8, ({gen, calculate, Pokemon, Move, Field}) => {
+    inGens(3, 9, ({gen, calculate, Pokemon, Move, Field}) => {
       test(`Weather Ball should change type depending on the weather (gen ${gen})`, () => {
         const weathers = [
           {
@@ -198,7 +198,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(6, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(6, 9, ({gen, calculate, Pokemon, Move}) => {
       test(`Thousand Arrows and Ring Target Should negate damage nullfiers (gen ${gen})`, () => {
         const result = calculate(Pokemon('Zygarde'), Pokemon('Swellow'), Move('Thousand Arrows'));
         expect(result.range()).toEqual([147, 174]);
@@ -208,7 +208,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(4, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(4, 9, ({gen, calculate, Pokemon, Move}) => {
       const zapdos = Pokemon('Zapdos', {item: 'Iron Ball'});
       if (gen === 4) {
         test(`Iron Ball negates ground immunities (gen ${gen})`, () => {
@@ -236,6 +236,36 @@ describe('calc', () => {
       });
     });
 
+    inGens(5, 9, ({gen, calculate, Pokemon, Move, Field}) => {
+      const dragonite = Pokemon('Dragonite', {ability: 'Multiscale'});
+      const dragonite1 = Pokemon('Dragonite', {ability: 'Multiscale', curHP: 69});
+      const dragonite2 = Pokemon('Dragonite', {ability: 'Shadow Shield', item: 'Heavy-Duty Boots'});
+      if (gen > 7) {
+        test(`Multiscale and Shadow Shield halves damage even if there are hazzards if holding Heavy-Duty Boots (gen ${gen})`, () => {
+          const field = Field({defenderSide: {isSR: true}});
+          const result = calculate(Pokemon('Abomasnow'), dragonite2, Move('Blizzard'), field);
+          expect(result.range()).toEqual([222, 264]);
+          expect(result.desc()).toBe(
+            '0 SpA Abomasnow Blizzard vs. 0 HP / 0 SpD Shadow Shield Dragonite: 222-264 (68.7 - 81.7%) -- guaranteed 2HKO'
+          );
+        });
+      }
+      test(`Multiscale and Shadow Shield should not halve damage if less than 100% HP (gen ${gen})`, () => {
+        const result = calculate(Pokemon('Abomasnow'), dragonite1, Move('Ice Shard'));
+        expect(result.range()).toEqual([168, 204]);
+        expect(result.desc()).toBe(
+          '0 Atk Abomasnow Ice Shard vs. 0 HP / 0 Def Dragonite: 168-204 (52 - 63.1%) -- guaranteed OHKO'
+        );
+      });
+      test(`Multiscale and Shadow Shield Should halve damage taken (gen ${gen})`, () => {
+        const result = calculate(Pokemon('Abomasnow'), dragonite, Move('Ice Shard'));
+        expect(result.range()).toEqual([84, 102]);
+        expect(result.desc()).toBe(
+          '0 Atk Abomasnow Ice Shard vs. 0 HP / 0 Def Multiscale Dragonite: 84-102 (26 - 31.5%) -- guaranteed 4HKO'
+        );
+      });
+    });
+
     inGen(8, ({gen, Pokemon}) => {
       test(`Pokemon should double their HP stat when dynamaxing (gen ${gen})`, () => {
         const munchlax = Pokemon('Munchlax', {isDynamaxed: true});
@@ -243,7 +273,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(7, 8, ({gen, calculate, Pokemon, Move, Field}) => {
+    inGens(7, 9, ({gen, calculate, Pokemon, Move, Field}) => {
       test(`Psychic Terrain (gen ${gen})`, () => {
         const field = Field({terrain: 'Psychic'});
         const Mewtwo = Pokemon('Mewtwo', {
@@ -278,7 +308,7 @@ describe('calc', () => {
       });
     });
 
-    inGens(6, 8, ({gen, calculate, Pokemon, Move}) => {
+    inGens(6, 9, ({gen, calculate, Pokemon, Move}) => {
       test(`Parental Bond (gen ${gen})`, () => {
         let result = calculate(
           Pokemon('Kangaskhan-Mega', {evs: {atk: 152}}),
@@ -571,6 +601,22 @@ describe('calc', () => {
           '+1 252 SpA Choice Specs Gengar Focus Blast vs. 252 HP / 252+ SpD Eviolite Chansey: 274-324 (18 - 22px) -- guaranteed 3HKO'
         );
       });
+      test('Technician with Low Kick', () => {
+        const ambipom = Pokemon('Ambipom', {level: 50, ability: 'Technician'});
+        const blissey = Pokemon('Blissey', {level: 50, evs: {hp: 252}});
+        let result = calculate(ambipom, blissey, Move('Low Kick'));
+        expect(result.range()).toEqual([272, 320]);
+        expect(result.desc()).toBe(
+          '0 Atk Technician Ambipom Low Kick (60 BP) vs. 252 HP / 0 Def Blissey: 272-320 (75.1 - 88.3%) -- guaranteed 2HKO'
+        );
+
+        const aggron = Pokemon('Aggron', {level: 50, evs: {hp: 252}});
+        result = calculate(ambipom, aggron, Move('Low Kick'));
+        expect(result.range()).toEqual([112, 132]);
+        expect(result.desc()).toBe(
+          '0 Atk Ambipom Low Kick (120 BP) vs. 252 HP / 0 Def Aggron: 112-132 (63.2 - 74.5%) -- guaranteed 2HKO'
+        );
+      });
     });
   });
 
@@ -664,7 +710,12 @@ describe('calc', () => {
         expect(recovery.recovery).toEqual([161, 161]);
         expect(recovery.text).toBe('52.1 - 52.1% recovered');
       });
-
+      test('Big Root', () => {
+        const bigRoot = Pokemon('Blissey', {item: 'Big Root'});
+        const result = calculate(bigRoot, abomasnow, Move('Drain Punch'));
+        expect(result.range()).toEqual([38, 46]);
+        expect(result.recovery().recovery).toEqual([24, 29]);
+      });
       test('Loaded Field', () => {
         const field = Field({
           gameType: 'Doubles',
@@ -838,6 +889,73 @@ describe('calc', () => {
         expect(result.desc()).toBe(
           '252 SpA Choice Specs Kyurem Earth Power vs. 0 HP / 0 SpD Jirachi: 294-348 (86.2 - 102%) -- 12.5% chance to OHKO'
         );
+      });
+
+      test('Technician with Low Kick', () => {
+        const ambipom = Pokemon('Ambipom', {level: 50, ability: 'Technician'});
+        const blissey = Pokemon('Blissey', {level: 50, evs: {hp: 252}});
+        let result = calculate(ambipom, blissey, Move('Low Kick'));
+        expect(result.range()).toEqual([272, 320]);
+        expect(result.desc()).toBe(
+          '0 Atk Technician Ambipom Low Kick (60 BP) vs. 252 HP / 0 Def Blissey: 272-320 (75.1 - 88.3%) -- guaranteed 2HKO'
+        );
+
+        const aggron = Pokemon('Aggron', {level: 50, evs: {hp: 252}});
+        result = calculate(ambipom, aggron, Move('Low Kick'));
+        expect(result.range()).toEqual([112, 132]);
+        expect(result.desc()).toBe(
+          '0 Atk Ambipom Low Kick (120 BP) vs. 252 HP / 0 Def Aggron: 112-132 (63.2 - 74.5%) -- guaranteed 2HKO'
+        );
+      });
+    });
+
+    describe('Gen 9', () => {
+      inGen(9, ({calculate, Pokemon, Move}) => {
+        test('Supreme Overlord', () => {
+          const kingambit = Pokemon('Kingambit', {level: 100, ability: 'Supreme Overlord', alliesFainted: 0});
+          const aggron = Pokemon('Aggron', {level: 100});
+          let result = calculate(kingambit, aggron, Move('Iron Head'));
+          expect(result.range()).toEqual([67, 79]);
+          expect(result.desc()).toBe(
+            '0 Atk Kingambit Iron Head vs. 0 HP / 0 Def Aggron: 67-79 (23.8 - 28.1%) -- 91.2% chance to 4HKO'
+          );
+          kingambit.alliesFainted = 5;
+          result = calculate(kingambit, aggron, Move('Iron Head'));
+          expect(result.range()).toEqual([100, 118]);
+          expect(result.desc()).toBe(
+            '0 Atk Supreme Overlord 5 allies fainted Kingambit Iron Head vs. 0 HP / 0 Def Aggron: 100-118 (35.5 - 41.9%) -- guaranteed 3HKO'
+          );
+          kingambit.alliesFainted = 10;
+          result = calculate(kingambit, aggron, Move('Iron Head'));
+          expect(result.range()).toEqual([100, 118]);
+          expect(result.desc()).toBe(
+            '0 Atk Supreme Overlord 5 allies fainted Kingambit Iron Head vs. 0 HP / 0 Def Aggron: 100-118 (35.5 - 41.9%) -- guaranteed 3HKO'
+          );
+        });
+        test('Electro Drift/Collision Course boost on Super Effective hits', () => {
+          const attacker = Pokemon('Arceus'); // same stats in each offense, does not get stab on fighting or electric
+          let defender = Pokemon('Mew'); // neutral to both
+          const calc = (move = Move('Electro Drift')) => calculate(attacker, defender, move).range();
+          // 1x effectiveness should be identical to just using a 100 BP move
+          const neutral = calc();
+          const fusionBolt = Move('Fusion Bolt');
+          expect(calc(fusionBolt)).toEqual(neutral);
+          // 2x effectiveness
+          defender = Pokemon('Manaphy');
+          const se = calc();
+          // expect some sort of boost compared to the control
+          expect(calc(fusionBolt)).not.toEqual(se);
+          // tera should be able to revoke the boost
+          defender.teraType = 'Normal';
+          expect(calc()).toEqual(neutral);
+          // check if secondary type resist is handled
+          const cc = Move('Collision Course'); // Fighting type
+          defender = Pokemon('Jirachi'); // Steel / Psychic is neutral to fighting, so no boost
+          expect(calc(cc)).toEqual(neutral);
+          // tera should cause the boost to be applied
+          defender.teraType = 'Normal';
+          expect(calc(cc)).toEqual(se);
+        });
       });
     });
   });

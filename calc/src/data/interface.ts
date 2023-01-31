@@ -1,6 +1,6 @@
 export interface As<T> {__brand: T}
 export type ID = (string & As<'ID'>) | (string & { __isID: true }) | '';
-export type GenerationNum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type GenerationNum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type GenderName = 'M' | 'F' | 'N';
 export type StatID = 'hp' | StatIDExceptHP;
 export type StatIDExceptHP = 'atk' | 'def' | 'spa' | 'spd' | 'spe';
@@ -16,7 +16,7 @@ export type StatusName = 'slp' | 'psn' | 'brn' | 'frz' | 'par' | 'tox';
 export type GameType = 'Singles' | 'Doubles';
 export type Terrain = 'Electric' | 'Grassy' | 'Psychic' | 'Misty';
 export type Weather =
-  | 'Sand' | 'Sun' | 'Rain' | 'Hail' | 'Harsh Sunshine' | 'Heavy Rain' | 'Strong Winds';
+  | 'Sand' | 'Sun' | 'Rain' | 'Hail' | 'Snow' | 'Harsh Sunshine' | 'Heavy Rain' | 'Strong Winds';
 
 export type NatureName =
   'Adamant' | 'Bashful' | 'Bold' | 'Brave' | 'Calm' |
@@ -92,6 +92,8 @@ export interface MoveFlags {
   punch?: 1 | 0;
   bullet?: 1 | 0;
   pulse?: 1 | 0;
+  slicing?: 1 | 0;
+  wind?: 1| 0;
 }
 
 export interface SelfOrSecondaryEffect {

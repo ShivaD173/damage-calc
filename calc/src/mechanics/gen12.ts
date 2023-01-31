@@ -42,10 +42,43 @@ export function calculateRBYGSC(
     }
   }
 
+  const typeEffectivenessPrecedenceRules = [
+    'Normal',
+    'Fire',
+    'Water',
+    'Electric',
+    'Grass',
+    'Ice',
+    'Fighting',
+    'Poison',
+    'Ground',
+    'Flying',
+    'Psychic',
+    'Bug',
+    'Rock',
+    'Ghost',
+    'Dragon',
+    'Dark',
+    'Steel',
+  ];
+
+  let firstDefenderType = defender.types[0];
+  let secondDefenderType = defender.types[1];
+
+  if (secondDefenderType && firstDefenderType !== secondDefenderType && gen.num === 2) {
+    const firstTypePrecedence = typeEffectivenessPrecedenceRules.indexOf(firstDefenderType);
+    const secondTypePrecedence = typeEffectivenessPrecedenceRules.indexOf(secondDefenderType);
+
+    if (firstTypePrecedence > secondTypePrecedence) {
+      [firstDefenderType, secondDefenderType] = [secondDefenderType, firstDefenderType];
+    }
+  }
+
+
   const type1Effectiveness =
-    getMoveEffectiveness(gen, move, defender.types[0], field.defenderSide.isForesight);
-  const type2Effectiveness = defender.types[1]
-    ? getMoveEffectiveness(gen, move, defender.types[1], field.defenderSide.isForesight)
+    getMoveEffectiveness(gen, move, firstDefenderType, field.defenderSide.isForesight);
+  const type2Effectiveness = secondDefenderType
+    ? getMoveEffectiveness(gen, move, secondDefenderType, field.defenderSide.isForesight)
     : 1;
   const typeEffectiveness = type1Effectiveness * type2Effectiveness;
 
@@ -198,7 +231,12 @@ export function calculateRBYGSC(
     baseDamage = Math.floor(baseDamage * 1.5);
   }
 
-  baseDamage = Math.floor(baseDamage * typeEffectiveness);
+  if (gen.num === 1) {
+    baseDamage = Math.floor(baseDamage * type1Effectiveness);
+    baseDamage = Math.floor(baseDamage * type2Effectiveness);
+  } else {
+    baseDamage = Math.floor(baseDamage * typeEffectiveness);
+  }
 
   // Flail and Reversal don't use random factor
   if (move.named('Flail', 'Reversal')) {
@@ -208,7 +246,15 @@ export function calculateRBYGSC(
 
   result.damage = [];
   for (let i = 217; i <= 255; i++) {
-    result.damage[i - 217] = Math.floor((baseDamage * i) / 255);
+    if (gen.num === 2) { // in gen 2 damage is always rounded up to 1. TODO ADD TESTS
+      result.damage[i - 217] = Math.max(1, Math.floor((baseDamage * i) / 255));
+    } else {
+      if (baseDamage === 1) { // in gen 1 the random factor multiplication is skipped if damage = 1
+        result.damage[i - 217] = 1;
+      } else {
+        result.damage[i - 217] = Math.floor((baseDamage * i) / 255);
+      }
+    }
   }
 
   return result;

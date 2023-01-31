@@ -245,6 +245,10 @@ class Move implements I.Move {
       if (move.isMax) this.isMax = true;
       if (move.maxMove) this.maxMove = {basePower: move.maxMove.basePower};
     }
+    if (dex.gen >= 9) {
+      if (move.flags.wind) this.flags.wind = move.flags.wind;
+      if (move.flags.slicing) this.flags.slicing = move.flags.slicing;
+    }
   }
 }
 
@@ -309,11 +313,11 @@ class Specie implements I.Specie {
     this.baseStats = species.baseStats;
     this.weightkg = species.weightkg;
 
-    const nfe = !!species.evos?.some(s => exists(dex.species.get(s), dex.gen));
+    const nfe = !!species.evos?.some((s: string) => exists(dex.species.get(s), dex.gen));
     if (nfe) this.nfe = nfe;
     if (species.gender === 'N' && dex.gen > 1) this.gender = species.gender;
 
-    const formes = species.otherFormes?.filter(s => exists(dex.species.get(s), dex.gen));
+    const formes = species.otherFormes?.filter((s: string) => exists(dex.species.get(s), dex.gen));
     if (species.id.startsWith('aegislash')) {
       if (species.id === 'aegislashblade') {
         this.otherFormes = ['Aegislash-Shield', 'Aegislash-Both'] as I.SpeciesName[];
@@ -484,14 +488,22 @@ const NATDEX_BANNED = [
   'Pikachu-Libre',
   'Pichu-Spiky-eared',
   'Floette-Eternal',
-  'Magearna-Original',
 ];
 
 function exists(val: D.Ability| D.Item | D.Move | D.Species | D.Type, gen: I.GenerationNum) {
   if (!val.exists || val.id === 'noability') return false;
   if (gen === 7 && val.isNonstandard === 'LGPE') return true;
-  if (gen === 8 && val.isNonstandard === 'Past' && !NATDEX_BANNED.includes(val.name)) return true;
-  if (gen === 8 && ['eternatuseternamax', 'zarude', 'zarudedada'].includes(val.id)) return true;
+  if (gen >= 8) {
+    if (gen === 8) {
+      if (('isMax' in val && val.isMax) || val.isNonstandard === 'Gigantamax') return true;
+      if (['eternatuseternamax', 'zarude', 'zarudedada'].includes(val.id)) return true;
+      if (val.isNonstandard === 'Future') return false;
+    }
+    if (val.isNonstandard === 'Past' && !NATDEX_BANNED.includes(val.name)) return true;
+    if (gen > 8 && 'isZ' in val && val.isZ) return false;
+    if (gen > 8 && val.isNonstandard === 'Unobtainable') return true;
+  }
+  if (gen >= 6 && ['floetteeternal'].includes(val.id)) return true;
   // TODO: clean this up with proper Gigantamax support
   if (val.isNonstandard && !['CAP', 'Unobtainable', 'Gigantamax'].includes(val.isNonstandard)) {
     return false;

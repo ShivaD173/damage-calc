@@ -97,7 +97,7 @@ export class Move implements State.Move {
         } else if (options.hits) {
           this.hits = options.hits;
         } else {
-          this.hits = (options.ability === 'Skill Link' || options.item === 'Grip Claw')
+          this.hits = (options.ability === 'Skill Link')
             ? data.multihit[1]
             : data.multihit[0] + 1;
         }
@@ -156,10 +156,6 @@ export class Move implements State.Move {
       // Assume max happiness for these moves because the calc doesn't support happiness
       if (['return', 'frustration', 'pikapapow', 'veeveevolley'].includes(data.id)) {
         this.bp = 102;
-      } else if (data.id === 'naturepower') {
-        // Assume the 'Wi-Fi' default of Tri Attack
-        this.bp = 80;
-        if (gen.num >= 5) this.secondaries = true;
       }
     }
   }

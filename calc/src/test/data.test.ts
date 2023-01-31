@@ -7,7 +7,7 @@ import {Generations} from './gen';
 
 const pkmn = {Generations: new Generations(Dex)};
 
-const gens = [1, 2, 3, 4, 5, 6, 7, 8] as I.GenerationNum[];
+const gens = [1, 2, 3, 4, 5, 6, 7, 8, 9] as I.GenerationNum[];
 
 describe('Generations', () => {
   test('abilities', () => {
@@ -48,7 +48,13 @@ describe('Generations', () => {
 
       expect(Array.from(c.values()).map(s => s.name).sort()).toEqual(p.map(s => s.name).sort());
       for (const move of p) {
-        expect(c.get(move.id)).toEqual(move);
+        // Formerly toEqual, relax a bit so the calc can have properties aren't in pkmn/dex.
+        for (const [k, v] of Object.entries(move)) {
+          if (v === undefined) {
+            delete (move as any)[k];
+          }
+        }
+        expect(c.get(move.id)).toMatchObject(move);
         c.delete(move.id);
       }
       expect(c.size).toBe(0);

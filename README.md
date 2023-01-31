@@ -93,11 +93,15 @@ with the adaptable entry point for applications which want to avoid having two s
 same data shipped to users.
 
 ```ts
+import {Dex} from '@pkmn/dex';
 import {Generations} from '@pkmn/data';
 import {calculate, Pokemon, Move, Field} from '@smogon/calc/adaptable';
 
-const gen = Generations.get(1);
+const gens = new Generations(Dex);
+
+const gen = gens.get(1);
 const result = calculate(
+  gen,
   new Pokemon(gen, 'Gengar'),
   new Pokemon(gen, 'Vulpix'),
   new Move(gen, 'Surf'),
@@ -174,6 +178,7 @@ This project was created by Honko and is primarily maintained by Austin.
 - The Omega Ruby / Alpha Sapphire update was done by gamut-was-taken and Austin.
 - The Gen 7 update was done by Austin.
 - The Gen 8 update was done by Austin and Kris.
+- The Gen 9 update was done by Austin and Kris.
 - Some CSS styling was contributed by Zarel to match the Pokémon Showdown! theme.
 
 Many other contributors have added features or contributed bug fixes, please see the
