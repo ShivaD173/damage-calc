@@ -1297,7 +1297,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Doom Desire": {bp: 135},
   "Double Slap": {bp: 25},
   "Double-Edge": {bp: 105},
-  "Draco Meteor": {bp: 110, recoil: [1, 3]},
+  "Draco Meteor": {bp: 110, recoil: [1, 3], self: {}},
   "Dragon Pulse": {bp: 85},
   "Drain Punch": {bp: 75},
   "Earth Power": {bp: 85},
@@ -1330,7 +1330,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Knock Off": {bp: 70},
   "Last Resort": {bp: 120},
   "Lava Plume": {bp: 90},
-  "Leaf Storm": {bp: 110, recoil: [1, 3]},
+  "Leaf Storm": {bp: 110, recoil: [1, 3], self: {}},
   "Leech Life": {bp: 80},
   "Lick": {bp: 45},
   "Magical Leaf": {bp: 70},
@@ -1342,7 +1342,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Mud Slap": {bp: 30},
   "Muddy Water": {bp: 85},
   "Outrage": {bp: 100, recoil: [1, 3]},
-  "Overheat": {bp: 110, recoil: [1, 3]},
+  "Overheat": {bp: 110, recoil: [1, 3], self: {}},
   "Peck": {bp: 45},
   "Petal Dance": {bp: 100, recoil: [1, 3]},
   "Pin Missile": {bp: 25},
@@ -1352,7 +1352,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Power Gem": {bp: 80},
   "Power Whip": {bp: 110},
   "Psychic": {bp: 85},
-  "Psycho Boost": {bp: 110, recoil: [1, 3]},
+  "Psycho Boost": {bp: 110, recoil: [1, 3], self: {}},
   "Rapid Spin": {bp: 50},
   "Razor Leaf": {bp: 65},
   "Roar of Time": {bp: 120, recoil: [1, 3], target: "allAdjacentFoes"},
@@ -1367,7 +1367,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Shadow Ball": {bp: 85},
   "Shadow Claw": {bp: 80},
   "Shadow Force": {bp: 100},
-  "Skull Base": {type: 'Rock'},
+  "Skull Bash": {type: 'Rock'},
   "Sky Attack": {bp: 105},
   "Sludge": {bp: 75, target: 'allAdjacentFoes'},
   "Sludge Bomb": {bp: 85},
@@ -1381,7 +1381,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Stone Edge": {bp: 90},
   "Strength": {type: 'Fighting', bp: 75},
   "Submission": {bp: 85},
-  "Superpower": {bp: 100, recoil: [1, 3]},
+  "Superpower": {bp: 100, recoil: [1, 3], self: {}},
   "Swift": {bp: 70},
   "Tackle": {bp: 50},
   "Take Down": {type: 'Fighting', bp: 85},
@@ -5072,7 +5072,19 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   },
 };
 
-const SV: {[name: string]: MoveData} = extend(true, {}, SS, SV_PATCH);
+const SV_old: {[name: string]: MoveData} = extend(true, {}, SS, SV_PATCH);
+const VGC_PLAT_SHOWDOWN_PATCH = {
+  "Explosion": {bp: 375},
+  "Self-Destruct": {bp: 300},
+  "Skull Bash": {bp: 135},
+  "Attack Order": {bp: 120},
+  "Volt Tackle": {bp: 110},
+  "Bonemerang": {bp: 50},
+  "Stealth Rock": {bp: 0},
+  "Sucker Punch": {bp: 80},
+};
+const SV1: {[name: string]: MoveData} = extend(true, {}, SV_old, DPP_VGC_PATCH);
+const SV: {[name: string]: MoveData} = extend(true, {}, SV1, VGC_PLAT_SHOWDOWN_PATCH);
 
 export const MOVES = [{}, RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
 
