@@ -1367,6 +1367,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   "Shadow Ball": {bp: 85},
   "Shadow Claw": {bp: 80},
   "Shadow Force": {bp: 100},
+  "Shadow Punch": {bp: 75},
   "Skull Bash": {type: 'Rock'},
   "Sky Attack": {bp: 105},
   "Sludge": {bp: 75, target: 'allAdjacentFoes'},
