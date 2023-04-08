@@ -181,11 +181,11 @@ export function calculateSMSSSV(
       type = 'Dark';
     }
   } else if (move.named('Raging Bull')) {
-    if (attacker.named('Tauros-Paldea')) {
+    if (attacker.named('Tauros-Paldea-Combat')) {
       type = 'Fighting';
-    } else if (attacker.named('Tauros-Paldea-Fire')) {
+    } else if (attacker.named('Tauros-Paldea-Blaze')) {
       type = 'Fire';
-    } else if (attacker.named('Tauros-Paldea-Water')) {
+    } else if (attacker.named('Tauros-Paldea-Aqua')) {
       type = 'Water';
     }
   }
@@ -463,19 +463,25 @@ export function calculateSMSSSV(
     baseDamage = pokeRound(OF32(baseDamage * 1024) / 4096);
   }
 
-  const noWeatherBoost = defender.hasItem('Utility Umbrella');
-  if (!noWeatherBoost &&
-    ((field.hasWeather('Sun', 'Harsh Sunshine') && move.hasType('Fire')) ||
-    (field.hasWeather('Rain', 'Heavy Rain') && move.hasType('Water')))
+  if (
+    field.hasWeather('Sun') && move.named('Hydro Steam') && !attacker.hasItem('Utility Umbrella')
   ) {
     baseDamage = pokeRound(OF32(baseDamage * 6144) / 4096);
     desc.weather = field.weather;
-  } else if (!noWeatherBoost &&
-    ((field.hasWeather('Sun') && move.hasType('Water')) ||
-    (field.hasWeather('Rain') && move.hasType('Fire')))
-  ) {
-    baseDamage = pokeRound(OF32(baseDamage * 2048) / 4096);
-    desc.weather = field.weather;
+  } else if (!defender.hasItem('Utility Umbrella')) {
+    if (
+      (field.hasWeather('Sun', 'Harsh Sunshine') && move.hasType('Fire')) ||
+      (field.hasWeather('Rain', 'Heavy Rain') && move.hasType('Water'))
+    ) {
+      baseDamage = pokeRound(OF32(baseDamage * 6144) / 4096);
+      desc.weather = field.weather;
+    } else if (
+      (field.hasWeather('Sun') && move.hasType('Water')) ||
+      (field.hasWeather('Rain') && move.hasType('Fire'))
+    ) {
+      baseDamage = pokeRound(OF32(baseDamage * 2048) / 4096);
+      desc.weather = field.weather;
+    }
   }
 
   if (hasTerrainSeed(defender) &&
@@ -711,6 +717,13 @@ export function calculateBasePowerSMSSSV(
   case 'Rising Voltage':
     basePower = move.bp * ((isGrounded(defender, field) && field.hasTerrain('Electric')) ? 2 : 1);
     desc.moveBP = basePower;
+    break;
+  case 'Psyblade':
+    basePower = move.bp * (field.hasTerrain('Electric') ? 1.5 : 1);
+    if (field.hasTerrain('Electric')) {
+      desc.moveBP = basePower;
+      desc.terrain = field.terrain;
+    }
     break;
   case 'Fling':
     basePower = getFlingPower(attacker.item);
@@ -1052,15 +1065,15 @@ export function calculateBPModsSMSSSV(
     bpMods.push(5325);
     desc.attackerItem = attacker.item;
   } else if (
-    ((attacker.hasItem('Adamant Crystal') && attacker.named('Dialga-Origin')) ||
-      (attacker.hasItem('Adamant Orb') && attacker.named('Dialga')) &&
+    (((attacker.hasItem('Adamant Crystal') && attacker.named('Dialga-Origin')) ||
+      (attacker.hasItem('Adamant Orb') && attacker.named('Dialga'))) &&
      move.hasType('Steel', 'Dragon')) ||
-    ((attacker.hasItem('Lustrous Orb') &&
+    (((attacker.hasItem('Lustrous Orb') &&
      attacker.named('Palkia')) ||
-      (attacker.hasItem('Lustrous Globe') && attacker.named('Palkia-Origin')) &&
+      (attacker.hasItem('Lustrous Globe') && attacker.named('Palkia-Origin'))) &&
      move.hasType('Water', 'Dragon')) ||
-    ((attacker.hasItem('Griseous Orb') || attacker.hasItem('Griseous Core')) &&
-     (attacker.named('Giratina-Origin') || attacker.named('Giratina')) &&
+    (((attacker.hasItem('Griseous Orb') || attacker.hasItem('Griseous Core')) &&
+     (attacker.named('Giratina-Origin') || attacker.named('Giratina'))) &&
      move.hasType('Ghost', 'Dragon')) ||
     (attacker.hasItem('Vile Vial') &&
      attacker.named('Venomicon-Epilogue') &&
