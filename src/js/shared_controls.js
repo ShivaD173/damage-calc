@@ -1396,8 +1396,9 @@ $(document).ready(function () {
 	$("#gen" + g).change();
 	$("#percentage").prop("checked", true);
 	$("#percentage").change();
-	$("#singles-format").prop("checked", true);
-	$("#singles-format").change();
+	$("#singles-format").prop("checked", false);
+	$("#doubles-format").prop("checked", true);
+	$("#doubles-format").change();
 	loadDefaultLists();
 	$(".move-selector").select2({
 		dropdownAutoWidth: true,
