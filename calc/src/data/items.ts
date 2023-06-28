@@ -156,17 +156,6 @@ const ADV = GSC.filter(i => !GSC_ONLY.includes(i)).concat([
 ]);
 
 const DPP = ADV.concat([
-  // 'Eviolite',
-  // 'Assault Vest',
-  // 'Normal Gem',
-  // 'Weakness Policy',
-  // 'Rocky Helmet',
-  // 'Pixie Plate',
-  // 'Throat Spray',
-  // 'Clear Amulet',
-  // 'Covert Cloak',
-  // 'Loaded Dice',
-  // 'Mirror Herb',
   'Adamant Orb',
   // 'Armor Fossil',
   'Babiri Berry',
@@ -198,7 +187,7 @@ const DPP = ADV.concat([
   'Focus Sash',
   // 'Full Incense',
   // 'Grip Claw',
-  // 'Griseous Orb',
+  'Griseous Orb',
   'Haban Berry',
   // 'Heal Ball',
   'Heat Rock',
@@ -213,7 +202,7 @@ const DPP = ADV.concat([
   'Lagging Tail',
   'Life Orb',
   'Light Clay',
-  // 'Lustrous Orb',
+  'Lustrous Orb',
   // 'Magmarizer',
   'Meadow Plate',
   'Metronome',
@@ -482,7 +471,7 @@ SS.push('Utility Umbrella', 'Vile Vial');
 SS.push(...GSC_ONLY, 'Old Amber');
 
 const SV = SS.concat([
-  // 'Adamant Crystal',
+  'Adamant Crystal',
   // 'Auspicious Armor',
   'Ability Shield',
   'Booster Energy',
@@ -492,8 +481,8 @@ const SV = SS.concat([
   // 'Malicious Armor',
   'Mirror Herb',
   'Punching Glove',
-  // 'Lustrous Globe',
-  // 'Griseous Core',
+  'Lustrous Globe',
+  'Griseous Core',
   // 'Strange Ball',
 ]);
 

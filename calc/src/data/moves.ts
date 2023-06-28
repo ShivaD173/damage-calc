@@ -2022,7 +2022,7 @@ const DPP_VGC_PATCH: {[name: string]: DeepPartial<MoveData>} = {
         "category": "Status",
         "target": "self"
     },
-    "Hi Jump Kick": {
+    "High Jump Kick": {
         "bp": 120,
         "type": "Fighting",
         "category": "Physical",
@@ -7824,6 +7824,7 @@ const VGC_PLAT_SHOWDOWN_PATCH = {
   "Bonemerang": {bp: 50},
   "Stealth Rock": {bp: 0},
   "Sucker Punch": {bp: 80},
+  "False Swipe": {bp: 130},
 };
 const SV1: {[name: string]: MoveData} = extend(true, {}, SV_old, DPP_VGC_PATCH);
 const SV: {[name: string]: MoveData} = extend(true, {}, SV1, VGC_PLAT_SHOWDOWN_PATCH);
