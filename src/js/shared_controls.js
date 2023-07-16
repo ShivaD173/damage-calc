@@ -234,6 +234,13 @@ $(".ability").bind("keyup change", function () {
 		$(this).closest(".poke-info").find(".abilityToggle").hide();
 	}
 
+	var boostedStat = $(this).closest(".poke-info").find(".boostedStat");
+	if (['Protosynthesis', 'Quark Drive'].indexOf(ability) >= 0) {
+		boostedStat.show();
+	} else {
+		boostedStat.hide();
+	}
+
 	if (ability === "Supreme Overlord") {
 		$(this).closest(".poke-info").find(".alliesFainted").show();
 	} else {
@@ -470,6 +477,7 @@ $(".set-selector").change(function () {
 			stickyMoves.clearStickyMove();
 		}
 		pokeObj.find(".teraToggle").prop("checked", false);
+		pokeObj.find(".boostedStat").val("Auto-Select");
 		pokeObj.find(".analysis").attr("href", smogonAnalysis(pokemonName));
 		pokeObj.find(".type1").val(pokemon.types[0]);
 		pokeObj.find(".type2").val(pokemon.types[1]);
@@ -858,6 +866,7 @@ function createPokemon(pokeInfo) {
 			isDynamaxed: isDynamaxed,
 			isSaltCure: pokeInfo.find(".saltcure").is(":checked"),
 			alliesFainted: parseInt(pokeInfo.find(".alliesFainted").val()),
+			boostedStat: pokeInfo.find(".boostedStat").val() || undefined,
 			teraType: teraType,
 			boosts: boosts,
 			curHP: curHP,
