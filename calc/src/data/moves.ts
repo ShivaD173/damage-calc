@@ -7178,7 +7178,2994 @@ const SS_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   'Zing Zap': {maxPower: 130},
 };
 
-const SS: {[name: string]: MoveData} = extend(true, {}, SM, SS_PATCH);
+const SS_old: {[name: string]: MoveData} = extend(true, {}, SM, SS_PATCH);
+
+const GG_PATCH: {[name: string]: DeepPartial<MoveData>} = {
+  "Pound": {
+    "bp": 40,
+    "type": "Normal",
+    "category": "Physical",
+    "target": "normal"
+  },
+  "Karate Chop": {
+      "bp": 50,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "DoubleSlap": {
+      "bp": 20,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Comet Punch": {
+      "bp": 20,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "PowerUpPunch": {
+      "bp": 40,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mega Punch": {
+      "bp": 40,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Pay Day": {
+      "bp": 40,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fire Punch": {
+      "bp": 75,
+      "type": "Fire",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Ice Punch": {
+      "bp": 75,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "ThunderPunch": {
+      "bp": 75,
+      "type": "Electric",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Scratch": {
+      "bp": 40,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "ViceGrip": {
+      "bp": 55,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Guillotine": {
+      "bp": 120,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Razor Wind": {
+      "bp": 80,
+      "type": "Normal",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Swords Dance": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Cut": {
+      "bp": 50,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Gust": {
+      "bp": 45,
+      "type": "Flying",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Wing Attack": {
+      "bp": 60,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Whirlwind": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Fly": {
+      "bp": 60,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Bind": {
+      "bp": 35,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Slam": {
+      "bp": 80,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Vine Whip": {
+      "bp": 40,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Stomp": {
+      "bp": 65,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Double Kick": {
+      "bp": 30,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mega Kick": {
+      "bp": 100,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Jump Kick": {
+      "bp": 85,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Rolling Kick": {
+      "bp": 60,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Sand-Attack": {
+      "bp": 0,
+      "type": "Ground",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Headbutt": {
+      "bp": 70,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Horn Attack": {
+      "bp": 65,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fury Attack": {
+      "bp": 20,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Horn Drill": {
+      "bp": 100,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Tackle": {
+      "bp": 40,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Body Slam": {
+      "bp": 85,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Wrap": {
+      "bp": 35,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Take Down": {
+      "bp": 90,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          4
+      ]
+  },
+  "Thrash": {
+      "bp": 90,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Double-Edge": {
+      "bp": 110,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          3
+      ]
+  },
+  "Tail Whip": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Poison Sting": {
+      "bp": 40,
+      "type": "Poison",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Twineedle": {
+      "bp": 30,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Pin Missile": {
+      "bp": 20,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Leer": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Bite": {
+      "bp": 60,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Growl": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Roar": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Sing": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Supersonic": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "SonicBoom": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Disable": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Acid": {
+      "bp": 40,
+      "type": "Poison",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Ember": {
+      "bp": 40,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Flamethrower": {
+      "bp": 95,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Mist": {
+      "bp": 0,
+      "type": "Ice",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Water Gun": {
+      "bp": 40,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Hydro Pump": {
+      "bp": 120,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Surf": {
+      "bp": 60,
+      "type": "Water",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Ice Beam": {
+      "bp": 95,
+      "type": "Ice",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Blizzard": {
+      "bp": 120,
+      "type": "Ice",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Psybeam": {
+      "bp": 65,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "BubbleBeam": {
+      "bp": 65,
+      "type": "Water",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Aurora Beam": {
+      "bp": 65,
+      "type": "Ice",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Hyper Beam": {
+      "bp": 150,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal",
+      "recoil": [
+          1,
+          2
+      ]
+  },
+  "Peck": {
+      "bp": 45,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Drill Peck": {
+      "bp": 80,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Submission": {
+      "bp": 80,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          4
+      ]
+  },
+  "Low Kick": {
+      "bp": 1,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Counter": {
+      "bp": 1,
+      "type": "Fighting",
+      "category": "Physical"
+  },
+  "Seismic Toss": {
+      "bp": 1,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Strength": {
+      "bp": 60,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "DrainingKiss": {
+      "bp": 50,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Absorb": {
+      "bp": 50,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Mega Drain": {
+      "bp": 50,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Leech Seed": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Growth": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "self"
+  },
+  "Razor Leaf": {
+      "bp": 60,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "allAdjacentFoes"
+  },
+  "SolarBeam": {
+      "bp": 120,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "PoisonPowder": {
+      "bp": 0,
+      "type": "Poison",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Stun Spore": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Sleep Powder": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Petal Dance": {
+      "bp": 120,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "String Shot": {
+      "bp": 0,
+      "type": "Bug",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Dragon Rage": {
+      "bp": 1,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Fire Spin": {
+      "bp": 40,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal"
+  },
+  "ThunderShock": {
+      "bp": 40,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Thunderbolt": {
+      "bp": 95,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Thunder Wave": {
+      "bp": 0,
+      "type": "Electric",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Thunder": {
+      "bp": 120,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Rock Throw": {
+      "bp": 50,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Earthquake": {
+      "bp": 100,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "allAdjacent"
+  },
+  "EarthShatter": {
+      "bp": 100,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          3
+      ]
+  },
+  "Fissure": {
+      "bp": 100,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          3
+      ]
+  },
+  "Dig": {
+      "bp": 80,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Toxic": {
+      "bp": 0,
+      "type": "Poison",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Confusion": {
+      "bp": 50,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Psychic": {
+      "bp": 90,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Hypnosis": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Meditate": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Agility": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Quick Attack": {
+      "bp": 40,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Rage": {
+      "bp": 20,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Teleport": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Night Shade": {
+      "bp": 1,
+      "type": "Ghost",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Mimic": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Screech": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Double Team": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Recover": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Harden": {
+      "bp": 0,
+      "type": "Rock",
+      "category": "Status",
+      "target": "self"
+  },
+  "Minimize": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "SmokeScreen": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Confuse Ray": {
+      "bp": 0,
+      "type": "Ghost",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Withdraw": {
+      "bp": 0,
+      "type": "Water",
+      "category": "Status",
+      "target": "self"
+  },
+  "Defense Curl": {
+      "bp": 0,
+      "type": "Rock",
+      "category": "Status",
+      "target": "self"
+  },
+  "Barrier": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Light Screen": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Haze": {
+      "bp": 0,
+      "type": "Ice",
+      "category": "Status",
+      "target": "all"
+  },
+  "Reflect": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Focus Energy": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Bide": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "self"
+  },
+  "Metronome": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Mirror Move": {
+      "bp": 0,
+      "type": "Flying",
+      "category": "Status"
+  },
+  "Selfdestruct": {
+      "bp": 200,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "allAdjacent"
+  },
+  "Egg Bomb": {
+      "bp": 100,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Lick": {
+      "bp": 45,
+      "type": "Ghost",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Smog": {
+      "bp": 45,
+      "type": "Poison",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Sludge": {
+      "bp": 65,
+      "type": "Poison",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Bone Club": {
+      "bp": 65,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fire Blast": {
+      "bp": 120,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Waterfall": {
+      "bp": 70,
+      "type": "Water",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Clamp": {
+      "bp": 70,
+      "type": "Water",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Swift": {
+      "bp": 60,
+      "type": "Normal",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Skull Bash": {
+      "bp": 100,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Spike Cannon": {
+      "bp": 20,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Constrict": {
+      "bp": 45,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Amnesia": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Kinesis": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Softboiled": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Hi Jump Kick": {
+      "bp": 100,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Glare": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Dream Eater": {
+      "bp": 100,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Poison Gas": {
+      "bp": 0,
+      "type": "Poison",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Barrage": {
+      "bp": 20,
+      "type": "Psychic",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Leech Life": {
+      "bp": 65,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Lovely Kiss": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Sky Attack": {
+      "bp": 140,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Transform": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Bubble": {
+      "bp": 35,
+      "type": "Water",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Dizzy Punch": {
+      "bp": 70,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Spore": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Flash": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Psywave": {
+      "bp": 1,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Splash": {
+      "bp": 25,
+      "type": "Water",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Acid Armor": {
+      "bp": 0,
+      "type": "Poison",
+      "category": "Status",
+      "target": "self"
+  },
+  "Crabhammer": {
+      "bp": 90,
+      "type": "Water",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Explosion": {
+      "bp": 250,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "allAdjacent"
+  },
+  "Fury Swipes": {
+      "bp": 20,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Bonemerang": {
+      "bp": 50,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Rest": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Rock Slide": {
+      "bp": 75,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "allAdjacentFoes"
+  },
+  "Hyper Fang": {
+      "bp": 80,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Sharpen": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Conversion": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Tri Attack": {
+      "bp": 80,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Super Fang": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Slash": {
+      "bp": 70,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Substitute": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Struggle": {
+      "bp": 50,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Sketch": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Triple Kick": {
+      "bp": 10,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Thief": {
+      "bp": 40,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Electroweb": {
+      "bp": 55,
+      "type": "Electric",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Spider Web": {
+      "bp": 55,
+      "type": "Electric",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Mind Reader": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Nightmare": {
+      "bp": 0,
+      "type": "Ghost",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Flame Wheel": {
+      "bp": 60,
+      "type": "Fire",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Snarl": {
+      "bp": 55,
+      "type": "Dark",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Snore": {
+      "bp": 55,
+      "type": "Dark",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Curse": {
+      "bp": 0,
+      "type": "Ghost",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Flail": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Conversion 2": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Aeroblast": {
+      "bp": 100,
+      "type": "Flying",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Cotton Spore": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Reversal": {
+      "bp": 1,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Spite": {
+      "bp": 0,
+      "type": "Ghost",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Powder Snow": {
+      "bp": 40,
+      "type": "Ice",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Protect": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Mach Punch": {
+      "bp": 40,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Scary Face": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Faint Attack": {
+      "bp": 60,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Sweet Kiss": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Belly Drum": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Sludge Bomb": {
+      "bp": 90,
+      "type": "Poison",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Mud-Slap": {
+      "bp": 20,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Octazooka": {
+      "bp": 65,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Spikes": {
+      "bp": 0,
+      "type": "Ground",
+      "category": "Status",
+      "target": "foeSide"
+  },
+  "Zap Cannon": {
+      "bp": 120,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Foresight": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Destiny Bond": {
+      "bp": 0,
+      "type": "Ghost",
+      "category": "Status",
+      "target": "self"
+  },
+  "Perish Song": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "all"
+  },
+  "Icy Wind": {
+      "bp": 55,
+      "type": "Ice",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Detect": {
+      "bp": 0,
+      "type": "Fighting",
+      "category": "Status",
+      "target": "self"
+  },
+  "Bone Rush": {
+      "bp": 20,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Lock-On": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Supernova": {
+      "bp": 75,
+      "type": "Dragon",
+      "category": "Physical",
+      "target": "allAdjacent"
+  },
+  "Outrage": {
+      "bp": 75,
+      "type": "Dragon",
+      "category": "Physical",
+      "target": "allAdjacent"
+  },
+  "Sandstorm": {
+      "bp": 0,
+      "type": "Rock",
+      "category": "Status",
+      "target": "all"
+  },
+  "Giga Drain": {
+      "bp": 70,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Endure": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Charm": {
+      "bp": 0,
+      "type": "Fairy",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Rollout": {
+      "bp": 30,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "False Swipe": {
+      "bp": 85,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Swagger": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Milk Drink": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Spark": {
+      "bp": 65,
+      "type": "Electric",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fury Cutter": {
+      "bp": 20,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Steel Wing": {
+      "bp": 70,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mean Look": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Attract": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Sleep Talk": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Heal Bell": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Return": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Present": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Frustration": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Safeguard": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Pain Split": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Sacred Fire": {
+      "bp": 100,
+      "type": "Fire",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Magnitude": {
+      "bp": 1,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "allAdjacent"
+  },
+  "DynamicPunch": {
+      "bp": 100,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Megahorn": {
+      "bp": 120,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "DragonBreath": {
+      "bp": 60,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Baton Pass": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Encore": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Pursuit": {
+      "bp": 40,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Rapid Spin": {
+      "bp": 45,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fairy Breeze": {
+      "bp": 45,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Sweet Scent": {
+      "bp": 45,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Iron Tail": {
+      "bp": 90,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Metal Claw": {
+      "bp": 50,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Vital Throw": {
+      "bp": 70,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Morning Sun": {
+      "bp": 0,
+      "type": "Fire",
+      "category": "Status",
+      "target": "self"
+  },
+  "Synthesis": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "self"
+  },
+  "Moonlight": {
+      "bp": 0,
+      "type": "Fairy",
+      "category": "Status",
+      "target": "self"
+  },
+  "Hidden Power": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Cross Chop": {
+      "bp": 100,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Twister": {
+      "bp": 40,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Rain Dance": {
+      "bp": 0,
+      "type": "Water",
+      "category": "Status",
+      "target": "all"
+  },
+  "Sunny Day": {
+      "bp": 0,
+      "type": "Fire",
+      "category": "Status",
+      "target": "all"
+  },
+  "Crunch": {
+      "bp": 80,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mirror Coat": {
+      "bp": 1,
+      "type": "Psychic",
+      "category": "Special"
+  },
+  "Psych Up": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "ExtremeSpeed": {
+      "bp": 80,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "AncientPower": {
+      "bp": 60,
+      "type": "Rock",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Shadow Ball": {
+      "bp": 90,
+      "type": "Ghost",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Future Sight": {
+      "bp": 95,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Rock Smash": {
+      "bp": 50,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Whirlpool": {
+      "bp": 40,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Beat Up": {
+      "bp": 12,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fake Out": {
+      "bp": 40,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Uproar": {
+      "bp": 50,
+      "type": "Normal",
+      "category": "Special"
+  },
+  "Stockpile": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Spit Up": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Swallow": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Heat Wave": {
+      "bp": 100,
+      "type": "Fire",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Hail": {
+      "bp": 0,
+      "type": "Ice",
+      "category": "Status",
+      "target": "all"
+  },
+  "Torment": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Flatter": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Will-O-Wisp": {
+      "bp": 0,
+      "type": "Fire",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Shadow Shift": {
+      "bp": 55,
+      "type": "Ghost",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Memento": {
+      "bp": 55,
+      "type": "Ghost",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Facade": {
+      "bp": 70,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Focus Punch": {
+      "bp": 150,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "SmellingSalt": {
+      "bp": 90,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Follow Me": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Nature Power": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Charge": {
+      "bp": 0,
+      "type": "Electric",
+      "category": "Status",
+      "target": "self"
+  },
+  "Taunt": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Helping Hand": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Trick": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Role Play": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Wish": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Assist": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Ingrain": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "self"
+  },
+  "Superpower": {
+      "bp": 110,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Magic Coat": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status"
+  },
+  "Recycle": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Revenge": {
+      "bp": 60,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Brick Break": {
+      "bp": 75,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Yawn": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Knock Off": {
+      "bp": 60,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Endeavor": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Eruption": {
+      "bp": 150,
+      "type": "Fire",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Skill Swap": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Imprison": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Refresh": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Grudge": {
+      "bp": 0,
+      "type": "Ghost",
+      "category": "Status",
+      "target": "self"
+  },
+  "Snatch": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status"
+  },
+  "Secret Power": {
+      "bp": 70,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Dive": {
+      "bp": 80,
+      "type": "Water",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Arm Thrust": {
+      "bp": 20,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Camouflage": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Tail Glow": {
+      "bp": 0,
+      "type": "Bug",
+      "category": "Status",
+      "target": "self"
+  },
+  "Dazzling Gleam": {
+      "bp": 80,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Luster Purge": {
+      "bp": 80,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Moon Blast": {
+      "bp": 95,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Mist Ball": {
+      "bp": 95,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "normal"
+  },
+  "FeatherDance": {
+      "bp": 0,
+      "type": "Flying",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Teeter Dance": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allAdjacent"
+  },
+  "Blaze Kick": {
+      "bp": 85,
+      "type": "Fire",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Molten Mud": {
+      "bp": 70,
+      "type": "Ground",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Mud Sport": {
+      "bp": 70,
+      "type": "Ground",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Ice Ball": {
+      "bp": 30,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Needle Arm": {
+      "bp": 60,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Slack Off": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "self"
+  },
+  "Hyper Voice": {
+      "bp": 90,
+      "type": "Normal",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Poison Fang": {
+      "bp": 65,
+      "type": "Poison",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Crush Claw": {
+      "bp": 75,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Blast Burn": {
+      "bp": 150,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal",
+      "recoil": [
+          1,
+          2
+      ]
+  },
+  "Hydro Cannon": {
+      "bp": 150,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal",
+      "recoil": [
+          1,
+          2
+      ]
+  },
+  "Meteor Mash": {
+      "bp": 100,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Astonish": {
+      "bp": 45,
+      "type": "Ghost",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Weather Ball": {
+      "bp": 50,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Aromatherapy": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Fake Tears": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Air Cutter": {
+      "bp": 55,
+      "type": "Flying",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Overheat": {
+      "bp": 140,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Quiver Crawl": {
+      "bp": 55,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Odor Sleuth": {
+      "bp": 55,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Rock Tomb": {
+      "bp": 50,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Silver Wind": {
+      "bp": 60,
+      "type": "Bug",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Metal Sound": {
+      "bp": 0,
+      "type": "Steel",
+      "category": "Status",
+      "target": "normal"
+  },
+  "GrassWhistle": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Tickle": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Cosmic Power": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Water Spout": {
+      "bp": 120,
+      "type": "Water",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Signal Beam": {
+      "bp": 75,
+      "type": "Bug",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Shadow Punch": {
+      "bp": 60,
+      "type": "Ghost",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Extrasensory": {
+      "bp": 80,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Sky Uppercut": {
+      "bp": 85,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Sand Tomb": {
+      "bp": 40,
+      "type": "Ground",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Permafrost": {
+      "bp": 60,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Sheer Cold": {
+      "bp": 60,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Muddy Water": {
+      "bp": 90,
+      "type": "Water",
+      "category": "Special",
+      "target": "allAdjacentFoes"
+  },
+  "Bullet Seed": {
+      "bp": 20,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Aerial Ace": {
+      "bp": 60,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Icicle Spear": {
+      "bp": 20,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Iron Defense": {
+      "bp": 0,
+      "type": "Steel",
+      "category": "Status",
+      "target": "self"
+  },
+  "Centimpede": {
+      "bp": 50,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Block": {
+      "bp": 50,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Howl": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status"
+  },
+  "Dragon Claw": {
+      "bp": 80,
+      "type": "Dragon",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Frenzy Plant": {
+      "bp": 150,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal",
+      "recoil": [
+          1,
+          2
+      ]
+  },
+  "Bulk Up": {
+      "bp": 0,
+      "type": "Fighting",
+      "category": "Status",
+      "target": "self"
+  },
+  "Bounce": {
+      "bp": 85,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mud Shot": {
+      "bp": 55,
+      "type": "Ground",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Poison Tail": {
+      "bp": 50,
+      "type": "Poison",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Covet": {
+      "bp": 50,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Volt Tackle": {
+      "bp": 120,
+      "type": "Electric",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Magical Leaf": {
+      "bp": 60,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Scald": {
+      "bp": 70,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Water Sport": {
+      "bp": 70,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Calm Mind": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Leaf Blade": {
+      "bp": 90,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Dragon Dance": {
+      "bp": 0,
+      "type": "Dragon",
+      "category": "Status",
+      "target": "self"
+  },
+  "Rock Blast": {
+      "bp": 20,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Shock Wave": {
+      "bp": 60,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Water Pulse": {
+      "bp": 60,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Doom Desire": {
+      "bp": 120,
+      "type": "Steel",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Psycho Boost": {
+      "bp": 140,
+      "type": "Psychic",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Roost": {
+      "bp": 0,
+      "type": "Flying",
+      "category": "Status",
+      "target": "self"
+  },
+  "Black Hole": {
+      "bp": 60,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Gravity": {
+      "bp": 60,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Spirit Break": {
+      "bp": 70,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Miracle Eye": {
+      "bp": 70,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Play Rough": {
+      "bp": 90,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Wake-Up Slap": {
+      "bp": 90,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Hammer Arm": {
+      "bp": 100,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Gyro Ball": {
+      "bp": 1,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Healing Wish": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Brine": {
+      "bp": 65,
+      "type": "Water",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Volt Switch": {
+      "bp": 60,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Natural Gift": {
+      "bp": 60,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Swift Strike": {
+      "bp": 50,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Feint": {
+      "bp": 50,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Pluck": {
+      "bp": 60,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Tailwind": {
+      "bp": 0,
+      "type": "Flying",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Acupressure": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Metal Burst": {
+      "bp": 1,
+      "type": "Steel",
+      "category": "Physical"
+  },
+  "U-turn": {
+      "bp": 60,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Close Combat": {
+      "bp": 120,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Payback": {
+      "bp": 50,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Assurance": {
+      "bp": 50,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Taxation": {
+      "bp": 65,
+      "type": "Dark",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Embargo": {
+      "bp": 65,
+      "type": "Dark",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Fling": {
+      "bp": 1,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Psycho Shift": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Trump Card": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Heal Block": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Wring Out": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Power Trick": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "self"
+  },
+  "Gastro Acid": {
+      "bp": 0,
+      "type": "Poison",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Lucky Chant": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allySide"
+  },
+  "Me First": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Copycat": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status"
+  },
+  "Power Swap": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Guard Swap": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Punishment": {
+      "bp": 1,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Star Prayer": {
+      "bp": 60,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Last Resort": {
+      "bp": 60,
+      "type": "Fairy",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Worry Seed": {
+      "bp": 0,
+      "type": "Grass",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Sucker Punch": {
+      "bp": 80,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Toxic Spikes": {
+      "bp": 0,
+      "type": "Poison",
+      "category": "Status",
+      "target": "foeSide"
+  },
+  "Heart Swap": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Aqua Ring": {
+      "bp": 0,
+      "type": "Water",
+      "category": "Status",
+      "target": "self"
+  },
+  "Magnet Rise": {
+      "bp": 0,
+      "type": "Electric",
+      "category": "Status",
+      "target": "self"
+  },
+  "Flare Blitz": {
+      "bp": 120,
+      "type": "Fire",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Force Palm": {
+      "bp": 60,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Aura Sphere": {
+      "bp": 90,
+      "type": "Fighting",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Rock Polish": {
+      "bp": 0,
+      "type": "Rock",
+      "category": "Status",
+      "target": "self"
+  },
+  "Poison Jab": {
+      "bp": 80,
+      "type": "Poison",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Dark Pulse": {
+      "bp": 80,
+      "type": "Dark",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Night Slash": {
+      "bp": 70,
+      "type": "Dark",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Aqua Tail": {
+      "bp": 90,
+      "type": "Water",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Seed Bomb": {
+      "bp": 80,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Air Slash": {
+      "bp": 75,
+      "type": "Flying",
+      "category": "Special",
+      "target": "normal"
+  },
+  "X-Scissor": {
+      "bp": 80,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Bug Buzz": {
+      "bp": 90,
+      "type": "Bug",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Dragon Pulse": {
+      "bp": 90,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Dragon Rush": {
+      "bp": 95,
+      "type": "Dragon",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Power Gem": {
+      "bp": 70,
+      "type": "Rock",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Drain Punch": {
+      "bp": 60,
+      "type": "Fighting",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Vacuum Wave": {
+      "bp": 40,
+      "type": "Fighting",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Focus Blast": {
+      "bp": 120,
+      "type": "Fighting",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Energy Ball": {
+      "bp": 80,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Brave Bird": {
+      "bp": 120,
+      "type": "Flying",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          3
+      ]
+  },
+  "Earth Power": {
+      "bp": 90,
+      "type": "Ground",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Switcheroo": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Giga Impact": {
+      "bp": 150,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          2
+      ]
+  },
+  "Nasty Plot": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "self"
+  },
+  "Bullet Punch": {
+      "bp": 40,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Avalanche": {
+      "bp": 75,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "allAdjacentFoes"
+  },
+  "Ice Shard": {
+      "bp": 40,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Shadow Claw": {
+      "bp": 70,
+      "type": "Ghost",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Thunder Fang": {
+      "bp": 65,
+      "type": "Electric",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Ice Fang": {
+      "bp": 65,
+      "type": "Ice",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Fire Fang": {
+      "bp": 65,
+      "type": "Fire",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Shadow Sneak": {
+      "bp": 40,
+      "type": "Ghost",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mud Bomb": {
+      "bp": 65,
+      "type": "Ground",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Psycho Cut": {
+      "bp": 70,
+      "type": "Psychic",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Zen Headbutt": {
+      "bp": 80,
+      "type": "Psychic",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Mirror Shot": {
+      "bp": 65,
+      "type": "Steel",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Flash Cannon": {
+      "bp": 80,
+      "type": "Steel",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Rock Climb": {
+      "bp": 85,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Defog": {
+      "bp": 0,
+      "type": "Flying",
+      "category": "Status",
+      "target": "normal"
+  },
+  "Trick Room": {
+      "bp": 0,
+      "type": "Psychic",
+      "category": "Status",
+      "target": "all"
+  },
+  "Draco Meteor": {
+      "bp": 140,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Discharge": {
+      "bp": 80,
+      "type": "Electric",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Lava Plume": {
+      "bp": 80,
+      "type": "Fire",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Leaf Storm": {
+      "bp": 140,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Power Whip": {
+      "bp": 120,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Rock Wrecker": {
+      "bp": 150,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Cross Poison": {
+      "bp": 70,
+      "type": "Poison",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Gunk Shot": {
+      "bp": 120,
+      "type": "Poison",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Iron Head": {
+      "bp": 80,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Magnet Bomb": {
+      "bp": 60,
+      "type": "Steel",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Stone Edge": {
+      "bp": 100,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Captivate": {
+      "bp": 0,
+      "type": "Normal",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Accelerock": {
+      "bp": 40,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Stealth Rock": {
+      "bp": 40,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Grass Knot": {
+      "bp": 1,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Chatter": {
+      "bp": 60,
+      "type": "Flying",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Judgment": {
+      "bp": 100,
+      "type": "Normal",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Bug Bite": {
+      "bp": 60,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Charge Beam": {
+      "bp": 50,
+      "type": "Electric",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Wood Hammer": {
+      "bp": 120,
+      "type": "Grass",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          3
+      ]
+  },
+  "Aqua Jet": {
+      "bp": 40,
+      "type": "Water",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Attack Order": {
+      "bp": 90,
+      "type": "Bug",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Defend Order": {
+      "bp": 0,
+      "type": "Bug",
+      "category": "Status",
+      "target": "self"
+  },
+  "Heal Order": {
+      "bp": 0,
+      "type": "Bug",
+      "category": "Status",
+      "target": "self"
+  },
+  "Head Smash": {
+      "bp": 150,
+      "type": "Rock",
+      "category": "Physical",
+      "target": "normal",
+      "recoil": [
+          1,
+          2
+      ]
+  },
+  "Double Hit": {
+      "bp": 35,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Roar of Time": {
+      "bp": 150,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Spacial Rend": {
+      "bp": 100,
+      "type": "Dragon",
+      "category": "Special",
+      "target": "normal"
+  },
+  "New Moon": {
+      "bp": 200,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Lunar Dance": {
+      "bp": 200,
+      "type": "Fairy",
+      "category": "Special",
+      "target": "allAdjacent"
+  },
+  "Crush Grip": {
+      "bp": 1,
+      "type": "Normal",
+      "category": "Physical",
+      "target": "normal"
+  },
+  "Magma Storm": {
+      "bp": 120,
+      "type": "Fire",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Dark Void": {
+      "bp": 0,
+      "type": "Dark",
+      "category": "Status",
+      "target": "allAdjacentFoes"
+  },
+  "Seed Flare": {
+      "bp": 120,
+      "type": "Grass",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Ominous Wind": {
+      "bp": 60,
+      "type": "Ghost",
+      "category": "Special",
+      "target": "normal"
+  },
+  "Shadow Force": {
+      "bp": 120,
+      "type": "Ghost",
+      "category": "Physical",
+      "target": "normal"
+  },
+}
+
+const SS: {[name: string]: MoveData} = extend(true, {}, SS_old, GG_PATCH);
 
 const LGPE_MOVES = [
   'Baddy Bad',
@@ -7196,7 +10183,7 @@ const LGPE_MOVES = [
   'Veevee Volley',
 ];
 for (const m of LGPE_MOVES) {
-  delete SS[m];
+  delete SS_old[m];
 }
 
 const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
@@ -7814,7 +10801,7 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   },
 };
 
-const SV_old: {[name: string]: MoveData} = extend(true, {}, SS, SV_PATCH);
+const SV_old: {[name: string]: MoveData} = extend(true, {}, SS_old, SV_PATCH);
 const VGC_PLAT_SHOWDOWN_PATCH = {
   "Explosion": {bp: 375},
   "Self-Destruct": {bp: 300},

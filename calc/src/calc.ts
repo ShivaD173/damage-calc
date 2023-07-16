@@ -19,7 +19,8 @@ const MECHANICS = [
   calculateBWXY,
   calculateBWXY,
   calculateSMSSSV,
-  calculateSMSSSV,
+  // calculateSMSSSV,
+  calculateDPP,
   calculateSMSSSV,
 ];
 
