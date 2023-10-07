@@ -104,7 +104,10 @@ export function getFinalSpeed(gen: Generation, pokemon: Pokemon, field: Field, s
       (pokemon.hasAbility('Sand Rush') && weather === 'Sand') ||
       (pokemon.hasAbility('Swift Swim') && weather.includes('Rain')) ||
       (pokemon.hasAbility('Slush Rush') && ['Hail', 'Snow'].includes(weather)) ||
-      (pokemon.hasAbility('Surge Surfer') && terrain === 'Electric')
+      (pokemon.hasAbility('Arctic Rush') && ['Rain', 'Hail', 'Snow'].includes(weather)) ||
+      (pokemon.hasAbility('Surge Surfer') && terrain === 'Electric') ||
+      (pokemon.hasAbility('Lawn Surfer') && terrain === 'Grassy') ||
+      (pokemon.hasAbility('Mind Surfer') && terrain === 'Psychic')
   ) {
     speedMods.push(8192);
   } else if (pokemon.hasAbility('Quick Feet') && pokemon.status) {
@@ -146,10 +149,27 @@ export function getMoveEffectiveness(
     return 1;
   } else if (move.named('Freeze-Dry') && type === 'Water') {
     return 2;
+  } else if (move.named('Sky Uppercut') && type === 'Flying') {
+    return 2;
   } else if (move.named('Flying Press')) {
     return (
       gen.types.get('fighting' as ID)!.effectiveness[type]! *
       gen.types.get('flying' as ID)!.effectiveness[type]!
+    );
+  } else if (move.named('Freezing Glare')) {
+    return (
+      gen.types.get('psychic' as ID)!.effectiveness[type]! *
+      gen.types.get('ice' as ID)!.effectiveness[type]!
+    );
+  } else if (move.named('Thunderous Kick')) {
+    return (
+      gen.types.get('fighting' as ID)!.effectiveness[type]! *
+      gen.types.get('electric' as ID)!.effectiveness[type]!
+    );
+  } else if (move.named('Fiery Wrath')) {
+    return (
+      gen.types.get('dark' as ID)!.effectiveness[type]! *
+      gen.types.get('fire' as ID)!.effectiveness[type]!
     );
   } else {
     return gen.types.get(toID(move.type))!.effectiveness[type]!;

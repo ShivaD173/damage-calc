@@ -224,7 +224,6 @@ const DPP = ADV.concat([
   'Protector',
   'Quick Ball',
   'Quick Powder',
-  'Rare Bone',
   'Razor Claw',
   'Razor Fang',
   'Reaper Cloth',
@@ -233,9 +232,7 @@ const DPP = ADV.concat([
   'Rose Incense',
   'Rowap Berry',
   'Shed Shell',
-  'Shiny Stone',
   'Shuca Berry',
-  'Skull Fossil',
   'Sky Plate',
   'Smooth Rock',
   'Splash Plate',
@@ -350,27 +347,21 @@ const XY = BW.concat(
     'Assault Vest',
     'Blue Orb',
     'Fairy Gem',
-    'Jaw Fossil',
     'Kee Berry',
     'Luminous Moss',
     'Maranga Berry',
     'Pixie Plate',
     'Red Orb',
     'Roseli Berry',
-    'Sachet',
     'Safety Goggles',
-    'Sail Fossil',
     'Snowball',
     'Weakness Policy',
-    'Whipped Dream',
   ].sort()
 );
 
 const SM = XY.filter(i => i !== 'Old Amber').concat([
   'Adrenaline Orb',
   'Aloraichium Z',
-  'Beast Ball',
-  'Bottle Cap',
   'Bug Memory',
   'Buginium Z',
   'Dark Memory',
@@ -392,14 +383,12 @@ const SM = XY.filter(i => i !== 'Old Amber').concat([
   'Flyinium Z',
   'Ghost Memory',
   'Ghostium Z',
-  'Gold Bottle Cap',
   'Grass Memory',
   'Grassium Z',
   'Grassy Seed',
   'Ground Memory',
   'Groundium Z',
   'Ice Memory',
-  'Ice Stone',
   'Icium Z',
   'Incinium Z',
   'Kommonium Z',
@@ -433,36 +422,19 @@ const SM = XY.filter(i => i !== 'Old Amber').concat([
 ]);
 
 const SS = SM.concat([
-  'Berry Sweet',
   'Blunder Policy',
-  'Chipped Pot',
-  'Clover Sweet',
-  'Cracked Pot',
   'Eject Pack',
-  'Flower Sweet',
-  'Fossilized Bird',
-  'Fossilized Dino',
-  'Fossilized Drake',
-  'Fossilized Fish',
-  'Galarica Cuff',
-  'Galarica Wreath',
   'Heavy-Duty Boots',
   'Leek',
-  'Love Sweet',
-  'Ribbon Sweet',
   'Room Service',
   'Rusted Shield',
   'Rusted Sword',
-  'Star Sweet',
-  'Strawberry Sweet',
-  'Sweet Apple',
-  'Tart Apple',
   'Throat Spray',
 ]);
 
-for (let i = 0; i < 100; i++) {
-  SS.push(`TR${i < 10 ? `0${i}` : i}`);
-}
+// for (let i = 0; i < 100; i++) {
+//   SS.push(`TR${i < 10 ? `0${i}` : i}`);
+// }
 
 // Added after the TRs to maintain sort order
 SS.push('Utility Umbrella', 'Vile Vial');
@@ -472,7 +444,6 @@ SS.push(...GSC_ONLY, 'Old Amber');
 
 const SV = SS.concat([
   'Adamant Crystal',
-  'Auspicious Armor',
   'Ability Shield',
   'Booster Energy',
   'Clear Amulet',
@@ -481,15 +452,10 @@ const SV = SS.concat([
   'Fairy Feather',
   'Hearthflame Mask',
   'Loaded Dice',
-  'Malicious Armor',
-  'Masterpiece Teacup',
   'Mirror Herb',
   'Punching Glove',
   'Lustrous Globe',
   'Griseous Core',
-  'Strange Ball',
-  'Syrupy Apple',
-  'Unremarkable Teacup',
   'Wellspring Mask',
 ]);
 

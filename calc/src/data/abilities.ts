@@ -293,7 +293,7 @@ const SS = SM.concat([
   'Wandering Spirit',
 ]);
 
-const SV = SS.concat([
+const SV_orig = SS.concat([
   'Anger Shell',
   'Armor Tail',
   'Beads of Ruin',
@@ -334,6 +334,42 @@ const SV = SS.concat([
   'Wind Rider',
   'Zero to Hero',
 ]);
+
+const SV = SV_orig.concat([
+  'Triple Threat',
+  'Mind Surfer',
+  'Just the Tip',
+  'Arctic Rush',
+  'Cloak Change',
+  'Big Balls',
+  'Odd Keystone',
+  'Monkey Business',
+  'Wide Eyed',
+  'Constrictor',
+  'Heat Sink',
+  'Captivating Song',
+  'Transphobia',
+  'Homophobia',
+  'Il Vaticano',
+  'Lawn Surfer',
+  'True Aurora',
+  'Singularity',
+  'Cat\'s Cradle',
+  'Super Duper Luck',
+  'Large Wingspan',
+  'The Flock',
+  'Growing Pumpkin',
+  'Double Down',
+  'Sinnohan Grit',
+  'Hammer Time',
+  'Rampage',
+  'Calm B4 Storm',
+  'Lava Crust',
+  'Lifetaker',
+  'Shadow Tagged',
+  'Molten Down',
+  'Fighting Spirit'
+])
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
 

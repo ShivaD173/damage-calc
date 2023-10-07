@@ -1275,10 +1275,6 @@ function getSetOptions(sets) {
 	var setOptions = [];
 	for (var i = 0; i < pokeNames.length; i++) {
 		var pokeName = pokeNames[i];
-		setOptions.push({
-			pokemon: pokeName,
-			text: pokeName
-		});
 		if ($("#randoms").prop("checked")) {
 			if (pokeName in randdex) {
 				setOptions.push({
@@ -1290,6 +1286,10 @@ function getSetOptions(sets) {
 			}
 		} else {
 			if (pokeName in setdex) {
+				setOptions.push({
+					pokemon: pokeName,
+					text: pokeName
+				});
 				var setNames = Object.keys(setdex[pokeName]);
 				for (var j = 0; j < setNames.length; j++) {
 					var setName = setNames[j];
@@ -1302,13 +1302,13 @@ function getSetOptions(sets) {
 						nickname: setdex[pokeName][setName].nickname || ""
 					});
 				}
+				setOptions.push({
+					pokemon: pokeName,
+					set: "Blank Set",
+					text: pokeName + " (Blank Set)",
+					id: pokeName + " (Blank Set)"
+				});
 			}
-			setOptions.push({
-				pokemon: pokeName,
-				set: "Blank Set",
-				text: pokeName + " (Blank Set)",
-				id: pokeName + " (Blank Set)"
-			});
 		}
 	}
 	return setOptions;

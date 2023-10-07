@@ -183,7 +183,7 @@ export function getRecoil(
         notation, Math.min(max, defender.curHP()) * mod, attacker.maxHP(), 100
       );
     }
-    if (!attacker.hasAbility('Rock Head')) {
+    if (!attacker.hasAbility('Rock Head') && !attacker.hasAbility('Sinnohan Grit')) {
       recoil = [minRecoilDamage, maxRecoilDamage];
       text = `${minRecoilDamage} - ${maxRecoilDamage}${notation} recoil damage`;
     }
@@ -503,6 +503,9 @@ function getEndOfTurn(
     } else if (defender.hasAbility('Rain Dish')) {
       damage += Math.floor(defender.maxHP() / 16);
       texts.push('Rain Dish recovery');
+    } else if (defender.hasAbility('Molten Down')) {
+      damage -= Math.floor(defender.maxHP() / 8);
+      texts.push(defender.ability + ' damage');
     }
   } else if (field.hasWeather('Sand')) {
     if (
