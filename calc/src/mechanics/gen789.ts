@@ -411,12 +411,14 @@ export function calculateSMSSSV(
   if (move.named('Spectral Thief')) {
     let stat: StatID;
     for (stat in defender.boosts) {
-      if (defender.boosts[stat]) {
+      if (defender.boosts[stat] > 0) {
         attacker.boosts[stat] +=
           attacker.hasAbility('Contrary') ? -defender.boosts[stat]! : defender.boosts[stat]!;
         if (attacker.boosts[stat] > 6) attacker.boosts[stat] = 6;
         if (attacker.boosts[stat] < -6) attacker.boosts[stat] = -6;
         attacker.stats[stat] = getModifiedStat(attacker.rawStats[stat]!, attacker.boosts[stat]!);
+        defender.boosts[stat] = 0;
+        defender.stats[stat] = defender.rawStats[stat];
       }
     }
   }
@@ -1147,7 +1149,7 @@ export function calculateBPModsSMSSSV(
     desc.attackerItem = attacker.item;
   }
 
-  if (defender.hasAbility('Heatproof') && move.hasType('Fire')) {
+  if (gen.num <= 8 && defender.hasAbility('Heatproof') && move.hasType('Fire')) {
     bpMods.push(1024);
     desc.defenderAbility = defender.ability;
   } else if ((defender.hasAbility('Dry Skin') && move.hasType('Fire')) ||
@@ -1338,6 +1340,11 @@ export function calculateAtModsSMSSSV(
   if ((defender.hasAbility('Thick Fat') && move.hasType('Fire', 'Ice')) ||
       (defender.hasAbility('Water Bubble') && move.hasType('Fire')) ||
      (defender.hasAbility('Purifying Salt') && move.hasType('Ghost'))) {
+    atMods.push(2048);
+    desc.defenderAbility = defender.ability;
+  }
+
+  if (gen.num >= 9 && defender.hasAbility('Heatproof') && move.hasType('Fire')) {
     atMods.push(2048);
     desc.defenderAbility = defender.ability;
   }

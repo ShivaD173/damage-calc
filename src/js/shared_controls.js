@@ -577,7 +577,7 @@ $(".set-selector").change(function () {
 			$(this).closest('.poke-info').find(".extraSetAbilities").text(listAbilities.join(', '));
 			if (gen >= 2) $(this).closest('.poke-info').find(".item-pool").show();
 			$(this).closest('.poke-info').find(".extraSetItems").text(listItems.join(', '));
-			if (gen >= 9 || gen === 7 || gen === 6) {
+			if (gen >= 9 || gen === 7 || gen === 6 || gen === 5 || gen === 4) {
 				$(this).closest('.poke-info').find(".role-pool").show();
 				if (gen >= 9) $(this).closest('.poke-info').find(".tera-type-pool").show();
 			}
@@ -607,7 +607,7 @@ $(".set-selector").change(function () {
 			if (regSets) {
 				pokeObj.find(".teraType").val(set.teraType || getForcedTeraType(pokemonName) || pokemon.types[0]);
 			}
-			pokeObj.find(".level").val(set.level);
+			pokeObj.find(".level").val(set.level === undefined ? 100 : set.level);
 			pokeObj.find(".hp .evs").val((set.evs && set.evs.hp !== undefined) ? set.evs.hp : 0);
 			pokeObj.find(".hp .ivs").val((set.ivs && set.ivs.hp !== undefined) ? set.ivs.hp : 31);
 			pokeObj.find(".hp .dvs").val((set.dvs && set.dvs.hp !== undefined) ? set.dvs.hp : 15);
@@ -631,7 +631,7 @@ $(".set-selector").change(function () {
 			}
 			var setMoves = set.moves;
 			if (randset) {
-				if (gen < 9 && gen !== 7 && gen !== 6) {
+				if (gen < 9 && gen !== 7 && gen !== 6 && gen !== 5 && gen !== 4) {
 					setMoves = randset.moves;
 				} else {
 					setMoves = [];
@@ -826,8 +826,6 @@ $(".forme").change(function () {
 	container.find(".ability").keyup();
 	if (startsWith($(this).val(), "Ogerpon-") && !startsWith($(this).val(), "Ogerpon-Teal")) {
 		container.find(".item").val($(this).val().split("-")[1] + " Mask").keyup();
-	} else if ($(this).val().indexOf("-Mega") !== -1 && $(this).val() !== "Rayquaza-Mega") {
-		container.find(".item").val("").keyup();
 	} else {
 		container.find(".item").prop("disabled", false);
 	}
@@ -896,7 +894,7 @@ function createPokemon(pokeInfo) {
 			evs[stat] = (set.evs && typeof set.evs[legacyStat] !== "undefined") ? set.evs[legacyStat] : 0;
 		}
 		var moveNames = set.moves;
-		if (isRandoms && (gen >= 9 || gen === 7 || gen === 6)) {
+		if (isRandoms && (gen >= 9 || gen === 7 || gen === 6 || gen === 5 || gen === 4)) {
 			moveNames = [];
 			for (var role in set.roles) {
 				for (var q = 0; q < set.roles[role].moves.length; q++) {
