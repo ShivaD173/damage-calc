@@ -4826,6 +4826,7 @@ const GAY_PATCH = {
   'Misty Explosion': {bp: 150},
   'Explosion': {bp: 350},
   'Self-Destruct': {bp: 275},
+  'Round': {bp: 70},
   'Vise Grip': {bp: 70},
   'Grassy Glide': {bp: 60},
   'Tri Attack': {bp: 30, multihit: 3},
@@ -4854,6 +4855,7 @@ const GAY_PATCH = {
   'Fire Fang': {bp: 75},
   'Thunder Fang': {bp: 75},
   'Ice Fang': {bp: 75},
+  'Wring Out': {category: 'Physical'},
   'Needle Arm': {bp: 90},
   'Present': {bp: 80},
   'Aeroblast': {bp: 90},
@@ -4921,6 +4923,7 @@ const GAY_PATCH = {
   'Smeltery': {bp: 0, type: 'Steel', category: 'Status'},
   'Ice Rink': {bp: 0, type: 'Ice', category: 'Status'},
   'Flash Freeze': {bp: 0, type: 'Ice', category: 'Status'},
+  'Slush Crush': {bp: 0, type: 'Steel', makesContact: true, category: 'Physical'},
 }
 
 

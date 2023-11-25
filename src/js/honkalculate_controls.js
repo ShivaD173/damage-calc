@@ -72,7 +72,8 @@ function performCalculations() {
 		if (setOptions[i].id && typeof setOptions[i].id !== "undefined") {
 			setName = setOptions[i].id.substring(setOptions[i].id.indexOf("(") + 1, setOptions[i].id.lastIndexOf(")"));
 			setTier = setName.substring(0, setName.indexOf(" "));
-			if (selectedTiers.indexOf(setTier) !== -1) {
+			// if (selectedTiers.indexOf(setTier) !== -1) {
+			if (setTier !== "Blank") {
 				var field = createField();
 				if (mode === "one-vs-all") {
 					attacker = createPokemon(pokeInfo);
@@ -225,13 +226,13 @@ function placeBsBtn() {
 	$("#holder-2_wrapper").prepend(honkalculator);
 	$(".bs-btn").click(function () {
 		var formats = getSelectedTiers();
-		if (!formats.length) {
-			$(".bs-btn").popover({
-				content: "No format selected",
-				placement: "right"
-			}).popover('show');
-			setTimeout(function () { $(".bs-btn").popover('destroy'); }, 1350);
-		}
+		// if (!formats.length) {
+		// 	$(".bs-btn").popover({
+		// 		content: "No format selected",
+		// 		placement: "right"
+		// 	}).popover('show');
+		// 	setTimeout(function () { $(".bs-btn").popover('destroy'); }, 1350);
+		// }
 		table.clear();
 		performCalculations();
 	});

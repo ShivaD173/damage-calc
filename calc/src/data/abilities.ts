@@ -368,7 +368,12 @@ const SV = SV_orig.concat([
   'Lifetaker',
   'Shadow Tagged',
   'Molten Down',
-  'Fighting Spirit'
+  'Fighting Spirit',
+  'Tremor Sense',
+  'Regal Majesty',
+  'Putrid Stench',
+  'Wind Chime',
+  'Machine Learning'
 ])
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];

@@ -255,7 +255,7 @@ $(".ability").bind("keyup change", function () {
 
 	var ability = $(this).closest(".poke-info").find(".ability").val();
 
-	var TOGGLE_ABILITIES = ['Flash Fire', 'Intimidate', 'Minus', 'Plus', 'Slow Start', 'Unburden', 'Stakeout'];
+	var TOGGLE_ABILITIES = ['Flash Fire', 'Intimidate', 'The Flock', 'Minus', 'Plus', 'Slow Start', 'Unburden', 'Stakeout', 'Il Vaticano', 'Homophobia'];
 
 	if (TOGGLE_ABILITIES.indexOf(ability) >= 0) {
 		$(this).closest(".poke-info").find(".abilityToggle").show();
@@ -1220,7 +1220,8 @@ $(".notation").change(function () {
 });
 
 function clearField() {
-	$("#singles-format").prop("checked", true);
+	$("#singles-format").prop("checked", false);
+	$("#doubles-format").prop("checked", true);
 	$("#clear").prop("checked", true);
 	$("#gscClear").prop("checked", true);
 	$("#gravity").prop("checked", false);
