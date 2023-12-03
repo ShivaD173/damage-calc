@@ -68,6 +68,12 @@ function performCalculations() {
 	var setOptions = getSetOptions();
 	var dataSet = [];
 	var pokeInfo = $("#p1");
+	var KOs = 0
+	var chanceKOs = 0
+	var twohkos = 0
+	var threehkos = 0
+	var fourhkos = 0
+	var rest = 0
 	for (var i = 0; i < setOptions.length; i++) {
 		if (setOptions[i].id && typeof setOptions[i].id !== "undefined") {
 			setName = setOptions[i].id.substring(setOptions[i].id.indexOf("(") + 1, setOptions[i].id.lastIndexOf(")"));
@@ -94,18 +100,20 @@ function performCalculations() {
 				defender = damageResults[0].defender;
 				var result, minMaxDamage, minDamage, maxDamage, minPercentage, maxPercentage, minPixels, maxPixels;
 				var highestDamage = -1;
+				var highestMinDamage = -1;
 				var data = [setOptions[i].id];
 				for (var n = 0; n < 4; n++) {
 					result = damageResults[n];
 					minMaxDamage = result.range();
-					minDamage = minMaxDamage[0] * attacker.moves[n].hits;
-					maxDamage = minMaxDamage[1] * attacker.moves[n].hits;
+					minDamage = minMaxDamage[0];
+					maxDamage = minMaxDamage[1];
 					minPercentage = Math.floor(minDamage * 1000 / defender.maxHP()) / 10;
 					maxPercentage = Math.floor(maxDamage * 1000 / defender.maxHP()) / 10;
 					minPixels = Math.floor(minDamage * 48 / defender.maxHP());
 					maxPixels = Math.floor(maxDamage * 48 / defender.maxHP());
 					if (maxDamage > highestDamage) {
 						highestDamage = maxDamage;
+						highestMinDamage = minDamage;
 						while (data.length > 1) {
 							data.pop();
 						}
@@ -114,6 +122,21 @@ function performCalculations() {
 						data.push(minPixels + " - " + maxPixels + "px");
 						data.push(attacker.moves[n].bp === 0 ? 'nice move' : (result.kochance(false).text || 'possibly the worst move ever'));
 					}
+				}
+				highestPercentage = Math.floor(highestDamage * 1000 / defender.maxHP()) / 10;
+				highestMinPercentage = Math.floor(highestMinDamage * 1000 / defender.maxHP()) / 10;
+				if (highestMinPercentage > 100) {
+					KOs += 1;
+				} else if (highestPercentage > 100) {
+					chanceKOs += 1;
+				} else if (highestMinPercentage > 50) {
+					twohkos += 1;
+				} else if (highestMinPercentage > 33) {
+					threehkos += 1;
+				} else if (highestMinPercentage > 25) {
+					fourhkos += 1;
+				} else {
+					rest += 1
 				}
 				data.push((mode === "one-vs-all") ? defender.types[0] : attacker.types[0]);
 				data.push(((mode === "one-vs-all") ? defender.types[1] : attacker.types[1]) || "");
@@ -126,6 +149,15 @@ function performCalculations() {
 	var pokemon = mode === "one-vs-all" ? attacker : defender;
 	if (pokemon) pokeInfo.find(".sp .totalMod").text(pokemon.stats.spe);
 	table.rows.add(dataSet).draw();
+	const sum = (KOs + chanceKOs + twohkos + threehkos + fourhkos + rest)
+	ds2 = []
+	ds2.push(["1HKO", KOs, Math.floor(KOs/sum * 1000) / 10])
+	ds2.push(["1HKO chance", chanceKOs, Math.floor(chanceKOs/sum * 1000) / 10])
+	ds2.push(["2HKO", twohkos, Math.floor(twohkos/sum * 1000) / 10])
+	ds2.push(["3HKO", threehkos, Math.floor(threehkos/sum * 1000) / 10])
+	ds2.push(["4HKO", fourhkos, Math.floor(fourhkos/sum * 1000) / 10])
+	ds2.push(["5HKO+", rest, Math.floor(rest/sum * 1000) / 10])
+	table2.rows.add(ds2).draw();
 }
 
 function getSelectedTiers() {
@@ -150,6 +182,7 @@ $(".gen").change(function () {
 
 	if ($.fn.DataTable.isDataTable("#holder-2")) {
 		table.clear();
+		table2.clear();
 		constructDataTable();
 		placeBsBtn();
 	}
@@ -181,6 +214,7 @@ function adjustTierBorderRadius() {
 }
 
 var table;
+var table2;
 function constructDataTable() {
 	table = $("#holder-2").DataTable({
 		destroy: true,
@@ -219,13 +253,22 @@ function constructDataTable() {
 		scrollCollapse: true
 	});
 	$(".dataTables_wrapper").css({"max-width": dtWidth});
+
+	table2 = $("#holder-4").DataTable({
+		// destroy: true,
+		// dom: 'C<"clear">fti',
+		paging: false,
+		// scrollX: Math.floor(dtWidth / 100) * 100, // round down to nearest hundred
+		scrollY: 300,
+		scrollCollapse: true
+	});
 }
 
 function placeBsBtn() {
 	var honkalculator = "<button style='position:absolute' class='bs-btn bs-btn-default'>Honkalculate</button>";
 	$("#holder-2_wrapper").prepend(honkalculator);
 	$(".bs-btn").click(function () {
-		var formats = getSelectedTiers();
+		// var formats = getSelectedTiers();
 		// if (!formats.length) {
 		// 	$(".bs-btn").popover({
 		// 		content: "No format selected",
@@ -234,6 +277,7 @@ function placeBsBtn() {
 		// 	setTimeout(function () { $(".bs-btn").popover('destroy'); }, 1350);
 		// }
 		table.clear();
+		table2.clear();
 		performCalculations();
 	});
 }

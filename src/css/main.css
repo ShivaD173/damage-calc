@@ -214,7 +214,7 @@ th {
     float: left;
     display: inline-block; /* required for honkaculate to work */
 }
-.poke-info {
+.poke-info, .holder-3 {
     width: 30em;
 }
 .field-info, .poke-import {
@@ -228,6 +228,10 @@ th {
 #holder-2 tr {
     white-space: nowrap;
 }
+
+/* #holder-4 tr {
+    white-space: nowrap;
+} */
 
 /* general button styling */
 .btn {

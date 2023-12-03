@@ -373,7 +373,9 @@ const SV = SV_orig.concat([
   'Regal Majesty',
   'Putrid Stench',
   'Wind Chime',
-  'Machine Learning'
+  'Machine Learning',
+  'Mystic Fist',
+  "Ballin'"
 ])
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];
