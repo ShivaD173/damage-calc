@@ -1,9 +1,9 @@
 name: Update Sets
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '27 23 */3 * *'
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: '27 23 */3 * *'
 
 jobs:
   scheduled:

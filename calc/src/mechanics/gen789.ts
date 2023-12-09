@@ -388,7 +388,7 @@ export function calculateSMSSSV(
   if (move.named('Final Gambit')) {
     result.damage = attacker.curHP();
     if (attacker.hasAbility('Reckless')) {
-      result.damage = Math.floor(attacker.curHP() * 1.3)
+      result.damage = Math.floor(attacker.curHP() * 1.3);
     }
     return result;
   }
@@ -654,8 +654,10 @@ export function calculateSMSSSV(
         defenderDefBoost = Math.min(6, defenderDefBoost + 1);
         desc.defenderAbility = 'Stamina';
       } else if (defender.ability === 'Machine Learning') {
-        defenderDefBoost = Math.min(6, defenderDefBoost + 1);
-        desc.defenderAbility = 'Machine Learning';
+        if (times === 0) {
+          defenderDefBoost = Math.min(6, defenderDefBoost + 1);
+          desc.defenderAbility = 'Machine Learning';
+        }
       } else if (hitsPhysical && defender.ability === 'Weak Armor') {
         defenderDefBoost = Math.max(-6, defenderDefBoost - 1);
         desc.defenderAbility = 'Weak Armor';
@@ -964,7 +966,7 @@ export function calculateBPModsSMSSSV(
     desc.weather = field.weather;
   } else if (move.named('Collision Course', 'Electro Drift')) {
     const isGhostRevealed =
-      attacker.hasAbility('Scrappy') || attacker.hasAbility('Mind\'s Eye') || attacker.hasAbility('Normalize')
+      attacker.hasAbility('Scrappy') || attacker.hasAbility('Mind\'s Eye') || attacker.hasAbility('Normalize') ||
       field.defenderSide.isForesight;
     const isRingTarget =
       (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz')) || (attacker.hasAbility('Corrosion') && move.type === 'Poison');
@@ -1116,7 +1118,7 @@ export function calculateBPModsSMSSSV(
   }
 
   // TODO: Probably in the wrong place
-  if (attacker.hasAbility('Large Wingspan') && move.type === 'Flying'){
+  if (attacker.hasAbility('Large Wingspan') && move.type === 'Flying') {
     move.target = 'allAdjacentFoes';
   }
   if (attacker.hasAbility('Triple Threat') && move.hits === 1) {
@@ -1132,20 +1134,17 @@ export function calculateBPModsSMSSSV(
 
   if ((attacker.hasAbility('Reckless') && (move.recoil || move.hasCrashDamage || move.mindBlownRecoil || move.named('Explosion', 'Self-Destruct', 'Misty Explosion'))) ||
     (attacker.hasAbility('Transphobia') && defender.gender === 'N') ||
-    (attacker.hasAbility('Homophobia') && attacker.abilityOn) )
-  {
+    (attacker.hasAbility('Homophobia') && attacker.abilityOn)) {
     bpMods.push(5325);
     desc.attackerAbility = attacker.ability;
   }
   if ((attacker.hasAbility('Iron Fist') && move.flags.punch) ||
-      (attacker.hasAbility('Il Vaticano')) && attacker.abilityOn)
-  {
+      (attacker.hasAbility('Il Vaticano')) && attacker.abilityOn) {
     bpMods.push(5734);
     desc.attackerAbility = attacker.ability;
   }
 
-  if ((attacker.hasAbility('Mystic Fist') && move.flags.punch))
-  {
+  if ((attacker.hasAbility('Mystic Fist') && move.flags.punch)) {
     bpMods.push(4506);
     move.category = 'Special';
     desc.attackerAbility = attacker.ability;
@@ -1226,9 +1225,12 @@ export function calculateAttackSMSSSV(
   let attack: number;
   const attackSource = move.named('Foul Play') ? defender : attacker;
   if (move.named('Photon Geyser', 'Light That Burns The Sky', 'Hydro Cannon', 'Blast Burn', 'Frenzy Plant') ||
-      attacker.hasAbility("Ballin'") ||
       (move.named('Tera Blast') && attackSource.teraType)) {
     move.category = attackSource.stats.atk > attackSource.stats.spa ? 'Physical' : 'Special';
+  }
+  if (attacker.hasAbility("Ballin'") && move.flags.bullet) {
+    move.category = attackSource.stats.atk > attackSource.stats.spa ? 'Physical' : 'Special';
+    desc.attackerAbility = attacker.ability;
   }
   const attackStat =
     move.named('Shell Side Arm') &&
@@ -1495,7 +1497,7 @@ export function calculateDfModsSMSSSV(
     desc.isFlowerGiftDefender = true;
   } else if (
     defender.hasAbility('Grass Pelt') &&
-    field.hasTerrain('Grassy') 
+    field.hasTerrain('Grassy')
   ) {
     dfMods.push(6144);
     desc.defenderAbility = defender.ability;
@@ -1649,10 +1651,12 @@ export function calculateFinalModsSMSSSV(
     finalMods.push(8192);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Normalize') && typeEffectiveness < 1) {
-    if (typeEffectiveness === .5)
+    if (typeEffectiveness === 0.5) {
       finalMods.push(8192);
-    if (typeEffectiveness === .25)
+    }
+    if (typeEffectiveness === 0.25) {
       finalMods.push(16384);
+    }
     desc.attackerAbility = attacker.ability;
   }
 

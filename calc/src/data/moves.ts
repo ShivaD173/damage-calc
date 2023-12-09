@@ -4824,8 +4824,8 @@ const GAY_PATCH = {
   'Future Sight': {bp: 150},
   'Doom Desire': {bp: 150},
   'Misty Explosion': {bp: 150},
-  'Explosion': {bp: 350},
-  'Self-Destruct': {bp: 275},
+  'Explosion': {bp: 325},
+  'Self-Destruct': {bp: 250},
   'Round': {bp: 70},
   'Vise Grip': {bp: 70},
   'Grassy Glide': {bp: 60},
@@ -4885,8 +4885,8 @@ const GAY_PATCH = {
   'Triple Dive': {bp: 80},
   'Ice Hammer': {bp: 110},
   'Steamroller': {bp: 85},
-  'Luster Purge': {bp: 80},
-  'Mist Ball': {bp: 80},
+  'Luster Purge': {bp: 75},
+  'Mist Ball': {bp: 75},
   'Accelerock': {bp: 60},
   'G-Max Replenish': {bp: 70},
   'G-Max Malodor': {bp: 80},
@@ -4906,25 +4906,34 @@ const GAY_PATCH = {
   'Hidden Power Fairy': {bp: 60, type: 'Fairy', category: 'Special'},
   'Hidden Power Bug': {category: 'Physical'},
   'Hidden Power Fighting': {category: 'Physical'},
-  'Hidden Power Flying': {category: 'Physical'},
-  'Hidden Power Ghost': {category: 'Physical'},
-  'Hidden Power Poison': {category: 'Physical'},
-  'Hidden Power Rock': {category: 'Physical'},
-  'Hidden Power Steel': {category: 'Physical'},
-  'Hidden Power Ground': {category: 'Physical'},
+  'Hidden Power Flying': {category: 'Physical'}, 
+  'Hidden Power Ghost': {category: 'Physical'}, 
+  'Hidden Power Poison': {category: 'Physical'}, 
+  'Hidden Power Rock': {category: 'Physical'}, 
+  'Hidden Power Steel': {category: 'Physical'}, 
+  'Hidden Power Ground': {category: 'Physical'}, 
   // New Moves
   'Purifying Water': {bp: 100, type: 'Water', category: 'Special', secondaries: true},
   'Divine Smite': {bp: 100, type: 'Electric', category: 'Special', secondaries: true},
   'Firewall': {bp: 0, type: 'Fire', category: 'Status', priority: 4},
-  'Stalacbite': {bp: 75, type: 'Rock', category: 'Physical', makesContact: true, secondaries: true, isBite: true},
-  'Dive Bomb': {bp: 130, type: 'Flying', category: 'Physical', hasCrashDamage: true, makesContact: true},
-  'Psych Out': {bp: 40, type: 'Psychic', category: 'Special', makesContact: true, secondaries: true, priority: 3},
+  'Stalacbite': {
+    bp: 75, type: 'Rock', category: 'Physical',
+    makesContact: true, secondaries: true, isBite: true
+  },
+  'Dive Bomb': {
+    bp: 130, type: 'Flying', category: 'Physical',
+    hasCrashDamage: true, makesContact: true
+  },
+  'Psych Out': {
+    bp: 40, type: 'Psychic', category: 'Special',
+    makesContact: true, secondaries: true, priority: 3
+  },
   'Quarry': {bp: 0, type: 'Rock', category: 'Status'},
   'Smeltery': {bp: 0, type: 'Steel', category: 'Status'},
   'Ice Rink': {bp: 0, type: 'Ice', category: 'Status'},
   'Flash Freeze': {bp: 0, type: 'Ice', category: 'Status'},
   'Slush Crush': {bp: 0, type: 'Steel', makesContact: true, category: 'Physical'},
-}
+};
 
 
 const SV: {[name: string]: MoveData} = extend(true, {}, SV_old, GAY_PATCH);
