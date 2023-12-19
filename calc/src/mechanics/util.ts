@@ -182,6 +182,13 @@ export function checkAirLock(pokemon: Pokemon, field: Field) {
   }
 }
 
+export function checkTeraformZero(pokemon: Pokemon, field: Field) {
+  if (pokemon.hasAbility('Teraform Zero') && pokemon.abilityOn) {
+    field.weather = undefined;
+    field.terrain = undefined;
+  }
+}
+
 export function checkForecast(pokemon: Pokemon, weather?: Weather) {
   if (pokemon.hasAbility('Forecast') && pokemon.named('Castform')) {
     switch (weather) {
@@ -226,8 +233,8 @@ export function checkIntimidate(gen: Generation, source: Pokemon, target: Pokemo
     // More abilities now block Intimidate in Gen 8+ (DaWoblefet, Cloudy Mistral)
     (gen.num >= 8 && target.hasAbility('Inner Focus', 'Own Tempo', 'Oblivious', 'Scrappy')) ||
     target.hasItem('Clear Amulet');
-  if ((source.hasAbility('Intimidate') || source.hasAbility('The Flock'))
-   && source.abilityOn && !blocked) {
+  if ((source.hasAbility('Intimidate') || source.hasAbility('The Flock')) &&
+    source.abilityOn && !blocked) {
     if (target.hasAbility('Contrary', 'Defiant', 'Guard Dog')) {
       target.boosts.atk = Math.min(6, target.boosts.atk + 1);
     } else if (target.hasAbility('Simple')) {
