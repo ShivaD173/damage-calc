@@ -380,6 +380,7 @@ const SV = SV_orig.concat([
   'Machine Learning',
   'Mystic Fist',
   "Ballin'",
+  'Running Start',
 ]);
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];

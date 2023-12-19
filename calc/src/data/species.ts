@@ -10073,10 +10073,10 @@ const GAY_PATCH = {
       "Flying"
     ],
     "bs": {
-      "hp": 65,
+      "hp": 70,
       "at": 55,
       "df": 60,
-      "sa": 105,
+      "sa": 110,
       "sd": 90,
       "sp": 75
     },
@@ -10090,10 +10090,10 @@ const GAY_PATCH = {
       "Poison"
     ],
     "bs": {
-      "hp": 65,
+      "hp": 70,
       "at": 130,
       "df": 40,
-      "sa": 15,
+      "sa": 20,
       "sd": 75,
       "sp": 125
     },
@@ -10703,7 +10703,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 60,
-      "at": 130,
+      "at": 135,
       "df": 120,
       "sa": 50,
       "sd": 55,
@@ -11977,12 +11977,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 110,
-      "at": 120,
+      "hp": 90,
+      "at": 125,
       "df": 125,
       "sa": 60,
       "sd": 60,
-      "sp": 95
+      "sp": 60
     },
     "abilities": {
       "0": "Sturdy"
@@ -12895,7 +12895,7 @@ const GAY_PATCH = {
       "Dark"
     ],
     "bs": {
-      "hp": 73,
+      "hp": 63,
       "at": 130,
       "df": 90,
       "sa": 90,
@@ -13100,9 +13100,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 114,
-      "at": 100,
+      "at": 98,
       "df": 103,
-      "sa": 100,
+      "sa": 102,
       "sd": 112,
       "sp": 71
     },
@@ -13168,9 +13168,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 120,
-      "at": 85,
+      "at": 95,
       "df": 90,
-      "sa": 95,
+      "sa": 85,
       "sd": 90,
       "sp": 60
     },
@@ -15088,15 +15088,15 @@ const GAY_PATCH = {
       "Flying"
     ],
     "bs": {
-      "hp": 100,
-      "at": 150,
-      "df": 70,
-      "sa": 132,
-      "sd": 70,
-      "sp": 120
+      "hp": 83,
+      "at": 145,
+      "df": 65,
+      "sa": 127,
+      "sd": 65,
+      "sp": 115
     },
     "abilities": {
-      "0": "Defeatist"
+      "0": "Running Start"
     }
   },
   "Garbodor": {
@@ -15972,11 +15972,11 @@ const GAY_PATCH = {
       "Flying"
     ],
     "bs": {
-      "hp": 90,
+      "hp": 95,
       "at": 57,
-      "df": 60,
+      "df": 65,
       "sa": 95,
-      "sd": 60,
+      "sd": 65,
       "sp": 94
     },
     "abilities": {
@@ -18555,23 +18555,6 @@ const GAY_PATCH = {
       "0": "Water Absorb"
     }
   },
-  "Duraludon": {
-    "types": [
-      "Steel",
-      "Dragon"
-    ],
-    "bs": {
-      "hp": 70,
-      "at": 95,
-      "df": 115,
-      "sa": 120,
-      "sd": 50,
-      "sp": 85
-    },
-    "abilities": {
-      "0": "Pressure"
-    }
-  },
   "Dragapult": {
     "types": [
       "Dragon",
@@ -19966,23 +19949,6 @@ const GAY_PATCH = {
       "0": "Mind's Eye"
     }
   },
-  "Dipplin": {
-    "types": [
-      "Grass",
-      "Dragon"
-    ],
-    "bs": {
-      "hp": 85,
-      "at": 80,
-      "df": 115,
-      "sa": 95,
-      "sd": 85,
-      "sp": 40
-    },
-    "abilities": {
-      "0": "Supersweet Syrup"
-    }
-  },
   "Sinistcha": {
     "types": [
       "Grass",
@@ -20185,6 +20151,108 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Embody Aspect (Cornerstone)"
+    }
+  },
+  "Archaludon": {
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 105,
+      "df": 130,
+      "sa": 125,
+      "sd": 65,
+      "sp": 85
+    },
+    "abilities": {
+      "0": "Stamina"
+    }
+  },
+  "Hydrapple": {
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 106,
+      "at": 80,
+      "df": 110,
+      "sa": 120,
+      "sd": 80,
+      "sp": 44
+    },
+    "abilities": {
+      "0": "Supersweet Syrup"
+    }
+  },
+  "Gouging Fire": {
+    "types": [
+      "Fire",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 105,
+      "at": 115,
+      "df": 121,
+      "sa": 65,
+      "sd": 93,
+      "sp": 91
+    },
+    "abilities": {
+      "0": "Protosynthesis"
+    }
+  },
+  "Raging Bolt": {
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 125,
+      "at": 73,
+      "df": 91,
+      "sa": 137,
+      "sd": 89,
+      "sp": 75
+    },
+    "abilities": {
+      "0": "Protosynthesis"
+    }
+  },
+  "Iron Boulder": {
+    "types": [
+      "Rock",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 120,
+      "df": 80,
+      "sa": 68,
+      "sd": 108,
+      "sp": 124
+    },
+    "abilities": {
+      "0": "Quark Drive"
+    }
+  },
+  "Iron Crown": {
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 72,
+      "df": 100,
+      "sa": 122,
+      "sd": 108,
+      "sp": 98
+    },
+    "abilities": {
+      "0": "Quark Drive"
     }
   }
 }
