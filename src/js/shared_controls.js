@@ -1550,10 +1550,10 @@ $(document).ready(function () {
 	$("#gen" + g).change();
 	$("#percentage").prop("checked", true);
 	$("#percentage").change();
-	$("#singles-format").prop("checked", true);
-	$("#singles-format").change();
-	$("#default-level-100").prop("checked", true);
-	$("#default-level-100").change();
+	$("#doubles-format").prop("checked", true);
+	$("#doubles-format").change();
+	$("#default-level-50").prop("checked", true);
+	$("#default-level-50").change();
 	loadDefaultLists();
 	$(".move-selector").select2({
 		dropdownAutoWidth: true,

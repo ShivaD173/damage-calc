@@ -17365,7 +17365,7 @@ const GAY_PATCH = {
       "0": "RKS System"
     }
   },
-  "Minior Meteor": {
+  "Minior-Meteor": {
     "types": [
       "Rock",
       "Flying"
