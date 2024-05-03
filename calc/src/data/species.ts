@@ -13470,7 +13470,7 @@ const GAY_PATCH = {
   "Luxray": {
     "types": [
       "Electric",
-      "Fairy"
+      "Normal"
     ],
     "bs": {
       "hp": 90,
