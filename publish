@@ -1,5 +1,8 @@
 #!/bin/bash -ex
 
+echo 'Publishing disabled for the showdex-calc fork of smogon/damage-calc.'
+exit 1
+
 # Setup
 
 rev=$(git rev-parse --short HEAD | tr -d "\n")
