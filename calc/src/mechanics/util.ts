@@ -207,7 +207,9 @@ export function checkWonderRoom(pokemon: Pokemon, wonderRoomActive?: boolean) {
   }
 }
 
-export function checkIntimidate(gen: Generation, source: Pokemon, target: Pokemon) {
+export function checkIntimidate(_gen: Generation, _source: Pokemon, _target: Pokemon) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   const blocked =
     target.hasAbility('Clear Body', 'White Smoke', 'Hyper Cutter', 'Full Metal Body') ||
     // More abilities now block Intimidate in Gen 8+ (DaWoblefet, Cloudy Mistral)
@@ -225,9 +227,12 @@ export function checkIntimidate(gen: Generation, source: Pokemon, target: Pokemo
       target.boosts.spa = Math.min(6, target.boosts.spa + 2);
     }
   }
+  */
 }
 
-export function checkDownload(source: Pokemon, target: Pokemon, wonderRoomActive?: boolean) {
+export function checkDownload(_source: Pokemon, _target: Pokemon, _wonderRoomActive?: boolean) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   if (source.hasAbility('Download')) {
     let def = target.stats.def;
     let spd = target.stats.spd;
@@ -239,27 +244,39 @@ export function checkDownload(source: Pokemon, target: Pokemon, wonderRoomActive
       source.boosts.atk = Math.min(6, source.boosts.atk + 1);
     }
   }
+  */
 }
 
-export function checkIntrepidSword(source: Pokemon, gen: Generation) {
+export function checkIntrepidSword(_source: Pokemon, _gen: Generation) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   if (source.hasAbility('Intrepid Sword') && gen.num > 7) {
     source.boosts.atk = Math.min(6, source.boosts.atk + 1);
   }
+  */
 }
 
-export function checkDauntlessShield(source: Pokemon, gen: Generation) {
+export function checkDauntlessShield(_source: Pokemon, _gen: Generation) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   if (source.hasAbility('Dauntless Shield') && gen.num > 7) {
     source.boosts.def = Math.min(6, source.boosts.def + 1);
   }
+  */
 }
 
-export function checkWindRider(source: Pokemon, attackingSide: Side) {
+export function checkWindRider(_source: Pokemon, _attackingSide: Side) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   if (source.hasAbility('Wind Rider') && attackingSide.isTailwind) {
     source.boosts.atk = Math.min(6, source.boosts.atk + 1);
   }
+  */
 }
 
-export function checkEmbody(source: Pokemon, gen: Generation) {
+export function checkEmbody(_source: Pokemon, _gen: Generation) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   if (gen.num < 9) return;
   switch (source.ability) {
   case 'Embody Aspect (Cornerstone)':
@@ -275,6 +292,7 @@ export function checkEmbody(source: Pokemon, gen: Generation) {
     source.boosts.spd = Math.min(6, source.boosts.spd + 1);
     break;
   }
+  */
 }
 
 export function checkInfiltrator(pokemon: Pokemon, affectedSide: Side) {
@@ -285,7 +303,9 @@ export function checkInfiltrator(pokemon: Pokemon, affectedSide: Side) {
   }
 }
 
-export function checkSeedBoost(pokemon: Pokemon, field: Field) {
+export function checkSeedBoost(_pokemon: Pokemon, _field: Field) {
+  // handled in Showdex via determineAutoBoostEffect(), so making this a no-op
+  /*
   if (!pokemon.item) return;
   if (field.terrain && pokemon.item.includes('Seed')) {
     const terrainSeed = pokemon.item.substring(0, pokemon.item.indexOf(' ')) as Terrain;
@@ -302,6 +322,7 @@ export function checkSeedBoost(pokemon: Pokemon, field: Field) {
       pokemon.item = '' as ItemName;
     }
   }
+  */
 }
 
 // NOTE: We only need to handle guaranteed, damage-relevant boosts here for multi-hit accuracy
@@ -511,9 +532,9 @@ export function isQPActive(
 
   return (
     (pokemon.hasAbility('Protosynthesis') &&
-      (weather.includes('Sun') || pokemon.hasItem('Booster Energy'))) ||
+      (pokemon.abilityOn || weather.includes('Sun') || pokemon.hasItem('Booster Energy'))) ||
     (pokemon.hasAbility('Quark Drive') &&
-      (terrain === 'Electric' || pokemon.hasItem('Booster Energy'))) ||
+      (pokemon.abilityOn || terrain === 'Electric' || pokemon.hasItem('Booster Energy'))) ||
     (pokemon.boostedStat !== 'auto')
   );
 }

@@ -43,6 +43,7 @@
 // If we're not being used as a module we're just going to rely on globals and
 // that the correct loading order being followed.
 
+import { type ShowdexCalcMods } from './showdex';
 import {Generations} from './data';
 import {State} from './state';
 import * as I from './data/interface';
@@ -62,14 +63,16 @@ export function calculate(
   attacker: A.Pokemon,
   defender: A.Pokemon,
   move: A.Move,
-  field?: A.Field
+  field?: A.Field,
+  mods?: ShowdexCalcMods,
 ): A.Result {
   return (Acalculate || A.calculate)(
     typeof gen === 'number' ? Generations.get(gen) : gen,
     attacker,
     defender,
     move,
-    field
+    field,
+    mods,
   );
 }
 
@@ -97,6 +100,7 @@ export class Pokemon extends A.Pokemon {
       nature?: string;
       moves?: string[];
       curHP?: number;
+      rawStats?: I.StatsTable<number>;
       ivs?: Partial<I.StatsTable> & {spc?: number};
       evs?: Partial<I.StatsTable> & {spc?: number};
       boosts?: Partial<I.StatsTable> & {spc?: number};
@@ -140,9 +144,30 @@ export function calcStat(
   );
 }
 
+export * from './showdex';
 export {Field, Side} from './field';
 export {Result} from './result';
-export {GenerationNum, StatsTable, StatID} from './data/interface';
+export {
+  AbilityName,
+  ItemName,
+  GameType,
+  Generation,
+  GenerationNum,
+  GenderName,
+  MoveCategory,
+  MoveName,
+  NatureName,
+  Natures,
+  Specie,
+  Species,
+  SpeciesName,
+  StatID,
+  StatsTable,
+  StatusName,
+  Terrain,
+  TypeName,
+  Weather,
+} from './data/interface';
 export {Generations} from './data/index';
 export {toID} from './util';
 export {State} from './state';

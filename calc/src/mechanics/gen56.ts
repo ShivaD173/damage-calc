@@ -1,3 +1,4 @@
+﻿import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
 import {Generation, AbilityName} from '../data/interface';
 import {toID} from '../util';
 import {
@@ -25,7 +26,7 @@ import {
   checkWonderRoom,
   computeFinalStats,
   countBoosts,
-  getBaseDamage,
+  // getBaseDamage,
   getStatDescriptionText,
   getFinalDamage,
   getModifiedStat,
@@ -43,7 +44,8 @@ export function calculateBWXY(
   attacker: Pokemon,
   defender: Pokemon,
   move: Move,
-  field: Field
+  field: Field,
+  mods?: ShowdexCalcMods,
 ) {
   // #region Initial
 
@@ -305,7 +307,8 @@ export function calculateBWXY(
     move,
     field,
     desc,
-    isCritical
+    isCritical,
+    mods,
   );
 
   // the random factor is applied between the crit mod and the stab mod, so don't apply anything
@@ -388,7 +391,11 @@ export function calculateBWXY(
         hasAteAbilityTypeChange,
         desc
       );
-      const newBaseDamage = getBaseDamage(attacker.level, newBasePower, newAtk, newDef);
+      // const newBaseDamage = getBaseDamage(attacker.level, newBasePower, newAtk, newDef);
+      const newBaseDamage = modBaseDamage('gen56', mods)(attacker.level, newBasePower, newAtk, newDef);
+      if (mods?.strikes?.length) {
+        desc.hits = mods.strikes.length;
+      }
       const newFinalMods = calculateFinalModsBWXY(
         gen,
         attacker,
@@ -489,10 +496,10 @@ export function calculateBasePowerBWXY(
     basePower = 20 + 20 * countBoosts(gen, attacker.boosts);
     desc.moveBP = basePower;
     break;
-  case 'Acrobatics':
-    basePower = move.bp * (attacker.hasItem('Flying Gem') || !attacker.item ? 2 : 1);
-    desc.moveBP = basePower;
-    break;
+  // case 'Acrobatics': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = move.bp * (attacker.hasItem('Flying Gem') || !attacker.item ? 2 : 1);
+  //   desc.moveBP = basePower;
+  //   break;
   case 'Assurance':
     basePower = move.bp * (defender.hasAbility('Parental Bond (Child)') ? 2 : 1);
     // NOTE: desc.attackerAbility = 'Parental Bond' will already reflect this boost
@@ -505,10 +512,10 @@ export function calculateBasePowerBWXY(
     basePower = move.bp * (defender.hasStatus('par') ? 2 : 1);
     desc.moveBP = basePower;
     break;
-  case 'Weather Ball':
-    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
-    desc.moveBP = basePower;
-    break;
+  // case 'Weather Ball': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+  //   desc.moveBP = basePower;
+  //   break;
   case 'Fling':
     basePower = getFlingPower(attacker.item);
     desc.moveBP = basePower;
@@ -554,10 +561,10 @@ export function calculateBasePowerBWXY(
     }
     break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  case 'Triple Kick':
-    basePower = hit * 10;
-    desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
-    break;
+  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = hit * 10;
+  //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
+  //   break;
   case 'Crush Grip':
   case 'Wring Out':
     basePower = 100 * Math.floor((defender.curHP() * 4096) / defender.maxHP());
@@ -585,6 +592,7 @@ export function calculateBasePowerBWXY(
   );
 
   basePower = OF16(Math.max(1, pokeRound((basePower * chainMods(bpMods, 41, 2097152)) / 4096)));
+  desc.moveBP = basePower;
   return basePower;
 }
 
@@ -716,7 +724,7 @@ export function calculateBPModsBWXY(
   }
 
   if (hasAteAbilityTypeChange) {
-    bpMods.push(5325);
+    // bpMods.push(5325); // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
     desc.attackerAbility = attacker.ability;
   } else if (
     (attacker.hasAbility('Mega Launcher') && move.flags.pulse) ||
@@ -783,7 +791,7 @@ export function calculateAttackBWXY(
 ) {
   let attack: number;
   const attackSource = move.named('Foul Play') ? defender : attacker;
-  const attackStat = move.category === 'Special' ? 'spa' : 'atk';
+  const attackStat = move.overrideOffensiveStat || (move.category === 'Special' ? 'spa' : 'atk');
   desc.attackEVs =
     move.named('Foul Play')
       ? getStatDescriptionText(gen, defender, attackStat, defender.nature)
@@ -998,8 +1006,13 @@ function calculateBaseDamageBWXY(
   field: Field,
   desc: RawDesc,
   isCritical = false,
+  mods?: ShowdexCalcMods,
 ) {
-  let baseDamage = getBaseDamage(attacker.level, basePower, attack, defense);
+  let baseDamage = modBaseDamage('gen56', mods)(attacker.level, basePower, attack, defense);
+
+  if (mods?.strikes?.length) {
+    desc.hits = mods.strikes.length;
+  }
 
   const isSpread = field.gameType !== 'Singles' &&
     ['allAdjacent', 'allAdjacentFoes'].includes(move.target);

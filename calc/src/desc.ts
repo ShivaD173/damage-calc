@@ -8,6 +8,7 @@ import {error} from './util';
 import {isGrounded} from './mechanics/util';
 
 export interface RawDesc {
+  __debug__?: unknown;
   HPEVs?: string;
   attackBoost?: number;
   attackEVs?: string;
@@ -173,7 +174,9 @@ export function getRecoil(
   let recoil: [number, number] | number = [0, 0];
   let text = '';
 
-  const damageOverflow = minDamage > defender.curHP() || maxDamage > defender.curHP();
+  // are these typos? o_O --keith
+  // const damageOverflow = minDamage > defender.curHP() || maxDamage > defender.curHP();
+  const damageOverflow = min > defender.curHP() || max > defender.curHP();
   if (move.recoil) {
     const mod = (move.recoil[0] / move.recoil[1]) * 100;
     let minRecoilDamage, maxRecoilDamage;

@@ -1,3 +1,4 @@
+import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
 import {Generation} from '../data/interface';
 import {getItemBoostType} from '../items';
 import {RawDesc} from '../desc';
@@ -12,7 +13,8 @@ export function calculateRBYGSC(
   attacker: Pokemon,
   defender: Pokemon,
   move: Move,
-  field: Field
+  field: Field,
+  mods?: ShowdexCalcMods,
 ) {
   computeFinalStats(gen, attacker, defender, field, 'atk', 'def', 'spa', 'spd', 'spe');
 
@@ -104,10 +106,10 @@ export function calculateRBYGSC(
     desc.hits = move.hits;
   }
   // Triple Kick's damage increases by 10 after each consecutive hit (10, 20, 30), this is a hack
-  if (move.name === 'Triple Kick') {
-    move.bp = move.hits === 2 ? 15 : move.hits === 3 ? 20 : 10;
-    desc.moveBP = move.bp;
-  }
+  // if (move.name === 'Triple Kick') { // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   move.bp = move.hits === 2 ? 15 : move.hits === 3 ? 20 : 10;
+  //   desc.moveBP = move.bp;
+  // }
 
   // Flail and Reversal are variable BP and never crit
   if (move.named('Flail', 'Reversal')) {
@@ -125,9 +127,11 @@ export function calculateRBYGSC(
     return result;
   }
 
+  desc.moveBP = move.bp;
+
   const isPhysical = move.category === 'Physical';
-  const attackStat = isPhysical ? 'atk' : 'spa';
-  const defenseStat = isPhysical ? 'def' : 'spd';
+  const attackStat = move.overrideOffensiveStat || (isPhysical ? 'atk' : 'spa');
+  const defenseStat = move.overrideDefensiveStat || (isPhysical ? 'def' : 'spd');
   let at = attacker.stats[attackStat]!;
   let df = defender.stats[defenseStat]!;
 
@@ -198,9 +202,11 @@ export function calculateRBYGSC(
     desc.defenderItem = defender.item;
   }
 
-  let baseDamage = Math.floor(
-    Math.floor((Math.floor((2 * lv) / 5 + 2) * Math.max(1, at) * move.bp) / Math.max(1, df)) / 50
-  );
+  let baseDamage = modBaseDamage('gen12', mods)(lv, move.bp, at, df);
+
+  if (mods?.strikes?.length) {
+    desc.hits = mods.strikes.length;
+  }
 
   // Gen 1 handles move.isCrit above by doubling level
   if (gen.num === 2 && move.isCrit) {

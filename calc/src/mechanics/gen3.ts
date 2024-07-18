@@ -1,3 +1,4 @@
+import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
 import {Generation} from '../data/interface';
 import {getItemBoostType} from '../items';
 import {RawDesc} from '../desc';
@@ -22,7 +23,8 @@ export function calculateADV(
   attacker: Pokemon,
   defender: Pokemon,
   move: Move,
-  field: Field
+  field: Field,
+  mods?: ShowdexCalcMods,
 ) {
   checkAirLock(attacker, field);
   checkAirLock(defender, field);
@@ -152,7 +154,12 @@ export function calculateADV(
   const df = calculateDefenseADV(gen, defender, move, desc, isCritical);
 
   const lv = attacker.level;
-  let baseDamage = Math.floor(Math.floor((Math.floor((2 * lv) / 5 + 2) * at * bp) / df) / 50);
+  // let baseDamage = Math.floor(Math.floor((Math.floor((2 * lv) / 5 + 2) * at * bp) / df) / 50);
+  let baseDamage = modBaseDamage('gen3', mods)(lv, bp, at, df);
+
+  if (mods?.strikes?.length) {
+    desc.hits = mods.strikes.length;
+  }
 
   baseDamage = calculateFinalModsADV(baseDamage, attacker, move, field, desc, isCritical);
 
@@ -236,13 +243,14 @@ export function calculateBasePowerADV(
     bp = 60;
     desc.moveName = 'Swift';
     break;
-  case 'Triple Kick':
-    bp = hit * 10;
-    desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
-    break;
+  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   bp = hit * 10;
+  //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
+  //   break;
   default:
     bp = move.bp;
   }
+  desc.moveBP = bp;
   return bp;
 }
 
@@ -261,6 +269,7 @@ export function calculateBPModsADV(
     basePower = Math.floor(basePower * 1.5);
     desc.attackerAbility = attacker.ability;
   }
+  desc.moveBP = basePower;
   return basePower;
 }
 
@@ -273,7 +282,7 @@ export function calculateAttackADV(
   isCritical = false
 ) {
   const isPhysical = move.category === 'Physical';
-  const attackStat = isPhysical ? 'atk' : 'spa';
+  const attackStat = move.overrideOffensiveStat || (isPhysical ? 'atk' : 'spa');
   desc.attackEVs = getStatDescriptionText(gen, attacker, attackStat, attacker.nature);
 
   let at = attacker.rawStats[attackStat];
@@ -333,7 +342,7 @@ export function calculateDefenseADV(
   isCritical = false
 ) {
   const isPhysical = move.category === 'Physical';
-  const defenseStat = isPhysical ? 'def' : 'spd';
+  const defenseStat = move.overrideDefensiveStat || (isPhysical ? 'def' : 'spd');
   desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
 
   let df = defender.rawStats[defenseStat];

@@ -57,7 +57,7 @@ export class Move implements State.Move {
     this.originalName = name;
     let data: I.Move = extend(true, {name}, gen.moves.get(toID(name)), options.overrides);
 
-    this.hits = 1;
+    this.hits = Math.max(options.hits || 0, 1);
     // If isZMove but there isn't a corresponding z-move, use the original move
     if (options.useMax && data.maxMove) {
       const maxMoveName: string = getMaxMoveName(
@@ -94,7 +94,8 @@ export class Move implements State.Move {
         category: data.category,
       });
     } else {
-      if (data.multihit) {
+      // Showdex will provide options.hits specified by the user, which the typeof prevents this bit from overriding that
+      if (typeof options.hits !== 'number' && this.hits < 2 && data.multihit) {
         if (data.multiaccuracy && typeof data.multihit === 'number') {
           this.hits = options.hits || data.multihit;
         } else {
