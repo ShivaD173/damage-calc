@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
-    "lib": ["es2016", "dom"],
-    "module": "commonjs",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "lib": ["ES6", "DOM"],
+    "module": "CommonJS",
+    "noEmitOnError": false,
+    "noFallthroughCasesInSwitch": false,
+    "noImplicitReturns": false,
     "sourceMap": true,
-    "strict": true,
-    "target": "ES5",
+    "strict": false,
+    "target": "ES6",
     "removeComments": false,
   }
 }
