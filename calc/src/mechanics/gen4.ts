@@ -187,7 +187,7 @@ export function calculateDPP(
   // #endregion
   // #region Base Power
 
-  let basePower = calculateBasePowerDPP(gen, attacker, defender, move, field, desc);
+  let basePower = calculateBasePowerDPP(gen, attacker, defender, move, field, desc, undefined, mods);
   if (basePower === 0) {
     return result;
   }
@@ -280,10 +280,11 @@ export function calculateDPP(
       numAttacks = move.hits;
     }
     let usedItems = [false, false];
+    let totalModBp = desc.moveBP;
     for (let times = 1; times < numAttacks; times++) {
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
-      let newBasePower = calculateBasePowerDPP(gen, attacker, defender, move, field, desc);
+      let newBasePower = calculateBasePowerDPP(gen, attacker, defender, move, field, desc, times + 1, mods);
       newBasePower = calculateBPModsDPP(attacker, defender, move, field, desc, newBasePower);
       const newAtk = calculateAttackDPP(gen, attacker, defender, move, field, desc, isCritical);
       let baseDamage = Math.floor(
@@ -311,7 +312,11 @@ export function calculateDPP(
         damageMultiplier++;
         return affectedAmount + newFinalDamage;
       });
+      if (mods?.hitBasePowers?.length) {
+        totalModBp += (desc.moveBP || 0);
+      }
     }
+    desc.moveBP = totalModBp;
     desc.defenseBoost = origDefBoost;
     desc.attackBoost = origAtkBoost;
   }
@@ -329,6 +334,7 @@ export function calculateBasePowerDPP(
   field: Field,
   desc: RawDesc,
   hit = 1,
+  mods?: ShowdexCalcMods,
 ) {
   let basePower = move.bp;
   const turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
@@ -408,6 +414,10 @@ export function calculateBasePowerDPP(
     break;
   default:
     basePower = move.bp;
+  }
+  if (mods?.hitBasePowers?.length) {
+    // note: intentionally falling back to move.bp (& not basePower)
+    basePower = mods.hitBasePowers[hit - 1] ?? move.bp;
   }
   desc.moveBP = basePower;
   return basePower;

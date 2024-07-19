@@ -78,6 +78,18 @@ export interface ShowdexCalcMods {
    *   - inb4 I regret saying that
    */
   strikes?: ShowdexCalcStrike[];
+
+  /**
+   * Base powers of each individual hit for multi-hitting moves.
+   *
+   * * This was initially implemented for overriding base powers for *Triple Axel* & *Triple Kick*, which was properly
+   *   implemented in commit `718d832` (see link below), but works with any applicable move, such as *Icicle Spear*.
+   * * Not providing this will fallback to the move's `bp` value.
+   *   - This includes `null` / `undefined` values at a particular hit's index.
+   *
+   * @see https://github.com/smogon/damage-calc/commit/718d832eb5d5101e15587d709e7a26a3588a8edd
+   */
+  hitBasePowers?: number[];
 }
 
 /**

@@ -367,6 +367,7 @@ export function calculateBWXY(
       numAttacks = move.hits;
     }
     let usedItems = [false, false];
+    let totalModBp = desc.moveBP;
     for (let times = 1; times < numAttacks; times++) {
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
@@ -389,7 +390,9 @@ export function calculateBWXY(
         move,
         field,
         hasAteAbilityTypeChange,
-        desc
+        desc,
+        times + 1,
+        mods,
       );
       // const newBaseDamage = getBaseDamage(attacker.level, newBasePower, newAtk, newDef);
       const newBaseDamage = modBaseDamage('gen56', mods)(attacker.level, newBasePower, newAtk, newDef);
@@ -422,7 +425,11 @@ export function calculateBWXY(
         damageMultiplier++;
         return affectedAmount + newFinalDamage;
       });
+      if (mods?.hitBasePowers?.length) {
+        totalModBp += (desc.moveBP || 0);
+      }
     }
+    desc.moveBP = totalModBp;
     desc.defenseBoost = origDefBoost;
     desc.attackBoost = origAtkBoost;
   }
@@ -443,6 +450,7 @@ export function calculateBasePowerBWXY(
   hasAteAbilityTypeChange: boolean,
   desc: RawDesc,
   hit = 1,
+  mods?: ShowdexCalcMods,
 ) {
   let basePower: number;
   const turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
@@ -561,7 +569,7 @@ export function calculateBasePowerBWXY(
     }
     break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers() to more seamlessly integrate this w/ the UI
   //   basePower = hit * 10;
   //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
   //   break;
@@ -574,7 +582,9 @@ export function calculateBasePowerBWXY(
   default:
     basePower = move.bp;
   }
-
+  if (mods?.hitBasePowers?.length) {
+    basePower = mods.hitBasePowers[hit - 1] ?? basePower;
+  }
   if (basePower === 0) {
     return 0;
   }

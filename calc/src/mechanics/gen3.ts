@@ -142,7 +142,7 @@ export function calculateADV(
     desc.hits = move.hits;
   }
 
-  let bp = calculateBasePowerADV(attacker, defender, move, desc);
+  let bp = calculateBasePowerADV(attacker, defender, move, desc, undefined, mods);
 
   if (bp === 0) {
     return result;
@@ -181,11 +181,12 @@ export function calculateADV(
       numAttacks = move.hits;
     }
     let usedItems = [false, false];
+    let totalModBp = desc.moveBP;
     for (let times = 1; times < numAttacks; times++) {
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
       const newAt = calculateAttackADV(gen, attacker, defender, move, desc, isCritical);
-      let newBp = calculateBasePowerADV(attacker, defender, move, desc);
+      let newBp = calculateBasePowerADV(attacker, defender, move, desc, times + 1, mods);
       newBp = calculateBPModsADV(attacker, move, desc, newBp);
       let newBaseDmg = Math.floor(
         Math.floor((Math.floor((2 * lv) / 5 + 2) * newAt * newBp) / df) / 50
@@ -199,7 +200,11 @@ export function calculateADV(
         damageMultiplier++;
         return affectedAmount + newFinalDamage;
       });
+      if (mods?.hitBasePowers?.length) {
+        totalModBp += (desc.moveBP || 0);
+      }
     }
+    desc.moveBP = totalModBp;
     desc.defenseBoost = origDefBoost;
     desc.attackBoost = origAtkBoost;
   }
@@ -213,6 +218,7 @@ export function calculateBasePowerADV(
   move: Move,
   desc: RawDesc,
   hit = 1,
+  mods?: ShowdexCalcMods,
 ) {
   let bp = move.bp;
   switch (move.name) {
@@ -249,6 +255,10 @@ export function calculateBasePowerADV(
   //   break;
   default:
     bp = move.bp;
+  }
+  if (move.hits > 1 && mods?.hitBasePowers?.length) {
+    // note: intentionally falling back to move.bp (& not bp)
+    bp = mods.hitBasePowers[hit - 1] ?? move.bp;
   }
   desc.moveBP = bp;
   return bp;

@@ -532,9 +532,10 @@ export function calculateSMSSSV(
     defender,
     move,
     field,
-    // hasAteAbilityTypeChange, // handled in Showdex via calcMoveBasePower()
-    false,
-    desc
+    false, // hasAteAbilityTypeChange, // handled in Showdex via calcMoveBasePower()
+    desc,
+    undefined, // hits; defaults to 1
+    mods,
   );
   if (basePower === 0) {
     return result;
@@ -634,115 +635,103 @@ export function calculateSMSSSV(
       getFinalDamage(baseDamage, i, typeEffectiveness, applyBurn, stabMod, finalMod, protect);
   }
 
-  if (move.dropsStats && move.timesUsed! > 1) {
-    const simpleMultiplier = attacker.hasAbility('Simple') ? 2 : 1;
-
-    desc.moveTurns = `over ${move.timesUsed} turns`;
-    const hasWhiteHerb = attacker.hasItem('White Herb');
-    let usedWhiteHerb = false;
-    let dropCount = 0;
-    for (let times = 0; times < move.timesUsed!; times++) {
-      const newAttack = getModifiedStat(attack, dropCount);
-      let damageMultiplier = 0;
-      damage = damage.map(affectedAmount => {
-        if (times) {
-          // const newBaseDamage = getBaseDamage(attacker.level, basePower, newAttack, defense);
-          const newBaseDamage = modBaseDamage('gen789', mods)(attacker.level, basePower, newAttack, defense);
-          if (mods?.strikes?.length) {
-            desc.hits = mods.strikes.length;
-          }
-          const newFinalDamage = getFinalDamage(
-            newBaseDamage,
-            damageMultiplier,
-            typeEffectiveness,
-            applyBurn,
-            stabMod,
-            finalMod,
-            protect
-          );
-          damageMultiplier++;
-          return affectedAmount + newFinalDamage;
-        }
-        return affectedAmount;
-      });
-
-      if (attacker.hasAbility('Contrary')) {
-        dropCount = Math.min(6, dropCount + move.dropsStats);
-        desc.attackerAbility = attacker.ability;
-      } else {
-        dropCount = Math.max(-6, dropCount - move.dropsStats * simpleMultiplier);
-        if (attacker.hasAbility('Simple')) {
-          desc.attackerAbility = attacker.ability;
-        }
-      }
-
-      // the Pokémon hits THEN the stat rises / lowers
-      if (hasWhiteHerb && attacker.boosts[attackStat] < 0 && !usedWhiteHerb) {
-        dropCount += move.dropsStats * simpleMultiplier;
-        usedWhiteHerb = true;
-        desc.attackerItem = attacker.item;
-      }
-    }
-  }
-
-  if (move.hits > 1) {
-    let defenderDefBoost = 0;
-    for (let times = 0; times < move.hits; times++) {
-      const newDefense = getModifiedStat(defense, defenderDefBoost);
-      let damageMultiplier = 0;
-      damage = damage.map(affectedAmount => {
-        if (times) {
-          const newFinalMods = calculateFinalModsSMSSSV(
-            gen,
-            attacker,
-            defender,
-            move,
-            field,
-            desc,
-            isCritical,
-            typeEffectiveness,
-            times
-          );
-          const newFinalMod = chainMods(newFinalMods, 41, 131072);
-          const newBaseDamage = calculateBaseDamageSMSSSV(
-            gen,
-            attacker,
-            defender,
-            basePower,
-            attack,
-            newDefense,
-            move,
-            field,
-            desc,
-            isCritical,
-            mods,
-          );
-          const newFinalDamage = getFinalDamage(
-            newBaseDamage,
-            damageMultiplier,
-            typeEffectiveness,
-            applyBurn,
-            stabMod,
-            newFinalMod,
-            protect
-          );
-          damageMultiplier++;
-          return affectedAmount + newFinalDamage;
-        }
-        return affectedAmount;
-      });
-      if (hitsPhysical && defender.ability === 'Stamina') {
-        defenderDefBoost = Math.min(6, defenderDefBoost + 1);
-        desc.defenderAbility = 'Stamina';
-      } else if (hitsPhysical && defender.ability === 'Weak Armor') {
-        defenderDefBoost = Math.max(-6, defenderDefBoost - 1);
-        desc.defenderAbility = 'Weak Armor';
-      }
-    }
-  }
-
   desc.attackBoost =
     move.named('Foul Play') ? defender.boosts[attackStat] : attacker.boosts[attackStat];
+
+  if ((move.dropsStats && move.timesUsed! > 1) || move.hits > 1) {
+    // store boosts so intermediate boosts don't show.
+    const origDefBoost = desc.defenseBoost;
+    const origAtkBoost = desc.attackBoost;
+
+    let numAttacks = 1;
+    if (move.dropsStats && move.timesUsed! > 1) {
+      desc.moveTurns = `over ${move.timesUsed} turns`;
+      numAttacks = move.timesUsed!;
+    } else {
+      numAttacks = move.hits;
+    }
+    let usedItems = [false, false];
+    let totalModBp = desc.moveBP;
+    for (let times = 1; times < numAttacks; times++) {
+      usedItems = checkMultihitBoost(gen, attacker, defender, move,
+        field, desc, usedItems[0], usedItems[1]);
+      const newAttack = calculateAttackSMSSSV(gen, attacker, defender, move,
+        field, desc, isCritical);
+      const newDefense = calculateDefenseSMSSSV(gen, attacker, defender, move,
+        field, desc, isCritical);
+      // Check if lost -ate ability. Typing stays the same, only boost is lost
+      // Cannot be regained during multihit move and no Normal moves with stat drawbacks
+      hasAteAbilityTypeChange = hasAteAbilityTypeChange &&
+        attacker.hasAbility('Aerilate', 'Galvanize', 'Pixilate', 'Refrigerate', 'Normalize');
+
+      if ((move.dropsStats && move.timesUsed! > 1)) {
+        // Adaptability does not change between hits of a multihit, only between turns
+        preStellarStabMod = getStabMod(attacker, move, desc);
+        // Hack to make Tera Shell with multihit moves, but not over multiple turns
+        typeEffectiveness = turn2typeEffectiveness;
+        // Stellar damage boost applies for 1 turn, but all hits of multihit.
+        stabMod = getStellarStabMod(attacker, move, preStellarStabMod, times);
+      }
+
+      const newBasePower = calculateBasePowerSMSSSV(
+        gen,
+        attacker,
+        defender,
+        move,
+        field,
+        hasAteAbilityTypeChange,
+        desc,
+        times + 1,
+        mods,
+      );
+      const newBaseDamage = calculateBaseDamageSMSSSV(
+        gen,
+        attacker,
+        defender,
+        newBasePower,
+        newAttack,
+        newDefense,
+        move,
+        field,
+        desc,
+        isCritical,
+        mods,
+      );
+      const newFinalMods = calculateFinalModsSMSSSV(
+        gen,
+        attacker,
+        defender,
+        move,
+        field,
+        desc,
+        isCritical,
+        typeEffectiveness,
+        times
+      );
+      const newFinalMod = chainMods(newFinalMods, 41, 131072);
+
+      let damageMultiplier = 0;
+      damage = damage.map(affectedAmount => {
+        const newFinalDamage = getFinalDamage(
+          newBaseDamage,
+          damageMultiplier,
+          typeEffectiveness,
+          applyBurn,
+          stabMod,
+          newFinalMod,
+          protect
+        );
+        damageMultiplier++;
+        return affectedAmount + newFinalDamage;
+      });
+      if (mods?.hitBasePowers?.length) {
+        totalModBp += (desc.moveBP || 0);
+      }
+    }
+    desc.moveBP = totalModBp;
+    desc.defenseBoost = origDefBoost;
+    desc.attackBoost = origAtkBoost;
+  }
 
   result.damage = childDamage ? [damage, childDamage] : damage;
 
@@ -760,6 +749,7 @@ export function calculateBasePowerSMSSSV(
   hasAteAbilityTypeChange: boolean,
   desc: RawDesc,
   hit = 1,
+  mods?: ShowdexCalcMods,
 ) {
   const turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
 
@@ -826,8 +816,8 @@ export function calculateBasePowerSMSSSV(
     desc.moveBP = basePower;
     break;
   // case 'Acrobatics': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   // basePower = move.bp * (attacker.hasItem('Flying Gem') ||
-  //   //     (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
+  //   basePower = move.bp * (attacker.hasItem('Flying Gem') ||
+  //       (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
   //   desc.moveBP = basePower;
   //   break;
   case 'Assurance':
@@ -963,6 +953,10 @@ export function calculateBasePowerSMSSSV(
   default:
     basePower = move.bp;
   }
+  if (move.hits > 1 && mods?.hitBasePowers?.length) {
+    // note: intentionally falling back to move.bp (& not basePower)
+    basePower = mods.hitBasePowers[hit - 1] ?? move.bp;
+  }
   if (basePower === 0) {
     return 0;
   }
@@ -987,7 +981,6 @@ export function calculateBasePowerSMSSSV(
     turnOrder
   );
   basePower = OF16(Math.max(1, pokeRound((basePower * chainMods(bpMods, 41, 2097152)) / 4096)));
-  desc.moveBP = basePower;
   if (
     attacker.teraType && move.type === attacker.teraType &&
     attacker.hasType(attacker.teraType) && move.hits === 1 && !move.multiaccuracy &&
@@ -997,6 +990,7 @@ export function calculateBasePowerSMSSSV(
     basePower = 60;
     desc.moveBP = 60;
   }
+  desc.moveBP = basePower;
   return basePower;
 }
 
@@ -1608,7 +1602,11 @@ function calculateBaseDamageSMSSSV(
   isCritical = false,
   mods?: ShowdexCalcMods,
 ) {
+  // let baseDamage = getBaseDamage(attacker.level, basePower, attack, defense);
   let baseDamage = modBaseDamage('gen789', mods)(attacker.level, basePower, attack, defense);
+  if (mods?.strikes?.length) {
+    desc.hits = mods.strikes.length;
+  }
   const isSpread = field.gameType !== 'Singles' &&
      ['allAdjacent', 'allAdjacentFoes'].includes(move.target);
   if (isSpread) {
