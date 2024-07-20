@@ -81,7 +81,7 @@ export function calculateBWXY(
 
   const result = new Result(gen, attacker, defender, move, field, 0, desc);
 
-  if (move.category === 'Status' && !move.named('Nature Power')) {
+  if (move.category === 'Status' && !move.named('Nature Power', 'Pain Split')) {
     return result;
   }
 
@@ -918,7 +918,7 @@ export function calculateDefenseBWXY(
   isCritical = false
 ) {
   let defense: number;
-  const defenseStat = move.overrideDefensiveStat || move.category === 'Physical' ? 'def' : 'spd';
+  const defenseStat = move.overrideDefensiveStat || (move.category === 'Physical' ? 'def' : 'spd');
   const hitsPhysical = defenseStat === 'def';
   desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
   if (defender.boosts[defenseStat] === 0 ||

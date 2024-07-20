@@ -26,7 +26,7 @@ export function calculateRBYGSC(
 
   const result = new Result(gen, attacker, defender, move, field, 0, desc);
 
-  if (move.category === 'Status') {
+  if (move.category === 'Status' && !move.named('Pain Split')) {
     return result;
   }
 
@@ -106,7 +106,7 @@ export function calculateRBYGSC(
     desc.hits = move.hits;
   }
   // Triple Kick's damage increases by 10 after each consecutive hit (10, 20, 30), this is a hack
-  // if (move.name === 'Triple Kick') { // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // if (move.name === 'Triple Kick') { // handled in Showdex via calcMoveBasePower() -- NOT in calcMoveHitBasePowers()
   //   move.bp = move.hits === 2 ? 15 : move.hits === 3 ? 20 : 10;
   //   desc.moveBP = move.bp;
   // }

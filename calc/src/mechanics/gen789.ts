@@ -127,7 +127,7 @@ export function calculateSMSSSV(
 
   const result = new Result(gen, attacker, defender, move, field, 0, desc);
 
-  if (move.category === 'Status' && !move.named('Nature Power')) {
+  if (move.category === 'Status' && !move.named('Nature Power', 'Pain Split')) {
     return result;
   }
 
