@@ -1,3 +1,4 @@
+import { type ShowdexCalcMods } from './showdex';
 import {Field} from './field';
 import {Generation} from './data/interface';
 import {Move} from './move';
@@ -29,12 +30,14 @@ export function calculate(
   defender: Pokemon,
   move: Move,
   field?: Field,
+  mods?: ShowdexCalcMods,
 ) {
   return MECHANICS[gen.num](
     gen,
     attacker.clone(),
     defender.clone(),
     move.clone(),
-    field ? field.clone() : new Field()
+    field ? field.clone() : new Field(),
+    mods,
   ) as Result;
 }

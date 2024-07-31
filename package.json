@@ -1,7 +1,8 @@
 {
+  "name": "showdex-calc",
   "private": true,
-  "homepage": "https://calc.pokemonshowdown.com/",
-  "repository": "github:smogon/damage-calc",
+  "homepage": "https://github.com/doshidak/showdex-calc",
+  "repository": "github:doshidak/showdex-calc",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.57.0",
@@ -38,7 +39,7 @@
     "bundle": "subpkg run bundle",
     "build": "subpkg run build && node build view",
     "test": "subpkg run test && npm run build && eslint --cache src --ext js",
-    "postinstall": "subpkg install"
+    "postinstall": "subpkg run compile calc"
   },
   "subPackages": [
     "calc"

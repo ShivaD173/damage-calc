@@ -1,3 +1,4 @@
+import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
 import {Generation, AbilityName, StatID, Terrain} from '../data/interface';
 import {toID} from '../util';
 import {
@@ -32,7 +33,7 @@ import {
   checkWonderRoom,
   computeFinalStats,
   countBoosts,
-  getBaseDamage,
+  // getBaseDamage,
   getStatDescriptionText,
   getFinalDamage,
   getModifiedStat,
@@ -54,7 +55,8 @@ export function calculateSMSSSV(
   attacker: Pokemon,
   defender: Pokemon,
   move: Move,
-  field: Field
+  field: Field,
+  mods?: ShowdexCalcMods,
 ) {
   // #region Initial
 
@@ -125,7 +127,7 @@ export function calculateSMSSSV(
 
   const result = new Result(gen, attacker, defender, move, field, 0, desc);
 
-  if (move.category === 'Status' && !move.named('Nature Power')) {
+  if (move.category === 'Status' && !move.named('Nature Power', 'Pain Split')) {
     return result;
   }
 
@@ -281,6 +283,11 @@ export function calculateSMSSSV(
     } else if (attacker.name.includes('Ogerpon-Wellspring')) {
       type = 'Water';
     }
+  } else if (
+    move.named('Tera Starstorm') && attacker.name === 'Terapagos-Stellar'
+  ) {
+    move.target = 'allAdjacentFoes';
+    type = 'Stellar';
   }
 
   let hasAteAbilityTypeChange = false;
@@ -530,8 +537,10 @@ export function calculateSMSSSV(
     defender,
     move,
     field,
-    hasAteAbilityTypeChange,
-    desc
+    false, // hasAteAbilityTypeChange, // handled in Showdex via calcMoveBasePower()
+    desc,
+    undefined, // hits; defaults to 1
+    mods,
   );
   if (basePower === 0) {
     return result;
@@ -570,7 +579,8 @@ export function calculateSMSSSV(
     move,
     field,
     desc,
-    isCritical
+    isCritical,
+    mods,
   );
 
   if (hasTerrainSeed(defender) &&
@@ -646,6 +656,7 @@ export function calculateSMSSSV(
       numAttacks = move.hits;
     }
     let usedItems = [false, false];
+    let totalModBp = desc.moveBP;
     for (let times = 1; times < numAttacks; times++) {
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
@@ -675,7 +686,8 @@ export function calculateSMSSSV(
         field,
         hasAteAbilityTypeChange,
         desc,
-        times + 1
+        times + 1,
+        mods,
       );
       const newBaseDamage = calculateBaseDamageSMSSSV(
         gen,
@@ -687,7 +699,8 @@ export function calculateSMSSSV(
         move,
         field,
         desc,
-        isCritical
+        isCritical,
+        mods,
       );
       const newFinalMods = calculateFinalModsSMSSSV(
         gen,
@@ -716,7 +729,11 @@ export function calculateSMSSSV(
         damageMultiplier++;
         return affectedAmount + newFinalDamage;
       });
+      if (mods?.hitBasePowers?.length) {
+        totalModBp += (desc.moveBP || 0);
+      }
     }
+    desc.moveBP = totalModBp;
     desc.defenseBoost = origDefBoost;
     desc.attackBoost = origAtkBoost;
   }
@@ -737,6 +754,7 @@ export function calculateBasePowerSMSSSV(
   hasAteAbilityTypeChange: boolean,
   desc: RawDesc,
   hit = 1,
+  mods?: ShowdexCalcMods,
 ) {
   const turnOrder = attacker.stats.spe > defender.stats.spe ? 'first' : 'last';
 
@@ -802,11 +820,11 @@ export function calculateBasePowerSMSSSV(
     basePower = 20 + 20 * countBoosts(gen, attacker.boosts);
     desc.moveBP = basePower;
     break;
-  case 'Acrobatics':
-    basePower = move.bp * (attacker.hasItem('Flying Gem') ||
-        (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
-    desc.moveBP = basePower;
-    break;
+  // case 'Acrobatics': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = move.bp * (attacker.hasItem('Flying Gem') ||
+  //       (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
+  //   desc.moveBP = basePower;
+  //   break;
   case 'Assurance':
     basePower = move.bp * (defender.hasAbility('Parental Bond (Child)') ? 2 : 1);
     // NOTE: desc.attackerAbility = 'Parental Bond' will already reflect this boost
@@ -820,16 +838,16 @@ export function calculateBasePowerSMSSSV(
     basePower = move.bp * (defender.hasStatus('par') ? 2 : 1);
     desc.moveBP = basePower;
     break;
-  case 'Weather Ball':
-    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
-    if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
-      attacker.hasItem('Utility Umbrella')) basePower = move.bp;
-    desc.moveBP = basePower;
-    break;
-  case 'Terrain Pulse':
-    basePower = move.bp * (isGrounded(attacker, field) && field.terrain ? 2 : 1);
-    desc.moveBP = basePower;
-    break;
+  // case 'Weather Ball': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+  //   if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
+  //     attacker.hasItem('Utility Umbrella')) basePower = move.bp;
+  //   desc.moveBP = basePower;
+  //   break;
+  // case 'Terrain Pulse': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = move.bp * (isGrounded(attacker, field) && field.terrain ? 2 : 1);
+  //   desc.moveBP = basePower;
+  //   break;
   case 'Rising Voltage':
     basePower = move.bp * ((isGrounded(defender, field) && field.hasTerrain('Electric')) ? 2 : 1);
     desc.moveBP = basePower;
@@ -908,20 +926,20 @@ export function calculateBasePowerSMSSSV(
       desc.moveName = 'Tri Attack';
     }
     break;
-  case 'Water Shuriken':
-    basePower = attacker.named('Greninja-Ash') && attacker.hasAbility('Battle Bond') ? 20 : 15;
-    desc.moveBP = basePower;
-    break;
+  // case 'Water Shuriken': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = attacker.named('Greninja-Ash') && attacker.hasAbility('Battle Bond') ? 20 : 15;
+  //   desc.moveBP = basePower;
+  //   break;
   // Triple Axel's damage increases after each consecutive hit (20, 40, 60)
-  case 'Triple Axel':
-    basePower = hit * 20;
-    desc.moveBP = move.hits === 2 ? 60 : move.hits === 3 ? 120 : 20;
-    break;
+  // case 'Triple Axel': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = hit * 20;
+  //   desc.moveBP = move.hits === 2 ? 60 : move.hits === 3 ? 120 : 20;
+  //   break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  case 'Triple Kick':
-    basePower = hit * 10;
-    desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
-    break;
+  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = hit * 10;
+  //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
+  //   break;
   case 'Crush Grip':
   case 'Wring Out':
     basePower = 100 * Math.floor((defender.curHP() * 4096) / defender.maxHP());
@@ -933,25 +951,29 @@ export function calculateBasePowerSMSSSV(
     basePower = Math.floor(Math.floor((100 * basePower + 2048 - 1) / 4096) / 100) || 1;
     desc.moveBP = basePower;
     break;
-  case 'Tera Blast':
-    basePower = attacker.teraType === 'Stellar' ? 100 : 80;
-    desc.moveBP = basePower;
-    break;
+  // case 'Tera Blast': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   basePower = attacker.teraType === 'Stellar' ? 100 : 80;
+  //   desc.moveBP = basePower;
+  //   break;
   default:
     basePower = move.bp;
+  }
+  if (move.hits > 1 && mods?.hitBasePowers?.length) {
+    // note: intentionally falling back to move.bp (& not basePower)
+    basePower = mods.hitBasePowers[hit - 1] ?? move.bp;
   }
   if (basePower === 0) {
     return 0;
   }
-  if (move.named(
-    'Breakneck Blitz', 'Bloom Doom', 'Inferno Overdrive', 'Hydro Vortex', 'Gigavolt Havoc',
-    'Subzero Slammer', 'Supersonic Skystrike', 'Savage Spin-Out', 'Acid Downpour', 'Tectonic Rage',
-    'Continental Crush', 'All-Out Pummeling', 'Shattered Psyche', 'Never-Ending Nightmare',
-    'Devastating Drake', 'Black Hole Eclipse', 'Corkscrew Crash', 'Twinkle Tackle'
-  ) || move.isMax) {
-    // show z-move power in description
-    desc.moveBP = move.bp;
-  }
+  // if (move.named( // we'll always include the desc.moveBP in case something's awry, so we'll be able to see it on Showdex's end
+  //   'Breakneck Blitz', 'Bloom Doom', 'Inferno Overdrive', 'Hydro Vortex', 'Gigavolt Havoc',
+  //   'Subzero Slammer', 'Supersonic Skystrike', 'Savage Spin-Out', 'Acid Downpour', 'Tectonic Rage',
+  //   'Continental Crush', 'All-Out Pummeling', 'Shattered Psyche', 'Never-Ending Nightmare',
+  //   'Devastating Drake', 'Black Hole Eclipse', 'Corkscrew Crash', 'Twinkle Tackle'
+  // ) || move.isMax) {
+  //   // show z-move power in description
+  //   desc.moveBP = move.bp;
+  // }
   const bpMods = calculateBPModsSMSSSV(
     gen,
     attacker,
@@ -973,6 +995,7 @@ export function calculateBasePowerSMSSSV(
     basePower = 60;
     desc.moveBP = 60;
   }
+  desc.moveBP = basePower;
   return basePower;
 }
 
@@ -1030,11 +1053,6 @@ export function calculateBPModsSMSSSV(
     move.target = 'allAdjacentFoes';
     bpMods.push(6144);
     desc.moveBP = basePower * 1.5;
-  } else if (
-    move.named('Tera Starstorm') && attacker.name === 'Terapagos-Stellar'
-  ) {
-    move.target = 'allAdjacentFoes';
-    move.type = 'Stellar';
   } else if ((move.named('Knock Off') && !resistedKnockOffDamage) ||
     (move.named('Misty Explosion') && isGrounded(attacker, field) && field.hasTerrain('Misty')) ||
     (move.named('Grav Apple') && field.isGravity)
@@ -1257,7 +1275,7 @@ export function calculateAttackSMSSSV(
   isCritical = false
 ) {
   let attack: number;
-  const attackStat =
+  const attackStat = move.overrideOffensiveStat || (
     move.named('Shell Side Arm') &&
     getShellSideArmCategory(attacker, defender) === 'Physical'
       ? 'atk'
@@ -1265,7 +1283,8 @@ export function calculateAttackSMSSSV(
         ? 'def'
         : move.category === 'Special'
           ? 'spa'
-          : 'atk';
+          : 'atk'
+  );
   desc.attackEVs =
     move.named('Foul Play')
       ? getStatDescriptionText(gen, defender, attackStat, defender.nature)
@@ -1327,13 +1346,6 @@ export function calculateAtModsSMSSSV(
     atMods.push(6144);
     desc.attackerAbility = attacker.ability;
   } else if (
-    field.attackerSide.isFlowerGift &&
-    field.hasWeather('Sun', 'Harsh Sunshine') &&
-    move.category === 'Physical') {
-    atMods.push(6144);
-    desc.weather = field.weather;
-    desc.isFlowerGiftAttacker = true;
-  } else if (
     (attacker.hasAbility('Guts') && attacker.status && move.category === 'Physical') ||
     (attacker.curHP() <= attacker.maxHP() / 3 &&
       ((attacker.hasAbility('Overgrow') && move.hasType('Grass')) ||
@@ -1366,6 +1378,16 @@ export function calculateAtModsSMSSSV(
   ) {
     atMods.push(8192);
     desc.attackerAbility = attacker.ability;
+  }
+
+  if (
+    field.attackerSide.isFlowerGift &&
+    !attacker.hasAbility('Flower Gift') &&
+    field.hasWeather('Sun', 'Harsh Sunshine') &&
+    move.category === 'Physical') {
+    atMods.push(6144);
+    desc.weather = field.weather;
+    desc.isFlowerGiftAttacker = true;
   }
 
   if ((defender.hasAbility('Thick Fat') && move.hasType('Fire', 'Ice')) ||
@@ -1449,7 +1471,7 @@ export function calculateDefenseSMSSSV(
   let defense: number;
   const hitsPhysical = move.overrideDefensiveStat === 'def' || move.category === 'Physical' ||
     (move.named('Shell Side Arm') && getShellSideArmCategory(attacker, defender) === 'Physical');
-  const defenseStat = hitsPhysical ? 'def' : 'spd';
+  const defenseStat = move.overrideDefensiveStat || (hitsPhysical ? 'def' : 'spd');
   desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
   if (defender.boosts[defenseStat] === 0 ||
       (isCritical && defender.boosts[defenseStat] > 0) ||
@@ -1581,8 +1603,13 @@ function calculateBaseDamageSMSSSV(
   field: Field,
   desc: RawDesc,
   isCritical = false,
+  mods?: ShowdexCalcMods,
 ) {
-  let baseDamage = getBaseDamage(attacker.level, basePower, attack, defense);
+  // let baseDamage = getBaseDamage(attacker.level, basePower, attack, defense);
+  let baseDamage = modBaseDamage('gen789', mods)(attacker.level, basePower, attack, defense);
+  if (mods?.strikes?.length) {
+    desc.hits = mods.strikes.length;
+  }
   const isSpread = field.gameType !== 'Singles' &&
      ['allAdjacent', 'allAdjacentFoes'].includes(move.target);
   if (isSpread) {
