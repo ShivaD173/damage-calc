@@ -544,9 +544,9 @@ var SETDEX_SS = {
     "ZU Wallbreaker": {"ability":"Guts","item":"Toxic Orb","nature":"Adamant","evs":{"at":252,"df":4,"sp":252},"moves":["Flare Blitz","Facade","Superpower","Quick Attack"]}
   },
   "Porygon": {
-    "LC Defensive": {"level":5,"ability":"Trace","item":"Eviolite","nature":"Calm","evs":{"hp":156,"df":196,"sd":156},"moves":["Tri Attack","Teleport","Thunder Wave","Recover"]},
     "LC Agility": {"level":5,"ability":"Download","item":"Eviolite","nature":"Modest","evs":{"df":36,"sa":236,"sp":196},"moves":["Agility","Tri Attack","Ice Beam","Recover"]},
-    "LC Choice Scarf": {"level":5,"ability":"Download","item":"Choice Scarf","nature":"Timid","evs":{"df":36,"sa":236,"sp":196},"moves":["Tri Attack","Ice Beam","Thunderbolt","Psychic"]}
+    "LC Choice Scarf": {"level":5,"ability":"Download","item":"Choice Scarf","nature":"Timid","evs":{"df":36,"sa":236,"sp":196},"moves":["Tri Attack","Ice Beam","Thunderbolt","Psychic"]},
+    "LC Defensive": {"level":5,"ability":"Trace","item":"Eviolite","nature":"Calm","evs":{"hp":156,"df":196,"sd":156},"moves":["Tri Attack","Teleport","Thunder Wave","Recover"]}
   },
   "Omanyte": {
     "LC Shell Smash Sweeper": {"level":5,"ability":"Shell Armor","item":"Eviolite","nature":"Modest","evs":{"hp":76,"sa":196,"sp":236},"moves":["Shell Smash","Hydro Pump","Ice Beam","Earth Power"]},
@@ -674,7 +674,7 @@ var SETDEX_SS = {
     "CAP Showdown Usage": {"ability":"Berserk","item":"Sitrus Berry","nature":"Modest","evs":{"hp":216,"sa":100,"sp":192},"moves":["Fiery Wrath","Nasty Plot","Agility","Hurricane"]}
   },
   "Dragonite": {
-    "OU Bulky Dragon Dance": {"ability":"Multiscale","item":"Heavy-Duty Boots","nature":"Adamant","evs":{"hp":248,"at":32,"df":68,"sp":160},"moves":["Dragon Dance","Earthquake","Dual Wingbeat","Roost"]},
+    "OU Bulky Dragon Dance": {"ability":"Multiscale","item":"Heavy-Duty Boots","nature":"Adamant","evs":{"hp":248,"at":24,"df":68,"sd":8,"sp":160},"moves":["Dragon Dance","Earthquake","Dual Wingbeat","Roost"]},
     "OU Offensive Dragon Dance": {"ability":"Multiscale","item":"Heavy-Duty Boots","nature":"Jolly","evs":{"at":252,"sd":4,"sp":252},"moves":["Dragon Dance","Earthquake","Dual Wingbeat","Roost"]},
     "OU Utility": {"ability":"Multiscale","item":"Heavy-Duty Boots","nature":"Careful","evs":{"hp":248,"df":8,"sd":252},"moves":["Dual Wingbeat","Earthquake","Roost","Heal Bell"]},
     "OU Choice Band": {"ability":"Multiscale","item":"Choice Band","nature":"Adamant","evs":{"at":252,"sd":4,"sp":252},"moves":["Outrage","Extreme Speed","Earthquake","Fire Punch"]},
@@ -2352,6 +2352,10 @@ var SETDEX_SS = {
     "Monotype Revenge Killer (Normal)": {"ability":"Defiant","item":"Choice Scarf","nature":"Jolly","evs":{"at":252,"sd":4,"sp":252},"moves":["Brave Bird","Close Combat","Defog","U-turn"]},
     "Monotype Defensive (Normal)": {"ability":"Defiant","item":"Heavy-Duty Boots","nature":"Impish","evs":{"hp":252,"df":240,"sp":16},"moves":["Brave Bird","Roost","Defog","U-turn"]}
   },
+  "Vullaby": {
+    "LC Offensive Pivot": {"level":5,"ability":"Weak Armor","item":"Berry Juice","nature":"Jolly","evs":{"at":236,"df":76,"sp":196},"moves":["Brave Bird","Knock Off","U-turn","Defog"]},
+    "LC Nasty Plot": {"level":5,"ability":"Weak Armor","item":"Berry Juice","nature":"Modest","ivs":{"at":0},"evs":{"df":76,"sa":236,"sp":196},"moves":["Nasty Plot","Air Slash","Heat Wave","Endure"]}
+  },
   "Mandibuzz": {
     "OU Defensive": {"ability":"Overcoat","item":"Heavy-Duty Boots","nature":"Impish","evs":{"hp":248,"df":92,"sd":152,"sp":16},"moves":["Foul Play","Roost","Defog","U-turn"]},
     "UU Physically Defensive": {"ability":"Overcoat","item":"Heavy-Duty Boots","nature":"Impish","evs":{"hp":248,"df":164,"sp":96},"moves":["Foul Play","Knock Off","U-turn","Roost"]},
@@ -3535,8 +3539,8 @@ var SETDEX_SS = {
     "National Dex UU Showdown Usage": {"ability":"Beast Boost","item":"Life Orb","nature":"Lonely","evs":{"hp":248,"at":252,"sd":8},"moves":["Gyro Ball","Trick Room","Heat Crash","Rock Blast"]}
   },
   "Blacephalon": {
-    "OU Choice Scarf": {"ability":"Beast Boost","item":"Choice Scarf","nature":"Timid","ivs":{"at":0},"evs":{"sa":252,"sd":4,"sp":252},"moves":["Flamethrower","Shadow Ball","Fire Blast","Trick"]},
-    "OU Choice Specs": {"ability":"Beast Boost","item":"Choice Specs","nature":"Timid","ivs":{"at":0},"evs":{"sa":252,"sd":4,"sp":252},"moves":["Flamethrower","Shadow Ball","Overheat","Trick"]},
+    "OU Choice Scarf": {"ability":"Beast Boost","item":"Choice Scarf","nature":"Timid","ivs":{"at":0},"evs":{"sa":252,"sd":4,"sp":252},"moves":["Flamethrower","Shadow Ball","Trick","Fire Blast"]},
+    "OU Choice Specs": {"ability":"Beast Boost","item":"Choice Specs","nature":"Timid","ivs":{"at":0},"evs":{"sa":252,"sd":4,"sp":252},"moves":["Flamethrower","Shadow Ball","Trick","Overheat"]},
     "Monotype Choice Scarf (Fire)": {"ability":"Beast Boost","item":"Choice Scarf","nature":"Timid","evs":{"sa":252,"sd":4,"sp":252},"moves":["Shadow Ball","Flamethrower","Psyshock","Trick"]},
     "Monotype Choice Scarf (Ghost)": {"ability":"Beast Boost","item":"Choice Scarf","nature":"Timid","evs":{"sa":252,"sd":4,"sp":252},"moves":["Flamethrower","Shadow Ball","Psyshock","Trick"]},
     "National Dex Choice Specs Wallbreaker": {"ability":"Beast Boost","item":"Choice Specs","nature":"Timid","evs":{"sa":252,"sd":4,"sp":252},"moves":["Overheat","Fire Blast","Shadow Ball","Knock Off"]},

@@ -283,6 +283,11 @@ export function calculateSMSSSV(
     } else if (attacker.name.includes('Ogerpon-Wellspring')) {
       type = 'Water';
     }
+  } else if (
+    move.named('Tera Starstorm') && attacker.name === 'Terapagos-Stellar'
+  ) {
+    move.target = 'allAdjacentFoes';
+    type = 'Stellar';
   }
 
   let hasAteAbilityTypeChange = false;
@@ -1048,11 +1053,6 @@ export function calculateBPModsSMSSSV(
     move.target = 'allAdjacentFoes';
     bpMods.push(6144);
     desc.moveBP = basePower * 1.5;
-  } else if (
-    move.named('Tera Starstorm') && attacker.name === 'Terapagos-Stellar'
-  ) {
-    move.target = 'allAdjacentFoes';
-    move.type = 'Stellar';
   } else if ((move.named('Knock Off') && !resistedKnockOffDamage) ||
     (move.named('Misty Explosion') && isGrounded(attacker, field) && field.hasTerrain('Misty')) ||
     (move.named('Grav Apple') && field.isGravity)
@@ -1346,13 +1346,6 @@ export function calculateAtModsSMSSSV(
     atMods.push(6144);
     desc.attackerAbility = attacker.ability;
   } else if (
-    field.attackerSide.isFlowerGift &&
-    field.hasWeather('Sun', 'Harsh Sunshine') &&
-    move.category === 'Physical') {
-    atMods.push(6144);
-    desc.weather = field.weather;
-    desc.isFlowerGiftAttacker = true;
-  } else if (
     (attacker.hasAbility('Guts') && attacker.status && move.category === 'Physical') ||
     (attacker.curHP() <= attacker.maxHP() / 3 &&
       ((attacker.hasAbility('Overgrow') && move.hasType('Grass')) ||
@@ -1385,6 +1378,16 @@ export function calculateAtModsSMSSSV(
   ) {
     atMods.push(8192);
     desc.attackerAbility = attacker.ability;
+  }
+
+  if (
+    field.attackerSide.isFlowerGift &&
+    !attacker.hasAbility('Flower Gift') &&
+    field.hasWeather('Sun', 'Harsh Sunshine') &&
+    move.category === 'Physical') {
+    atMods.push(6144);
+    desc.weather = field.weather;
+    desc.isFlowerGiftAttacker = true;
   }
 
   if ((defender.hasAbility('Thick Fat') && move.hasType('Fire', 'Ice')) ||
