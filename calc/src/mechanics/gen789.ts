@@ -28,17 +28,18 @@ import {
   checkMultihitBoost,
   checkSeedBoost,
   checkTeraformZero,
+  checkWindRider,
   checkWonderRoom,
   computeFinalStats,
   countBoosts,
   getBaseDamage,
-  getEVDescriptionText,
+  getStatDescriptionText,
   getFinalDamage,
   getModifiedStat,
   getQPBoostedStat,
   getMoveEffectiveness,
   getShellSideArmCategory,
-  getWeightFactor,
+  getWeight,
   handleFixedDamageMoves,
   isGrounded,
   OF16, OF32,
@@ -83,6 +84,9 @@ export function calculateSMSSSV(
   checkIntrepidSword(attacker, gen);
   checkIntrepidSword(defender, gen);
 
+  checkWindRider(attacker, field.attackerSide);
+  checkWindRider(defender, field.defenderSide);
+
   if (move.named('Meteor Beam', 'Electro Shot')) {
     attacker.boosts.spa +=
       attacker.hasAbility('Simple') ? 2
@@ -99,18 +103,39 @@ export function calculateSMSSSV(
 
   const desc: RawDesc = {
     attackerName: attacker.name,
-    attackerTera: attacker.teraType,
     moveName: move.name,
     defenderName: defender.name,
-    defenderTera: defender.teraType,
     isDefenderDynamaxed: defender.isDynamaxed,
     isWonderRoom: field.isWonderRoom,
   };
+
+  // only display tera type if it applies
+  if (attacker.teraType !== 'Stellar' || move.name === 'Tera Blast' || move.isStellarFirstUse) {
+    // tera blast has special behavior with tera stellar
+    desc.isStellarFirstUse = attacker.name !== 'Terapagos-Stellar' && move.name === 'Tera Blast' &&
+      attacker.teraType === 'Stellar' && move.isStellarFirstUse;
+    desc.attackerTera = attacker.teraType;
+  }
+  if (defender.teraType !== 'Stellar') desc.defenderTera = defender.teraType;
+
+  if (move.named('Photon Geyser', 'Light That Burns The Sky', 'Hydro Cannon', 'Blast Burn', 'Frenzy Plant') ||
+      (move.named('Tera Blast') && attacker.teraType)) {
+    move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
+  }
+  if (attacker.hasAbility("Ballin'") && move.flags.bullet) {
+    move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
+    desc.attackerAbility = attacker.ability;
+  }
 
   const result = new Result(gen, attacker, defender, move, field, 0, desc);
 
   if (move.category === 'Status' && !move.named('Nature Power')) {
     return result;
+  }
+
+  if (move.flags.punch && attacker.hasItem('Punching Glove')) {
+    desc.attackerItem = attacker.item;
+    move.flags.contact = 0;
   }
 
   const breaksProtect = move.breaksProtect || move.isZ || attacker.isDynamaxed ||
@@ -123,9 +148,10 @@ export function calculateSMSSSV(
 
   const defenderIgnoresAbility = defender.hasAbility(
     'Full Metal Body',
-    'Neutralizing Gas',
     'Prism Armor',
-    'Shadow Shield'
+    'Shadow Shield',
+    'Tablets of Ruin',
+    'Vessel of Ruin'
   );
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
@@ -148,6 +174,25 @@ export function calculateSMSSSV(
     } else {
       defender.ability = '' as AbilityName;
     }
+  }
+
+  const ignoresNeutralizingGas = [
+    'As One (Glastrier)', 'As One (Spectrier)', 'Battle Bond', 'Comatose',
+    'Disguise', 'Gulp Missile', 'Ice Face', 'Multitype', 'Neutralizing Gas',
+    'Power Construct', 'RKS System', 'Schooling', 'Shields Down',
+    'Stance Change', 'Tera Shift', 'Zen Mode', 'Zero to Hero',
+  ];
+
+  if (attacker.hasAbility('Neutralizing Gas') &&
+    !ignoresNeutralizingGas.includes(defender.ability || '')) {
+    desc.attackerAbility = attacker.ability;
+    defender.ability = '' as AbilityName;
+  }
+
+  if (defender.hasAbility('Neutralizing Gas') &&
+    !ignoresNeutralizingGas.includes(attacker.ability || '')) {
+    desc.defenderAbility = defender.ability;
+    attacker.ability = '' as AbilityName;
   }
 
   // Merciless does not ignore Shell Armor, damage dealt to a poisoned Pokemon with Shell Armor
@@ -190,7 +235,14 @@ export function calculateSMSSSV(
       : field.hasTerrain('Psychic') ? 'Psychic'
       : 'Normal';
     desc.terrain = field.terrain;
-    desc.moveType = type;
+
+    // If the Nature Power user has the ability Prankster, it cannot affect
+    // Dark-types or grounded foes if Psychic Terrain is active
+    if (!(move.named('Nature Power') && attacker.hasAbility('Prankster')) &&
+      (defender.types.includes('Dark') ||
+      (field.hasTerrain('Psychic') && isGrounded(defender, field)))) {
+      desc.moveType = type;
+    }
   } else if (move.named('Revelation Dance')) {
     if (attacker.teraType) {
       type = attacker.teraType;
@@ -352,6 +404,7 @@ export function calculateSMSSSV(
   }
 
   if (move.type === 'Stellar') {
+    desc.defenderTera = defender.teraType; // always show in this case
     typeEffectiveness = !defender.teraType ? 1 : 2;
   }
 
@@ -402,7 +455,7 @@ export function calculateSMSSSV(
     return result;
   }
 
-  desc.HPEVs = `${defender.evs.hp} HP`;
+  desc.HPEVs = getStatDescriptionText(gen, defender, 'hp');
 
   const fixedDamage = handleFixedDamageMoves(attacker, move);
   if (fixedDamage) {
@@ -478,11 +531,6 @@ export function calculateSMSSSV(
   // #endregion
   // #region (Special) Attack
   const attack = calculateAttackSMSSSV(gen, attacker, defender, move, field, desc, isCritical);
-  const attackSource = move.named('Foul Play') ? defender : attacker;
-  if (move.named('Photon Geyser', 'Light That Burns The Sky', 'Hydro Cannon', 'Blast Burn', 'Frenzy Plant') ||
-      (move.named('Tera Blast') && attackSource.teraType)) {
-    move.category = attackSource.stats.atk > attackSource.stats.spa ? 'Physical' : 'Special';
-  }
   const attackStat =
     move.named('Shell Side Arm') &&
     getShellSideArmCategory(attacker, defender) === 'Physical'
@@ -719,7 +767,7 @@ export function calculateBasePowerSMSSSV(
     break;
   case 'Low Kick':
   case 'Grass Knot':
-    const w = defender.weightkg * getWeightFactor(defender);
+    const w = getWeight(defender, desc, 'defender');
     basePower = w >= 200 ? 120 : w >= 100 ? 100 : w >= 50 ? 80 : w >= 25 ? 60 : w >= 10 ? 40 : 20;
     desc.moveBP = basePower;
     break;
@@ -737,8 +785,8 @@ export function calculateBasePowerSMSSSV(
   case 'Heat Crash':
   case 'Slush Crush':
     const wr =
-        (attacker.weightkg * getWeightFactor(attacker)) /
-        (defender.weightkg * getWeightFactor(defender));
+        getWeight(attacker, desc, 'attacker') /
+        getWeight(defender, desc, 'defender');
     basePower = wr >= 5 ? 120 : wr >= 4 ? 100 : wr >= 3 ? 80 : wr >= 2 ? 60 : 40;
     desc.moveBP = basePower;
     break;
@@ -816,6 +864,14 @@ export function calculateBasePowerSMSSSV(
   case 'Nature Power':
     move.category = 'Special';
     move.secondaries = true;
+
+    // Nature Power cannot affect Dark-types if it is affected by Prankster
+    if (attacker.hasAbility('Prankster') && defender.types.includes('Dark')) {
+      basePower = 0;
+      desc.moveName = 'Nature Power';
+      desc.attackerAbility = 'Prankster';
+      break;
+    }
     switch (field.terrain) {
     case 'Electric':
       basePower = 90;
@@ -830,8 +886,15 @@ export function calculateBasePowerSMSSSV(
       desc.moveName = 'Moonblast';
       break;
     case 'Psychic':
-      basePower = 90;
-      desc.moveName = 'Psychic';
+      // Nature Power does not affect grounded Pokemon if it is affected by
+      // Prankster and there is Psychic Terrain active
+      if (attacker.hasAbility('Prankster') && isGrounded(defender, field)) {
+        basePower = 0;
+        desc.attackerAbility = 'Prankster';
+      } else {
+        basePower = 90;
+        desc.moveName = 'Psychic';
+      }
       break;
     default:
       basePower = 80;
@@ -896,7 +959,7 @@ export function calculateBasePowerSMSSSV(
   basePower = OF16(Math.max(1, pokeRound((basePower * chainMods(bpMods, 41, 2097152)) / 4096)));
   if (
     attacker.teraType && move.type === attacker.teraType &&
-    attacker.hasType(attacker.teraType) && move.hits === 1 &&
+    attacker.hasType(attacker.teraType) && move.hits === 1 && !move.multiaccuracy &&
     move.priority <= 0 && move.bp > 0 && !move.named('Dragon Energy', 'Eruption', 'Water Spout') &&
     basePower < 60 && gen.num >= 9
   ) {
@@ -1164,7 +1227,6 @@ export function calculateBPModsSMSSSV(
 
   if (attacker.hasItem('Punching Glove') && move.flags.punch) {
     bpMods.push(4506);
-    desc.attackerItem = attacker.item;
   }
 
   if (gen.num <= 8 && defender.hasAbility('Heatproof') && move.hasType('Fire')) {
@@ -1235,15 +1297,6 @@ export function calculateAttackSMSSSV(
   isCritical = false
 ) {
   let attack: number;
-  const attackSource = move.named('Foul Play') ? defender : attacker;
-  if (move.named('Photon Geyser', 'Light That Burns The Sky', 'Hydro Cannon', 'Blast Burn', 'Frenzy Plant') ||
-      (move.named('Tera Blast') && attackSource.teraType)) {
-    move.category = attackSource.stats.atk > attackSource.stats.spa ? 'Physical' : 'Special';
-  }
-  if (attacker.hasAbility("Ballin'") && move.flags.bullet) {
-    move.category = attackSource.stats.atk > attackSource.stats.spa ? 'Physical' : 'Special';
-    desc.attackerAbility = attacker.ability;
-  }
   const attackStat =
     move.named('Shell Side Arm') &&
     getShellSideArmCategory(attacker, defender) === 'Physical'
@@ -1255,9 +1308,9 @@ export function calculateAttackSMSSSV(
           : 'atk';
   desc.attackEVs =
     move.named('Foul Play')
-      ? getEVDescriptionText(gen, defender, attackStat, defender.nature)
-      : getEVDescriptionText(gen, attacker, attackStat, attacker.nature);
-
+      ? getStatDescriptionText(gen, defender, attackStat, defender.nature)
+      : getStatDescriptionText(gen, attacker, attackStat, attacker.nature);
+  const attackSource = move.named('Foul Play') ? defender : attacker;
   if (attackSource.boosts[attackStat] === 0 ||
       (isCritical && attackSource.boosts[attackStat] < 0)) {
     attack = attackSource.rawStats[attackStat];
@@ -1402,7 +1455,7 @@ export function calculateAtModsSMSSSV(
 
   if (
     (attacker.hasAbility('Hadron Engine') && move.category === 'Special' &&
-      field.hasTerrain('Electric') && isGrounded(attacker, field)) ||
+      field.hasTerrain('Electric')) ||
     (attacker.hasAbility('Orichalcum Pulse') &&
       field.hasWeather('Sun', 'Harsh Sunshine') && !attacker.hasItem('Utility Umbrella'))
   ) {
@@ -1444,7 +1497,7 @@ export function calculateDefenseSMSSSV(
   const hitsPhysical = move.overrideDefensiveStat === 'def' || move.category === 'Physical' ||
     (move.named('Shell Side Arm') && getShellSideArmCategory(attacker, defender) === 'Physical');
   const defenseStat = hitsPhysical ? 'def' : 'spd';
-  desc.defenseEVs = getEVDescriptionText(gen, defender, defenseStat, defender.nature);
+  desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
   if (defender.boosts[defenseStat] === 0 ||
       (isCritical && defender.boosts[defenseStat] > 0) ||
       move.ignoreDefensive) {

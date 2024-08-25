@@ -208,6 +208,19 @@ describe('calc', () => {
       });
     });
 
+    describe('IVs are shown if applicable', () => {
+      inGens(3, 9, ({gen, calculate, Pokemon, Move}) => {
+        test(`Gen ${gen}`, () => {
+          const ivs = {spa: 9, spd: 9, hp: 9};
+          const evs = {spa: 9, spd: 9, hp: 9};
+          let result = calculate(Pokemon('Mew', {ivs}), Pokemon('Mew', {evs}), Move('Psychic'));
+          expect(result.desc()).toBe('0 SpA 9 IVs Mew Psychic vs. 9 HP / 9 SpD Mew: 43-51 (12.5 - 14.8%) -- possible 7HKO');
+          result = calculate(Pokemon('Mew', {evs}), Pokemon('Mew', {ivs}), Move('Psychic'));
+          expect(result.desc()).toBe('9 SpA Mew Psychic vs. 0 HP 9 IVs / 0 SpD 9 IVs Mew: 54-64 (16.9 - 20%) -- possible 5HKO');
+        });
+      });
+    });
+
     inGens(4, 9, ({gen, calculate, Pokemon, Move}) => {
       const zapdos = Pokemon('Zapdos', {item: 'Iron Ball'});
       if (gen === 4) {
@@ -263,6 +276,41 @@ describe('calc', () => {
         expect(result.desc()).toBe(
           '0 Atk Abomasnow Ice Shard vs. 0 HP / 0 Def Multiscale Dragonite: 84-102 (26 - 31.5%) -- guaranteed 4HKO'
         );
+      });
+      describe('Weight', function () {
+        describe('Heavy Metal', () => {
+          function testBP(ability: string) {
+            return calculate(
+              Pokemon('Simisage', {ability}),
+              Pokemon('Simisear', {ability: 'Heavy Metal'}),
+              Move('Grass Knot')
+            ).rawDesc.moveBP;
+          }
+          it('should double the weight of a Pokemon', () => expect(testBP('Gluttony')).toBe(80));
+          it('should be negated by Mold Breaker', () => expect(testBP('Mold Breaker')).toBe(60));
+        });
+        describe('Light Metal', () => {
+          function testBP(ability: string) {
+            return calculate(
+              Pokemon('Simisage', {ability}),
+              Pokemon('Registeel', {ability: 'Light Metal'}),
+              Move('Grass Knot')
+            ).rawDesc.moveBP;
+          }
+          it('should halve the weight of a Pokemon', () => expect(testBP('Gluttony')).toBe(100));
+          it('should be negated by Mold Breaker', () => expect(testBP('Mold Breaker')).toBe(120));
+        });
+        describe('Float Stone', () => {
+          function testBP(ability?: string) {
+            return calculate(
+              Pokemon('Simisage', {ability: 'Gluttony'}),
+              Pokemon('Registeel', {ability, item: 'Float Stone'}),
+              Move('Grass Knot')
+            ).rawDesc.moveBP;
+          }
+          it('should halve the weight of a Pokemon', () => expect(testBP()).toBe(100));
+          it('should stack with Light Metal', () => expect(testBP('Light Metal')).toBe(80));
+        });
       });
     });
 
@@ -417,7 +465,7 @@ describe('calc', () => {
         );
         expect(result.range()).toEqual([89, 108]);
         expect(result.desc()).toBe(
-          '0 Atk Mamoswine Icicle Spear (3 hits) vs. 0 HP / 0 Def White Herb Weak Armor Skarmory: 89-108 (32.8 - 39.8%) -- approx. 100% chance to 3HKO'
+          '0 Atk Mamoswine Icicle Spear (3 hits) vs. 0 HP / 0 Def White Herb Weak Armor Skarmory: 89-108 (32.8 - 39.8%) -- approx. 99.9% chance to 3HKO'
         );
 
         result = calculate(
@@ -431,7 +479,7 @@ describe('calc', () => {
         );
         expect(result.range()).toEqual([56, 69]);
         expect(result.desc()).toBe(
-          '0 Atk Mamoswine Icicle Spear (3 hits) vs. +2 0 HP / 0 Def Weak Armor Skarmory: 56-69 (20.6 - 25.4%) -- approx. 0% chance to 4HKO'
+          '0 Atk Mamoswine Icicle Spear (3 hits) vs. +2 0 HP / 0 Def Weak Armor Skarmory: 56-69 (20.6 - 25.4%) -- approx. 0.1% chance to 4HKO'
         );
 
         result = calculate(
@@ -1173,6 +1221,76 @@ describe('calc', () => {
         expect(result.desc()).toBe(
           "0 Atk Weavile with an ally's Flower Gift Power Spot boosted switching boosted Pursuit (80 BP) vs. 0 HP / 0 Def Vulpix in Sun: 399-469 (183.8 - 216.1%) -- guaranteed OHKO"
         );
+      });
+
+      test('Wind Rider should give an Attack boost in Tailwind', () => {
+        const attacker = Pokemon('Brambleghast', {'ability': 'Wind Rider'});
+        const defender = Pokemon('Brambleghast', {'ability': 'Wind Rider'});
+        const field = Field({
+          attackerSide: {
+            isTailwind: true,
+          },
+        });
+
+        const result = calculate(attacker, defender, Move('Power Whip'), field);
+
+        expect(attacker.boosts.atk).toBe(0);
+        expect(result.attacker.boosts.atk).toBe(1);
+      });
+
+      describe('Tera Stellar', () => {
+        const terastal = Pokemon('Arceus', {teraType: 'Stellar'});
+        const control = Pokemon('Arceus');
+        test('should only be displayed on defender for Stellar attacks', () => {
+          expect(calculate(control, terastal, Move('Tera Blast'))
+            .rawDesc
+            .defenderTera).toBeUndefined();
+          expect(calculate(terastal, terastal, Move('Tera Blast'))
+            .rawDesc
+            .defenderTera).toBeDefined();
+          // make sure that it isn't caring about stellar first use
+          expect(calculate(terastal, terastal, Move('Tera Blast', {isStellarFirstUse: true}))
+            .rawDesc
+            .defenderTera).toBeDefined();
+          expect(calculate(control, terastal, Move('Tera Blast', {isStellarFirstUse: true}))
+            .rawDesc
+            .defenderTera).toBeUndefined();
+        });
+        test('should not be displayed for non-boosted attacks', () => expect(
+          calculate(terastal, control, Move('Judgment', {isStellarFirstUse: false}))
+            .rawDesc
+            .attackerTera
+        ).toBeUndefined());
+        test('should distinguish between first use for Tera Blast', () => {
+          // I don't exactly care what the difference is
+          const result = [true, false].map((isStellarFirstUse, ..._) =>
+            calculate(terastal, control, Move('Tera Blast', {isStellarFirstUse}))
+              .rawDesc
+              .isStellarFirstUse);
+          expect(result[0]).not.toEqual(result[1]);
+        });
+      });
+    });
+    describe('Descriptions', () => {
+      inGen(9, ({gen, calculate, Pokemon, Move}) => {
+        test('displayed chances should not round to 100%', () => {
+          const result = calculate(
+            Pokemon('Xerneas', {item: 'Choice Band', nature: 'Adamant', evs: {atk: 252}}),
+            Pokemon('Necrozma-Dusk-Mane', {nature: 'Impish', evs: {hp: 252, def: 252}}),
+            Move('Close Combat')
+          );
+          expect(result.kochance().chance).toBeGreaterThanOrEqual(0.9995);
+          expect(result.kochance().text).toBe('99.9% chance to 3HKO');
+        });
+        test('displayed chances should not round to 0%', () => {
+          const result = calculate(
+            Pokemon('Deoxys-Attack', {evs: {spa: 44}}),
+            Pokemon('Blissey', {nature: 'Calm', evs: {hp: 252, spd: 252}}),
+            Move('Psycho Boost')
+          );
+          expect(result.kochance().chance).toBeLessThan(0.005); // it would round down.
+          expect(result.kochance().text).toBe('0.1% chance to 4HKO');
+        });
       });
     });
   });

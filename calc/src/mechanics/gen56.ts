@@ -26,12 +26,12 @@ import {
   computeFinalStats,
   countBoosts,
   getBaseDamage,
-  getEVDescriptionText,
+  getStatDescriptionText,
   getFinalDamage,
   getModifiedStat,
   getMoveEffectiveness,
   getStabMod,
-  getWeightFactor,
+  getWeight,
   handleFixedDamageMoves,
   isGrounded,
   OF16, OF32,
@@ -237,7 +237,7 @@ export function calculateBWXY(
     return result;
   }
 
-  desc.HPEVs = `${defender.evs.hp} HP`;
+  desc.HPEVs = getStatDescriptionText(gen, defender, 'hp');
 
   const fixedDamage = handleFixedDamageMoves(attacker, move);
   if (fixedDamage) {
@@ -461,7 +461,7 @@ export function calculateBasePowerBWXY(
     break;
   case 'Low Kick':
   case 'Grass Knot':
-    const w = defender.weightkg * getWeightFactor(defender);
+    const w = getWeight(defender, desc, 'defender');
     basePower = w >= 200 ? 120 : w >= 100 ? 100 : w >= 50 ? 80 : w >= 25 ? 60 : w >= 10 ? 40 : 20;
     desc.moveBP = basePower;
     break;
@@ -472,8 +472,8 @@ export function calculateBasePowerBWXY(
   case 'Heavy Slam':
   case 'Heat Crash':
     const wr =
-        (attacker.weightkg * getWeightFactor(attacker)) /
-        (defender.weightkg * getWeightFactor(defender));
+        getWeight(attacker, desc, 'attacker') /
+        getWeight(defender, desc, 'defender');
     basePower = wr >= 5 ? 120 : wr >= 4 ? 100 : wr >= 3 ? 80 : wr >= 2 ? 60 : 40;
     desc.moveBP = basePower;
     break;
@@ -559,6 +559,10 @@ export function calculateBasePowerBWXY(
     break;
   default:
     basePower = move.bp;
+  }
+
+  if (basePower === 0) {
+    return 0;
   }
 
   const bpMods = calculateBPModsBWXY(
@@ -775,8 +779,8 @@ export function calculateAttackBWXY(
   const attackStat = move.category === 'Special' ? 'spa' : 'atk';
   desc.attackEVs =
     move.named('Foul Play')
-      ? getEVDescriptionText(gen, defender, attackStat, defender.nature)
-      : getEVDescriptionText(gen, attacker, attackStat, attacker.nature);
+      ? getStatDescriptionText(gen, defender, attackStat, defender.nature)
+      : getStatDescriptionText(gen, attacker, attackStat, attacker.nature);
 
   if (attackSource.boosts[attackStat] === 0 ||
       (isCritical && attackSource.boosts[attackStat] < 0)) {
@@ -891,7 +895,7 @@ export function calculateDefenseBWXY(
   let defense: number;
   const defenseStat = move.overrideDefensiveStat || move.category === 'Physical' ? 'def' : 'spd';
   const hitsPhysical = defenseStat === 'def';
-  desc.defenseEVs = getEVDescriptionText(gen, defender, defenseStat, defender.nature);
+  desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
   if (defender.boosts[defenseStat] === 0 ||
     (isCritical && defender.boosts[defenseStat] > 0) ||
     move.ignoreDefensive) {

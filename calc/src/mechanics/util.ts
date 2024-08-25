@@ -274,6 +274,12 @@ export function checkDauntlessShield(source: Pokemon, gen: Generation) {
   }
 }
 
+export function checkWindRider(source: Pokemon, attackingSide: Side) {
+  if (source.hasAbility('Wind Rider') && attackingSide.isTailwind) {
+    source.boosts.atk = Math.min(6, source.boosts.atk + 1);
+  }
+}
+
 export function checkEmbody(source: Pokemon, gen: Generation) {
   if (gen.num < 9) return;
   switch (source.ability) {
@@ -314,6 +320,7 @@ export function checkSeedBoost(pokemon: Pokemon, field: Field) {
           ? Math.max(-6, pokemon.boosts.spd - 1)
           : Math.min(6, pokemon.boosts.spd + 1);
       }
+      pokemon.item = '' as ItemName;
     }
   }
 }
@@ -580,9 +587,23 @@ export function getShellSideArmCategory(source: Pokemon, target: Pokemon): MoveC
   return physicalDamage > specialDamage ? 'Physical' : 'Special';
 }
 
-export function getWeightFactor(pokemon: Pokemon) {
-  return pokemon.hasAbility('Heavy Metal') ? 2
-    : (pokemon.hasAbility('Light Metal') || pokemon.hasItem('Float Stone')) ? 0.5 : 1;
+export function getWeight(pokemon: Pokemon, desc: RawDesc, role: 'defender' | 'attacker') {
+  let weightHG = pokemon.weightkg * 10;
+  const abilityFactor = pokemon.hasAbility('Heavy Metal') ? 2
+    : pokemon.hasAbility('Light Metal') ? 0.5
+    : 1;
+  if (abilityFactor !== 1) {
+    weightHG = Math.max(Math.trunc(weightHG * abilityFactor), 1);
+    desc[`${role}Ability`] = pokemon.ability;
+  }
+
+  if (pokemon.hasItem('Float Stone')) {
+    weightHG = Math.max(Math.trunc(weightHG * 0.5), 1);
+    desc[`${role}Item`] = pokemon.item;
+  }
+
+  // convert back to kg
+  return weightHG / 10;
 }
 
 export function getStabMod(pokemon: Pokemon, move: Move, desc: RawDesc) {
@@ -634,19 +655,22 @@ export function countBoosts(gen: Generation, boosts: StatsTable) {
   return sum;
 }
 
-export function getEVDescriptionText(
+export function getStatDescriptionText(
   gen: Generation,
   pokemon: Pokemon,
-  stat: 'atk' | 'def' | 'spd' | 'spa',
-  natureName: NatureName
+  stat: StatID,
+  natureName?: NatureName
 ): string {
   const nature = gen.natures.get(toID(natureName))!;
-  return (pokemon.evs[stat] +
-    (nature.plus === nature.minus ? ''
+  let desc = pokemon.evs[stat] +
+    (stat === 'hp' || nature.plus === nature.minus ? ''
     : nature.plus === stat ? '+'
     : nature.minus === stat ? '-'
     : '') + ' ' +
-     Stats.displayStat(stat));
+     Stats.displayStat(stat);
+  const iv = pokemon.ivs[stat];
+  if (iv !== 31) desc += ` ${iv} IVs`;
+  return desc;
 }
 
 export function handleFixedDamageMoves(attacker: Pokemon, move: Move) {
