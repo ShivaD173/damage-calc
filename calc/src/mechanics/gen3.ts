@@ -1,3 +1,4 @@
+import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
 import {Generation} from '../data/interface';
 import {getItemBoostType} from '../items';
 import {RawDesc} from '../desc';
@@ -22,7 +23,8 @@ export function calculateADV(
   attacker: Pokemon,
   defender: Pokemon,
   move: Move,
-  field: Field
+  field: Field,
+  mods?: ShowdexCalcMods,
 ) {
   checkAirLock(attacker, field);
   checkAirLock(defender, field);
@@ -41,12 +43,19 @@ export function calculateADV(
 
   const result = new Result(gen, attacker, defender, move, field, 0, desc);
 
-  if (move.category === 'Status' && !move.named('Nature Power')) {
+  if (move.category === 'Status' && !move.named('Nature Power', 'Pain Split')) {
     return result;
   }
 
   if (field.defenderSide.isProtected) {
     desc.isProtected = true;
+    return result;
+  }
+
+  if (move.name === 'Pain Split') {
+    const average = Math.floor((attacker.curHP() + defender.curHP()) / 2);
+    const damage = Math.max(0, defender.curHP() - average);
+    result.damage = damage;
     return result;
   }
 
@@ -133,7 +142,7 @@ export function calculateADV(
     desc.hits = move.hits;
   }
 
-  let bp = calculateBasePowerADV(attacker, defender, move, desc);
+  let bp = calculateBasePowerADV(attacker, defender, move, desc, undefined, mods);
 
   if (bp === 0) {
     return result;
@@ -145,7 +154,12 @@ export function calculateADV(
   const df = calculateDefenseADV(gen, defender, move, desc, isCritical);
 
   const lv = attacker.level;
-  let baseDamage = Math.floor(Math.floor((Math.floor((2 * lv) / 5 + 2) * at * bp) / df) / 50);
+  // let baseDamage = Math.floor(Math.floor((Math.floor((2 * lv) / 5 + 2) * at * bp) / df) / 50);
+  let baseDamage = modBaseDamage('gen3', mods)(lv, bp, at, df);
+
+  if (mods?.strikes?.length) {
+    desc.hits = mods.strikes.length;
+  }
 
   baseDamage = calculateFinalModsADV(baseDamage, attacker, move, field, desc, isCritical);
 
@@ -167,11 +181,12 @@ export function calculateADV(
       numAttacks = move.hits;
     }
     let usedItems = [false, false];
+    let totalModBp = desc.moveBP;
     for (let times = 1; times < numAttacks; times++) {
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
       const newAt = calculateAttackADV(gen, attacker, defender, move, desc, isCritical);
-      let newBp = calculateBasePowerADV(attacker, defender, move, desc);
+      let newBp = calculateBasePowerADV(attacker, defender, move, desc, times + 1, mods);
       newBp = calculateBPModsADV(attacker, move, desc, newBp);
       let newBaseDmg = Math.floor(
         Math.floor((Math.floor((2 * lv) / 5 + 2) * newAt * newBp) / df) / 50
@@ -185,7 +200,11 @@ export function calculateADV(
         damageMultiplier++;
         return affectedAmount + newFinalDamage;
       });
+      if (mods?.hitBasePowers?.length) {
+        totalModBp += (desc.moveBP || 0);
+      }
     }
+    desc.moveBP = totalModBp;
     desc.defenseBoost = origDefBoost;
     desc.attackBoost = origAtkBoost;
   }
@@ -199,6 +218,7 @@ export function calculateBasePowerADV(
   move: Move,
   desc: RawDesc,
   hit = 1,
+  mods?: ShowdexCalcMods,
 ) {
   let bp = move.bp;
   switch (move.name) {
@@ -229,13 +249,18 @@ export function calculateBasePowerADV(
     bp = 60;
     desc.moveName = 'Swift';
     break;
-  case 'Triple Kick':
-    bp = hit * 10;
-    desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
-    break;
+  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  //   bp = hit * 10;
+  //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
+  //   break;
   default:
     bp = move.bp;
   }
+  if (move.hits > 1 && mods?.hitBasePowers?.length) {
+    // note: intentionally falling back to move.bp (& not bp)
+    bp = mods.hitBasePowers[hit - 1] ?? move.bp;
+  }
+  desc.moveBP = bp;
   return bp;
 }
 
@@ -254,6 +279,7 @@ export function calculateBPModsADV(
     basePower = Math.floor(basePower * 1.5);
     desc.attackerAbility = attacker.ability;
   }
+  desc.moveBP = basePower;
   return basePower;
 }
 
@@ -266,7 +292,7 @@ export function calculateAttackADV(
   isCritical = false
 ) {
   const isPhysical = move.category === 'Physical';
-  const attackStat = isPhysical ? 'atk' : 'spa';
+  const attackStat = move.overrideOffensiveStat || (isPhysical ? 'atk' : 'spa');
   desc.attackEVs = getStatDescriptionText(gen, attacker, attackStat, attacker.nature);
 
   let at = attacker.rawStats[attackStat];
@@ -326,7 +352,7 @@ export function calculateDefenseADV(
   isCritical = false
 ) {
   const isPhysical = move.category === 'Physical';
-  const defenseStat = isPhysical ? 'def' : 'spd';
+  const defenseStat = move.overrideDefensiveStat || (isPhysical ? 'def' : 'spd');
   desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
 
   let df = defender.rawStats[defenseStat];

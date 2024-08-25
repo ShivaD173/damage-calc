@@ -3,7 +3,7 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "dist",
-    "downlevelIteration": true,
+    "downlevelIteration": false,
     "tsBuildInfoFile": ".tsbuildinfo"
   },
   "exclude": ["dist"]

@@ -8,6 +8,7 @@ import {error} from './util';
 import {isGrounded} from './mechanics/util';
 
 export interface RawDesc {
+  __debug__?: unknown;
   HPEVs?: string;
   attackBoost?: number;
   attackEVs?: string;
@@ -73,7 +74,7 @@ export function display(
   const desc = buildDescription(rawDesc, attacker, defender);
   const damageText = `${min}-${max} (${minDisplay} - ${maxDisplay}${notation})`;
 
-  if (move.category === 'Status' && !move.named('Nature Power')) return `${desc}: ${damageText}`;
+  if (move.category === 'Status' && !move.named('Nature Power', 'Pain Split')) return `${desc}: ${damageText}`;
   const koChanceText = getKOChance(gen, attacker, defender, move, field, damage, err).text;
   return koChanceText ? `${desc}: ${damageText} -- ${koChanceText}` : `${desc}: ${damageText}`;
 }
@@ -129,6 +130,11 @@ export function getRecovery(
     recovery[0] = recovery[1] = Math.round(attacker.maxHP() / 6);
   }
 
+  if (move.named('Pain Split')) {
+    const average = Math.floor((attacker.curHP() + defender.curHP()) / 2);
+    recovery[0] = recovery[1] = average - attacker.curHP();
+  }
+
   if (move.drain) {
     const percentHealed = move.drain[0] / move.drain[1];
     const max = Math.round(defender.maxHP() * percentHealed);
@@ -146,8 +152,9 @@ export function getRecovery(
 
   const minHealthRecovered = toDisplay(notation, recovery[0], attacker.maxHP());
   const maxHealthRecovered = toDisplay(notation, recovery[1], attacker.maxHP());
+  const change = recovery[0] > 0 ? 'recovered' : 'lost';
+  text = `${minHealthRecovered} - ${maxHealthRecovered}${notation} ${change}`;
 
-  text = `${minHealthRecovered} - ${maxHealthRecovered}${notation} recovered`;
   return {recovery, text};
 }
 
@@ -167,7 +174,9 @@ export function getRecoil(
   let recoil: [number, number] | number = [0, 0];
   let text = '';
 
-  const damageOverflow = minDamage > defender.curHP() || maxDamage > defender.curHP();
+  // are these typos? o_O --keith
+  // const damageOverflow = minDamage > defender.curHP() || maxDamage > defender.curHP();
+  const damageOverflow = min > defender.curHP() || max > defender.curHP();
   if (move.recoil) {
     const mod = (move.recoil[0] / move.recoil[1]) * 100;
     let minRecoilDamage, maxRecoilDamage;
