@@ -57,8 +57,6 @@ const VALIDATORS: {[format: string]: TeamValidator} = {};
 // the validator which is the only area that needs the Format object
 const UNSUPPORTED: {[format: string]: string} = {
   'gen9almostanyability': '[Gen 9] Almost Any Ability',
-  // NOTE: This should be working but https://github.com/pkmn/ps/issues/25
-  'gen9lc': '[Gen 9] LC',
 };
 const SHORT_STAT_FORM: {[stat: string]: keyof CalcStatsTable} =
 {'hp': 'hp', 'atk': 'at', 'def': 'df', 'spa': 'sa', 'spd': 'sd', 'spe': 'sp'};
@@ -181,10 +179,10 @@ function getSpecie(gen: Generation, specieName: SpeciesName): Specie | PSSpecie 
 
 function toPSFormat(formatID: ID): ID {
   if (formatID === 'gen9vgc2024') {
-    return `${formatID}regf` as ID;
+    return `${formatID}regg` as ID;
   }
   if (formatID === 'gen9battlestadiumsingles') {
-    return `gen9bssregf` as ID;
+    return `gen9bssregg` as ID;
   }
   return formatID;
 }
@@ -234,6 +232,7 @@ function usageToPset(
   const {nature, evs} = fromSpread(top(uset.spreads));
   const item = top(uset.items);
   const ability = top(uset.abilities);
+  const teraType = top(uset.teraTypes);
   const pset: PokemonSet = {
     name: '',
     species: specieName,
@@ -241,6 +240,7 @@ function usageToPset(
     ability: !ability || ability === 'No Ability' ? '' : ability,
     moves: top(uset.moves, 4).filter(m => m !== 'Nothing'),
     nature,
+    teraType: !teraType || teraType === 'Nothing' ? '' : teraType,
     gender: '',
     evs: TeamValidator.fillStats(evs ?? null, gen.num < 3 ? 252 : 0),
     ivs: TeamValidator.fillStats(null, gen.num === 2 ? 30 : 31),
@@ -416,6 +416,7 @@ function similarFormes(
     break;
   case 'Terapagos':
     similar.formes = ['Terapagos-Stellar', 'Terapagos-Terastal'] as SpeciesName[];
+    similar.abilityChange = true;
     break;
   case 'Sirfetch\'d':
     similar.formes = ['Sirfetch’d'] as SpeciesName[];

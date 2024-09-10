@@ -1,4 +1,4 @@
-import {Generation, AbilityName, StatID, Terrain} from '../data/interface';
+import type {Generation, AbilityName, StatID, Terrain} from '../data/interface';
 import {toID} from '../util';
 import {
   getBerryResistType,
@@ -9,10 +9,10 @@ import {
   getTechnoBlast,
   SEED_BOOSTED_STAT,
 } from '../items';
-import {RawDesc} from '../desc';
-import {Field} from '../field';
-import {Move} from '../move';
-import {Pokemon} from '../pokemon';
+import type {RawDesc} from '../desc';
+import type {Field} from '../field';
+import type {Move} from '../move';
+import type {Pokemon} from '../pokemon';
 import {Result} from '../result';
 import {
   chainMods,
@@ -146,6 +146,13 @@ export function calculateSMSSSV(
     return result;
   }
 
+  if (move.name === 'Pain Split') {
+    const average = Math.floor((attacker.curHP() + defender.curHP()) / 2);
+    const damage = Math.max(0, defender.curHP() - average);
+    result.damage = damage;
+    return result;
+  }
+
   const defenderIgnoresAbility = defender.hasAbility(
     'Full Metal Body',
     'Prism Armor',
@@ -203,7 +210,7 @@ export function calculateSMSSSV(
     move.timesUsed === 1;
 
   let type = move.type;
-  if (move.named('Weather Ball')) {
+  if (move.originalName === 'Weather Ball') {
     const holdingUmbrella = attacker.hasItem('Utility Umbrella');
     type =
       field.hasWeather('Sun', 'Harsh Sunshine') && !holdingUmbrella ? 'Fire'
@@ -215,10 +222,14 @@ export function calculateSMSSSV(
     desc.moveType = type;
   } else if (move.named('Judgment') && attacker.item && attacker.item.includes('Plate')) {
     type = getItemBoostType(attacker.item)!;
-  } else if (move.named('Techno Blast') && attacker.item && attacker.item.includes('Drive')) {
+  } else if (move.originalName === 'Techno Blast' &&
+    attacker.item && attacker.item.includes('Drive')) {
     type = getTechnoBlast(attacker.item)!;
-  } else if (move.named('Multi-Attack') && attacker.item && attacker.item.includes('Memory')) {
+    desc.moveType = type;
+  } else if (move.originalName === 'Multi-Attack' &&
+    attacker.item && attacker.item.includes('Memory')) {
     type = getMultiAttack(attacker.item)!;
+    desc.moveType = type;
   } else if (move.named('Natural Gift') && attacker.item?.endsWith('Berry')) {
     const gift = getNaturalGift(gen, attacker.item)!;
     type = gift.t;
@@ -226,7 +237,7 @@ export function calculateSMSSSV(
     desc.attackerItem = attacker.item;
   } else if (
     move.named('Nature Power') ||
-    (move.named('Terrain Pulse') && isGrounded(attacker, field))
+    (move.originalName === 'Terrain Pulse' && isGrounded(attacker, field))
   ) {
     type =
       field.hasTerrain('Electric') ? 'Electric'
@@ -236,14 +247,18 @@ export function calculateSMSSSV(
       : 'Normal';
     desc.terrain = field.terrain;
 
+    if (move.isMax) {
+      desc.moveType = type;
+    }
+
     // If the Nature Power user has the ability Prankster, it cannot affect
     // Dark-types or grounded foes if Psychic Terrain is active
     if (!(move.named('Nature Power') && attacker.hasAbility('Prankster')) &&
-      (defender.types.includes('Dark') ||
-      (field.hasTerrain('Psychic') && isGrounded(defender, field)))) {
+      ((defender.types.includes('Dark') ||
+      (field.hasTerrain('Psychic') && isGrounded(defender, field))))) {
       desc.moveType = type;
     }
-  } else if (move.named('Revelation Dance')) {
+  } else if (move.originalName === 'Revelation Dance') {
     if (attacker.teraType) {
       type = attacker.teraType;
     } else {
@@ -271,6 +286,11 @@ export function calculateSMSSSV(
     } else if (attacker.name.includes('Ogerpon-Wellspring')) {
       type = 'Water';
     }
+  } else if (
+    move.named('Tera Starstorm') && attacker.name === 'Terapagos-Stellar'
+  ) {
+    move.target = 'allAdjacentFoes';
+    type = 'Stellar';
   }
 
   let hasAteAbilityTypeChange = false;
@@ -285,7 +305,7 @@ export function calculateSMSSSV(
     'Judgment',
     'Nature Power',
     'Techno Blast',
-    'Multi Attack',
+    'Multi-Attack',
     'Natural Gift',
     'Weather Ball',
     'Terrain Pulse',
@@ -293,7 +313,7 @@ export function calculateSMSSSV(
   ) || (move.named('Tera Blast') && attacker.teraType);
 
   if (!move.isZ && !noTypeChange) {
-    const normal = move.hasType('Normal');
+    const normal = type === 'Normal';
     if ((isAerilate = attacker.hasAbility('Aerilate') && normal)) {
       type = 'Flying';
     } else if ((isGalvanize = attacker.hasAbility('Galvanize') && normal)) {
@@ -941,7 +961,7 @@ export function calculateBasePowerSMSSSV(
     'Subzero Slammer', 'Supersonic Skystrike', 'Savage Spin-Out', 'Acid Downpour', 'Tectonic Rage',
     'Continental Crush', 'All-Out Pummeling', 'Shattered Psyche', 'Never-Ending Nightmare',
     'Devastating Drake', 'Black Hole Eclipse', 'Corkscrew Crash', 'Twinkle Tackle'
-  )) {
+  ) || move.isMax) {
     // show z-move power in description
     desc.moveBP = move.bp;
   }
@@ -1023,11 +1043,6 @@ export function calculateBPModsSMSSSV(
     move.target = 'allAdjacentFoes';
     bpMods.push(6144);
     desc.moveBP = basePower * 1.5;
-  } else if (
-    move.named('Tera Starstorm') && attacker.name === 'Terapagos-Stellar'
-  ) {
-    move.target = 'allAdjacentFoes';
-    move.type = 'Stellar';
   } else if ((move.named('Knock Off') && !resistedKnockOffDamage) ||
     (move.named('Misty Explosion') && isGrounded(attacker, field) && field.hasTerrain('Misty')) ||
     (move.named('Grav Apple') && field.isGravity)
@@ -1045,7 +1060,8 @@ export function calculateBPModsSMSSSV(
       field.defenderSide.isForesight;
     const isRingTarget =
       (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz')) || (attacker.hasAbility('Corrosion') && move.type === 'Poison');
-    const types = defender.teraType ? [defender.teraType] : defender.types;
+    const types = defender.teraType && defender.teraType !== 'Stellar'
+      ? [defender.teraType] : defender.types;
     const type1Effectiveness = getMoveEffectiveness(
       gen,
       move,
@@ -1362,12 +1378,6 @@ export function calculateAtModsSMSSSV(
     desc.weather = field.weather;
   } else if (
     // Gorilla Tactics has no effect during Dynamax (Anubis)
-    (attacker.hasAbility('Gorilla Tactics') && move.category === 'Physical' &&
-     !attacker.isDynamaxed)) {
-    atMods.push(6144);
-    desc.attackerAbility = attacker.ability;
-  } else if (
-    // Gorilla Tactics has no effect during Dynamax (Anubis)
     !attacker.isDynamaxed &&
     ((attacker.hasAbility('Gorilla Tactics') && move.category === 'Physical') ||
     (attacker.hasAbility('Monkey Business') && move.category === 'Special'))) {
@@ -1413,6 +1423,16 @@ export function calculateAtModsSMSSSV(
   ) {
     atMods.push(8192);
     desc.attackerAbility = attacker.ability;
+  }
+
+  if (
+    field.attackerSide.isFlowerGift &&
+    !attacker.hasAbility('Flower Gift') &&
+    field.hasWeather('Sun', 'Harsh Sunshine') &&
+    move.category === 'Physical') {
+    atMods.push(6144);
+    desc.weather = field.weather;
+    desc.isFlowerGiftAttacker = true;
   }
 
   if ((defender.hasAbility('Thick Fat') && move.hasType('Fire', 'Ice')) ||

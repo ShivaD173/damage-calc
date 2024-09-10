@@ -1,4 +1,4 @@
-import {Generation, AbilityName} from '../data/interface';
+import type {Generation, AbilityName} from '../data/interface';
 import {toID} from '../util';
 import {
   getItemBoostType,
@@ -7,10 +7,10 @@ import {
   getBerryResistType,
   getTechnoBlast,
 } from '../items';
-import {RawDesc} from '../desc';
-import {Field} from '../field';
-import {Move} from '../move';
-import {Pokemon} from '../pokemon';
+import type {RawDesc} from '../desc';
+import type {Field} from '../field';
+import type {Move} from '../move';
+import type {Pokemon} from '../pokemon';
 import {Result} from '../result';
 import {
   chainMods,
@@ -85,6 +85,13 @@ export function calculateBWXY(
 
   if (field.defenderSide.isProtected && !move.breaksProtect) {
     desc.isProtected = true;
+    return result;
+  }
+
+  if (move.name === 'Pain Split') {
+    const average = Math.floor((attacker.curHP() + defender.curHP()) / 2);
+    const damage = Math.max(0, defender.curHP() - average);
+    result.damage = damage;
     return result;
   }
 
@@ -843,13 +850,6 @@ export function calculateAtModsBWXY(
     desc.attackerAbility = attacker.ability;
     desc.weather = field.weather;
   } else if (
-    field.attackerSide.isFlowerGift &&
-    field.hasWeather('Sun', 'Harsh Sunshine') &&
-    move.category === 'Physical') {
-    atMods.push(6144);
-    desc.weather = field.weather;
-    desc.isFlowerGiftAttacker = true;
-  } else if (
     (attacker.hasAbility('Defeatist') && attacker.curHP() <= attacker.maxHP() / 2) ||
     (attacker.hasAbility('Slow Start') && attacker.abilityOn && move.category === 'Physical')
   ) {
@@ -858,6 +858,16 @@ export function calculateAtModsBWXY(
   } else if (attacker.hasAbility('Huge Power', 'Pure Power') && move.category === 'Physical') {
     atMods.push(8192);
     desc.attackerAbility = attacker.ability;
+  }
+
+  if (
+    field.attackerSide.isFlowerGift &&
+    !attacker.hasAbility('Flower Gift') &&
+    field.hasWeather('Sun', 'Harsh Sunshine') &&
+    move.category === 'Physical') {
+    atMods.push(6144);
+    desc.weather = field.weather;
+    desc.isFlowerGiftAttacker = true;
   }
 
   if ((attacker.hasItem('Thick Club') &&

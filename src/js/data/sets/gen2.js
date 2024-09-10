@@ -1,10 +1,17 @@
 var SETDEX_GSC = {
+  "Ivysaur": {
+    "ZU Swords Dance": {"item":"Leftovers","moves":["Sleep Powder","Swords Dance","Return","Giga Drain"]}
+  },
   "Venusaur": {
     "OU Defensive": {"item":"Leftovers","moves":["Synthesis","Leech Seed","Razor Leaf","Sleep Powder"]},
     "OU Swords Dance": {"item":"Leftovers","moves":["Swords Dance","Body Slam","Giga Drain","Sleep Powder"]},
     "1v1 Leech Seed Stall": {"item":"Leftovers","ivs":{"hp":6,"at":28,"df":28},"moves":["Leech Seed","Protect","Substitute","Hidden Power Grass"]},
     "1v1 Swords Dance + Return": {"item":"Leftovers","moves":["Giga Drain","Synthesis","Swords Dance","Return"]},
     "1v1 Growth + Giga Drain": {"item":"Leftovers","ivs":{"hp":14,"at":24,"df":26},"moves":["Giga Drain","Synthesis","Growth","Hidden Power Flying"]}
+  },
+  "Charmeleon": {
+    "PU Booster": {"item":"Leftovers","moves":["Belly Drum","Return","Rock Slide","Fire Blast"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Fire Blast","Rest","Sleep Talk","Swords Dance"]}
   },
   "Charizard": {
     "OU BellyZard (Belly Drum)": {"item":"Leftovers","moves":["Belly Drum","Earthquake","Rock Slide","Fire Blast"]},
@@ -18,11 +25,13 @@ var SETDEX_GSC = {
     "1v1 Special Attacker": {"item":"Leftovers","moves":["Hydro Pump","Ice Beam","Icy Wind","Counter"]}
   },
   "Butterfree": {
-    "OU Double Powder": {"item":"Leftovers","moves":["Sleep Powder","Stun Spore","Psychic","Giga Drain"]}
+    "OU Double Powder": {"item":"Leftovers","moves":["Sleep Powder","Stun Spore","Psychic","Giga Drain"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Sleep Powder","Psychic","Stun Spore","Giga Drain"]}
   },
   "Beedrill": {
     "OU Swords Dance": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Sludge Bomb","Hidden Power Ground","Swords Dance","Agility"]},
-    "PU Double Dance": {"item":"Miracle Berry","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Agility","Sludge Bomb","Hidden Power Ground"]}
+    "PU Double Dance": {"item":"Miracle Berry","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Agility","Sludge Bomb","Hidden Power Ground"]},
+    "ZU Showdown Usage": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Sludge Bomb","Swords Dance","Hidden Power Ground","Agility"]}
   },
   "Pidgeot": {
     "OU Standard": {"item":"Leftovers","ivs":{"hp":14,"at":24,"df":26},"moves":["Return","Hidden Power Flying","Toxic","Steel Wing"]},
@@ -50,6 +59,7 @@ var SETDEX_GSC = {
     "1v1 Toxic + Curse": {"item":"Soft Sand","moves":["Earthquake","Flamethrower","Toxic","Curse"]}
   },
   "Clefairy": {
+    "PU Curse + Twave": {"item":"Leftovers","moves":["Curse","Return","Moonlight","Thunder Wave"]},
     "1v1 Thunder Wave + Seismic Toss": {"item":"Leftovers","moves":["Thunder Wave","Encore","Moonlight","Seismic Toss"]}
   },
   "Clefable": {
@@ -111,6 +121,12 @@ var SETDEX_GSC = {
     "1v1 Leftovers": {"item":"Leftovers","moves":["Fire Blast","Flamethrower","Sunny Day","Protect"]},
     "1v1 Charcoal": {"item":"Charcoal","ivs":{"df":26},"moves":["Fire Blast","Sunny Day","Agility","Hidden Power Ice"]}
   },
+  "Bayleef": {
+    "PU Defensive": {"item":"Leftovers","moves":["Synthesis","Curse","Body Slam","Razor Leaf"]},
+    "ZU Swords Dance": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Return","Hidden Power Ground","Synthesis"]},
+    "ZU Support": {"item":"Leftovers","moves":["Body Slam","Razor Leaf","Light Screen","Synthesis"]},
+    "NU Showdown Usage": {"item":"Leftovers","moves":["Synthesis","Razor Leaf","Light Screen","Leech Seed"]}
+  },
   "Meganium": {
     "OU Support": {"item":"Leftovers","moves":["Razor Leaf","Reflect","Leech Seed","Synthesis"]},
     "OU Swords Dance": {"item":"Leftovers","moves":["Body Slam","Swords Dance","Synthesis","Earthquake"]},
@@ -121,6 +137,11 @@ var SETDEX_GSC = {
     "OU Mixed Attacker": {"item":"Leftovers","ivs":{"hp":6,"at":28,"df":28},"moves":["Fire Blast","Dynamic Punch","Hidden Power Grass","Earthquake"]},
     "1v1 Anti-Raikou": {"item":"Mint Berry","moves":["Fire Blast","Earthquake","Thunder Punch","Rest"]}
   },
+  "Croconaw": {
+    "ZU Surf Attacker": {"item":"Leftovers","moves":["Surf","Rock Slide","Rest","Sleep Talk"]},
+    "ZU Double Coverage": {"item":"Leftovers","moves":["Rock Slide","Ice Beam","Rest","Sleep Talk"]},
+    "ZU Curse": {"item":"Leftovers","moves":["Curse","Return","Rest","Surf"]}
+  },
   "Feraligatr": {
     "OU Mixed Sweeper": {"item":"Leftovers","moves":["Hydro Pump","Earthquake","Rock Slide","Curse"]},
     "OU Special Sweeper": {"item":"Leftovers","ivs":{"hp":6,"at":28,"df":28},"moves":["Hydro Pump","Ice Beam","Crunch","Hidden Power Grass"]},
@@ -129,7 +150,9 @@ var SETDEX_GSC = {
   "Togetic": {
     "OU Special Attacker": {"item":"Leftovers","moves":["Charm","Fire Blast","Safeguard","Psychic"]},
     "OU SunnyBeam": {"item":"Leftovers","moves":["Sunny Day","Solar Beam","Fire Blast","Encore"]},
-    "OU Curse": {"item":"Leftovers","ivs":{"hp":14,"at":24,"df":26},"moves":["Curse","Hidden Power Flying","Return","Rest"]}
+    "OU Curse": {"item":"Leftovers","ivs":{"hp":14,"at":24,"df":26},"moves":["Curse","Hidden Power Flying","Return","Rest"]},
+    "ZU Curse": {"item":"Leftovers","moves":["Curse","Double-Edge","Rest","Sleep Talk"]},
+    "ZU Mixed Attacker": {"item":"Leftovers","moves":["Double-Edge","Psychic","Rest","Sleep Talk"]}
   },
   "Ampharos": {
     "UU Heart of the Lighthouse (Sleep Talk)": {"item":"Leftovers","moves":["Thunder","Light Screen","Rest","Sleep Talk"]}
@@ -147,6 +170,9 @@ var SETDEX_GSC = {
     "OU Status Support": {"item":"Leftovers","moves":["Sleep Powder","Stun Spore","Leech Seed","Encore"]},
     "UU Utility": {"item":"Leftovers","moves":["Stun Spore","Encore","Synthesis","Sleep Powder"]},
     "1v1 Leech Seed Stall": {"item":"Leftovers","moves":["Leech Seed","Protect","Encore","Rest"]}
+  },
+  "Snubbull": {
+    "ZU Cleric": {"item":"Leftovers","moves":["Return","Heal Bell","Rest","Sleep Talk"]}
   },
   "Granbull": {
     "UU Curse RestTalk": {"item":"Leftovers","moves":["Curse","Frustration","Rest","Sleep Talk"]},
@@ -169,7 +195,7 @@ var SETDEX_GSC = {
   },
   "Arbok": {
     "OU Glare": {"item":"Leftovers","moves":["Sludge Bomb","Glare","Earthquake","Giga Drain"]},
-    "NU Showdown Usage": {"item":"Leftovers","moves":["Sludge Bomb","Earthquake","Rest","Sleep Talk"]}
+    "NU Glare": {"item":"Leftovers","moves":["Glare","Sludge Bomb","Earthquake","Giga Drain"]}
   },
   "Dugtrio": {
     "NU Substitute Attacker": {"item":"Leftovers","moves":["Earthquake","Rock Slide","Screech","Substitute"]}
@@ -219,6 +245,7 @@ var SETDEX_GSC = {
   },
   "Magcargo": {
     "OU Curse": {"item":"Leftovers","moves":["Curse","Rock Slide","Earthquake","Fire Blast"]},
+    "PU Curse": {"item":"Leftovers","moves":["Fire Blast","Rock Slide","Curse","Protect"]},
     "PU Restalk": {"item":"Leftovers","moves":["Flamethrower","Rock Slide","Rest","Sleep Talk"]}
   },
   "Corsola": {
@@ -230,7 +257,8 @@ var SETDEX_GSC = {
     "OU Support": {"item":"Leftovers","moves":["Hydro Pump","Confuse Ray","Toxic","Haze"]},
     "PU 3 Attacks": {"item":"Leftovers","ivs":{"hp":14,"at":28},"moves":["Hydro Pump","Ice Beam","Hidden Power Electric","Haze"]},
     "PU Curse": {"item":"Leftovers","ivs":{"hp":14,"at":24,"df":26},"moves":["Curse","Hidden Power Flying","Rest","Sleep Talk"]},
-    "1v1 Toxic Stall": {"item":"Leftovers","moves":["Surf","Toxic","Haze","Rest"]}
+    "1v1 Toxic Stall": {"item":"Leftovers","moves":["Surf","Toxic","Haze","Rest"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Surf","Rest","Ice Beam","Sleep Talk"]}
   },
   "Raikou": {
     "OU Phazer": {"item":"Leftovers","ivs":{"hp":14,"at":28,"df":26},"evs":{"sp":216},"moves":["Thunder","Roar","Hidden Power Water","Rest"]},
@@ -249,21 +277,34 @@ var SETDEX_GSC = {
     "OU Defensive Tank": {"item":"Leftovers","moves":["Surf","Toxic","Rest","Sleep Talk"]},
     "1v1 Toxic Stall": {"item":"Leftovers","moves":["Hydro Pump","Toxic","Psych Up","Rest"]}
   },
+  "Koffing": {
+    "ZU Offensive": {"item":"Leftovers","ivs":{"hp":14,"at":28,"df":26},"moves":["Sludge Bomb","Thunder","Hidden Power Water","Explosion"]},
+    "ZU Tank": {"item":"Leftovers","moves":["Sludge Bomb","Haze","Pain Split","Explosion"]}
+  },
   "Weezing": {
     "NU Mixed Attacking Tank": {"item":"Leftovers","moves":["Sludge Bomb","Thunder","Explosion","Fire Blast"]}
   },
   "Raticate": {
     "OU Super Fang": {"item":"Leftovers","moves":["Super Fang","Substitute","Mimic","Body Slam"]},
-    "1v1 Mixed Attacker": {"item":"Pink Bow","moves":["Screech","Curse","Hyper Beam","Ice Beam"]},
-    "NU Showdown Usage": {"item":"Leftovers","moves":["Super Fang","Return","Rest","Sleep Talk"]}
+    "NU Super Fang": {"item":"Leftovers","moves":["Super Fang","Double-Edge","Rest","Sleep Talk"]},
+    "1v1 Mixed Attacker": {"item":"Pink Bow","moves":["Screech","Curse","Hyper Beam","Ice Beam"]}
   },
   "Fearow": {
-    "NU RestTalk": {"item":"Leftovers","moves":["Double-Edge","Drill Peck","Rest","Sleep Talk"]},
-    "NU Three Attacks": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Double-Edge","Hidden Power Ground","Drill Peck","Substitute"]}
+    "NU Wallbreaker": {"item":"Leftovers","moves":["Double-Edge","Drill Peck","Rest","Sleep Talk"]}
+  },
+  "Sandshrew": {
+    "ZU Swords Dance Attacker": {"item":"Leftovers","ivs":{"at":26,"df":26},"moves":["Swords Dance","Earthquake","Rock Slide","Hidden Power Bug"]},
+    "ZU Thief Lead": {"moves":["Thief","Earthquake","Rock Slide","Body Slam"]}
   },
   "Sandslash": {
     "OU Swords Dance": {"item":"Leftovers","moves":["Swords Dance","Earthquake","Rock Slide","Substitute"]},
     "UU Swords Dance": {"item":"Leftovers","moves":["Earthquake","Rock Slide","Swords Dance","Substitute"]}
+  },
+  "Nidorina": {
+    "ZU Curse + Moonlight": {"item":"Leftovers","moves":["Curse","Return","Ice Beam","Moonlight"]}
+  },
+  "Nidorino": {
+    "ZU Mixed Attacker": {"moves":["Thunder","Ice Beam","Thief","Morning Sun"]}
   },
   "Ninetales": {
     "NU Defensive": {"item":"Leftovers","moves":["Flamethrower","Sunny Day","Rest","Sleep Talk"]},
@@ -279,30 +320,47 @@ var SETDEX_GSC = {
   "Parasect": {
     "OU Double Powder": {"item":"Leftovers","ivs":{"at":26,"df":26},"moves":["Spore","Hidden Power Bug","Giga Drain","Stun Spore"]},
     "OU Special Sweeper": {"item":"Leftovers","ivs":{"hp":6,"at":28,"df":24},"moves":["Spore","Growth","Giga Drain","Hidden Power Fire"]},
-    "OU Swords Dance": {"item":"Leftovers","ivs":{"at":26,"df":26},"moves":["Spore","Hidden Power Bug","Return","Swords Dance"]}
+    "OU Swords Dance": {"item":"Leftovers","ivs":{"at":26,"df":26},"moves":["Spore","Hidden Power Bug","Return","Swords Dance"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Spore","Swords Dance","Body Slam","Stun Spore"]}
   },
   "Venomoth": {
     "OU Curse": {"item":"Leftovers","ivs":{"at":26,"df":26},"moves":["Curse","Sludge Bomb","Stun Spore","Hidden Power Bug"]},
     "PU Offensive": {"item":"Leftovers","moves":["Sleep Powder","Psychic","Sludge Bomb","Giga Drain"]},
     "PU Double Status": {"item":"Leftovers","moves":["Sleep Powder","Stun Spore","Psychic","Sludge Bomb"]},
+    "PU Curse Pass": {"item":"Leftovers","moves":["Sludge Bomb","Curse","Baton Pass","Sleep Powder"]},
     "UU Showdown Usage": {"item":"Leftovers","moves":["Sludge Bomb","Curse","Baton Pass","Sleep Powder"]}
+  },
+  "Diglett": {
+    "ZU Substitute Attacker": {"item":"Leftovers","moves":["Earthquake","Rock Slide","Sludge Bomb","Substitute"]},
+    "ZU Thief Lead": {"moves":["Thief","Earthquake","Rock Slide","Sludge Bomb"]}
+  },
+  "Meowth": {
+    "ZU Lead": {"moves":["Double-Edge","Hypnosis","Thief","Thunder"]}
   },
   "Persian": {
     "OU Screech": {"item":"Leftovers","moves":["Return","Hypnosis","Screech","Zap Cannon"]},
     "OU Swagger + Psych Up": {"item":"Leftovers","moves":["Return","Shadow Ball","Swagger","Psych Up"]},
     "UU Sub Swagger": {"item":"Leftovers","moves":["Substitute","Swagger","Double-Edge","Psych Up"]},
+    "NU Lead": {"moves":["Double-Edge","Thief","Hypnosis","Screech"]},
+    "NU RestTalk": {"item":"Leftovers","moves":["Double-Edge","Thunder","Rest","Sleep Talk"]},
     "1v1 Toxic Stall": {"item":"Mint Berry","moves":["Toxic","Amnesia","Spite","Rest"]},
-    "1v1 Pink Bow": {"item":"Pink Bow","moves":["Hyper Beam","Return","Screech","Curse"]},
-    "NU Showdown Usage": {"moves":["Hypnosis","Double-Edge","Thief","Screech"]}
+    "1v1 Pink Bow": {"item":"Pink Bow","moves":["Hyper Beam","Return","Screech","Curse"]}
   },
   "Golduck": {
     "OU Standard": {"item":"Leftovers","moves":["Cross Chop","Hypnosis","Surf","Ice Beam"]},
     "1v1 Scope Lens": {"item":"Scope Lens","moves":["Surf","Ice Beam","Screech","Cross Chop"]}
   },
+  "Mankey": {
+    "ZU Meditate": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Meditate","Cross Chop","Rock Slide","Hidden Power Ground"]},
+    "ZU Reversal": {"item":"Black Belt","moves":["Meditate","Reversal","Cross Chop","Endure"]}
+  },
   "Primeape": {
     "NU RestTalk": {"item":"Leftovers","moves":["Cross Chop","Thunder","Rest","Sleep Talk"]},
     "NU Substitute Attacker": {"item":"Leftovers","moves":["Cross Chop","Thunder","Double-Edge","Substitute"]},
     "1v1 Scope Lens": {"item":"Scope Lens","ivs":{"at":26,"df":26},"moves":["Cross Chop","Screech","Rock Slide","Hidden Power Bug"]}
+  },
+  "Growlithe": {
+    "ZU RestTalk": {"item":"Leftovers","moves":["Flamethrower","Double-Edge","Rest","Sleep Talk"]}
   },
   "Arcanine": {
     "OU RestTalk": {"item":"Leftovers","ivs":{"hp":6,"at":24,"df":24},"moves":["Fire Blast","Hidden Power Fighting","Rest","Sleep Talk"]},
@@ -333,6 +391,13 @@ var SETDEX_GSC = {
     "1v1 Mint Berry + Thief": {"item":"Mint Berry","moves":["Cross Chop","Curse","Rest","Thief"]},
     "1v1 Scope Lens": {"item":"Scope Lens","moves":["Cross Chop","Rock Slide","Fire Blast","Earthquake"]}
   },
+  "Weepinbell": {
+    "ZU Wallbreaker": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Sleep Powder","Swords Dance","Sludge Bomb","Hidden Power Ground"]}
+  },
+  "Tentacool": {
+    "ZU Swords Dance": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Sludge Bomb","Hydro Pump","Hidden Power Ground"]},
+    "NU Showdown Usage": {"item":"Leftovers","moves":["Toxic","Hydro Pump","Rapid Spin","Sludge Bomb"]}
+  },
   "Tentacruel": {
     "OU Druidcruel (Swords Dance)": {"item":"Leftovers","moves":["Swords Dance","Substitute","Sludge Bomb","Hydro Pump"]},
     "OU Rapid Spin": {"item":"Leftovers","moves":["Rapid Spin","Sludge Bomb","Surf","Screech"]},
@@ -341,14 +406,17 @@ var SETDEX_GSC = {
   },
   "Graveler": {
     "UU SpinSplode": {"item":"Leftovers","ivs":{"hp":22,"at":26,"df":24},"moves":["Earthquake","Hidden Power Rock","Rapid Spin","Explosion"]},
-    "NU Showdown Usage": {"item":"Leftovers","ivs":{"hp":22,"at":26,"df":24},"moves":["Earthquake","Explosion","Rapid Spin","Hidden Power Rock"]}
+    "NU Rapid Spin": {"item":"Leftovers","ivs":{"hp":22,"at":26,"df":24},"moves":["Earthquake","Hidden Power Rock","Rapid Spin","Explosion"]}
   },
   "Ponyta": {
-    "PU Restalk": {"item":"Leftovers","moves":["Fire Blast","Double-Edge","Rest","Sleep Talk"]}
+    "PU RestTalk": {"item":"Leftovers","moves":["Fire Blast","Double-Edge","Rest","Sleep Talk"]}
   },
   "Rapidash": {
-    "NU Offensive": {"item":"Leftovers","moves":["Fire Blast","Double-Edge","Hypnosis","Substitute"]},
     "NU RestTalk": {"item":"Leftovers","moves":["Fire Blast","Double-Edge","Rest","Sleep Talk"]}
+  },
+  "Slowpoke": {
+    "PU Resttalk": {"item":"Leftovers","moves":["Psychic","Thunder Wave","Rest","Sleep Talk"]},
+    "NU Showdown Usage": {"item":"Leftovers","moves":["Earthquake","Thunder Wave","Return","Curse"]}
   },
   "Slowbro": {
     "UU Sleep Talking Sponge (Sleep Talk)": {"item":"Leftovers","moves":["Psychic","Surf","Rest","Sleep Talk"]},
@@ -361,6 +429,14 @@ var SETDEX_GSC = {
     "OU Standard": {"item":"Leftovers","ivs":{"hp":14,"at":28,"df":26},"moves":["Thunderbolt","Thunder Wave","Hidden Power Water","Substitute"]},
     "UU RestTalk": {"item":"Leftovers","ivs":{"hp":14,"at":28,"df":26},"moves":["Thunder","Hidden Power Water","Rest","Sleep Talk"]}
   },
+  "Doduo": {
+    "ZU Attacker": {"item":"Polkadot Bow","ivs":{"hp":14,"at":28,"df":26},"moves":["Double-Edge","Drill Peck","Quick Attack","Hidden Power Water"]},
+    "ZU Flail": {"item":"Polkadot Bow","moves":["Endure","Flail","Drill Peck","Quick Attack"]},
+    "ZU RestTalk": {"item":"Leftovers","moves":["Double-Edge","Drill Peck","Rest","Sleep Talk"]}
+  },
+  "Seel": {
+    "ZU Curse RestTalk": {"item":"Leftovers","moves":["Curse","Body Slam","Rest","Sleep Talk"]}
+  },
   "Dewgong": {
     "UU Rest Talk": {"item":"Leftovers","moves":["Surf","Ice Beam","Rest","Sleep Talk"]},
     "NU RestTalk": {"item":"Leftovers","moves":["Surf","Ice Beam","Rest","Sleep Talk"]},
@@ -368,9 +444,15 @@ var SETDEX_GSC = {
     "NU Growth Pass Recipient": {"item":"Leftovers","ivs":{"hp":6,"at":28,"df":28},"moves":["Ice Beam","Surf","Hidden Power Grass","Protect"]},
     "1v1 Toxic + Encore": {"item":"Leftovers","moves":["Surf","Icy Wind","Toxic","Encore"]}
   },
+  "Grimer": {
+    "ZU Explosion": {"item":"Leftovers","moves":["Curse","Sludge Bomb","Giga Drain","Explosion"]}
+  },
   "Muk": {
     "OU Mixed Attacker": {"item":"Leftovers","moves":["Sludge Bomb","Fire Blast","Explosion","Curse"]},
     "1v1 Screech": {"item":"Leftovers","moves":["Acid Armor","Screech","Sludge Bomb","Fire Blast"]}
+  },
+  "Shellder": {
+    "ZU Explosion Lead": {"item":"Miracle Berry","moves":["Surf","Icy Wind","Explosion","Clamp"]}
   },
   "Cloyster": {
     "OU Spikes": {"item":"Leftovers","moves":["Spikes","Surf","Toxic","Explosion"]},
@@ -383,8 +465,12 @@ var SETDEX_GSC = {
   "Haunter": {
     "UU Offensive Utility": {"item":"Leftovers","moves":["Hypnosis","Psychic","Thunder","Explosion"]}
   },
+  "Onix": {
+    "PU Defensive": {"moves":["Rock Slide","Earthquake","Explosion","Roar"]},
+    "ZU Explosion": {"item":"Leftovers","moves":["Sharpen","Earthquake","Rock Slide","Explosion"]}
+  },
   "Drowzee": {
-    "PU Restalk": {"item":"Leftovers","moves":["Psychic","Thunder Wave","Rest","Sleep Talk"]}
+    "PU Defensive": {"item":"Leftovers","moves":["Psychic","Thunder Wave","Rest","Sleep Talk"]}
   },
   "Hypno": {
     "UU Supporter": {"item":"Leftovers","moves":["Thunder Wave","Psychic","Light Screen","Rest"]},
@@ -393,11 +479,12 @@ var SETDEX_GSC = {
     "1v1 Curse + Amnesia": {"item":"Leftovers","moves":["Curse","Amnesia","Rest","Return"]}
   },
   "Kingler": {
-    "NU King Krab (RestTalk)": {"item":"Leftovers","moves":["Frustration","Swords Dance","Rest","Sleep Talk"]},
-    "NU Substitute Krab": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Substitute","Frustration","Hidden Power Ground"]}
+    "NU Swords Dance + Hidden Power Ground": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Return","Hidden Power Ground","Substitute"]},
+    "NU Swords Dance + Hidden Power Rock": {"item":"Leftovers","ivs":{"hp":22,"at":26,"df":24},"moves":["Swords Dance","Return","Hidden Power Rock","Surf"]}
   },
   "Voltorb": {
-    "PU Lead": {"item":"Leftovers","moves":["Thunder","Light Screen","Reflect","Explosion"]}
+    "PU Lead": {"item":"Leftovers","moves":["Thunder","Light Screen","Reflect","Explosion"]},
+    "ZU Showdown Usage": {"item":"Leftovers","ivs":{"df":26},"moves":["Thunderbolt","Explosion","Hidden Power Ice","Thunder Wave"]}
   },
   "Exeggcute": {
     "NU Boom Utility": {"item":"Leftovers","ivs":{"hp":6,"at":28,"df":28},"moves":["Stun Spore","Psychic","Hidden Power Grass","Explosion"]}
@@ -416,10 +503,10 @@ var SETDEX_GSC = {
   "Lickitung": {
     "OU Swords Dance": {"item":"Leftovers","moves":["Body Slam","Swords Dance","Sleep Talk","Rest"]},
     "OU Special Attacker": {"item":"Leftovers","moves":["Thunderbolt","Ice Beam","Sleep Talk","Rest"]},
-    "NU Showdown Usage": {"item":"Leftovers","moves":["Earthquake","Rest","Swords Dance","Frustration"]}
+    "NU Curse": {"item":"Leftovers","moves":["Curse","Rest","Sleep Talk","Return"]}
   },
   "Rhyhorn": {
-    "PU Phazer": {"item":"Leftovers","moves":["Roar","Earthquake","Rock Slide","Protect"]}
+    "PU Curse": {"item":"Leftovers","moves":["Curse","Earthquake","Rock Slide","Roar"]}
   },
   "Rhydon": {
     "OU Curse": {"item":"Leftovers","moves":["Earthquake","Rock Slide","Curse","Roar"]},
@@ -450,6 +537,10 @@ var SETDEX_GSC = {
     "OU Swords Dance": {"item":"Miracle Berry","ivs":{"hp":14,"at":24},"moves":["Swords Dance","Agility","Double-Edge","Hidden Power Ground"]},
     "OU Special Attacker": {"item":"Leftovers","moves":["Surf","Ice Beam","Rest","Sleep Talk"]},
     "PU Swords Dance": {"item":"Leftovers","moves":["Swords Dance","Return","Rest","Sleep Talk"]}
+  },
+  "Staryu": {
+    "PU Thunder Wave": {"item":"Leftovers","moves":["Thunder Wave","Recover","Surf","Thunderbolt"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Thunderbolt","Recover","Ice Beam","Surf"]}
   },
   "Starmie": {
     "OU Rapid Spin": {"item":"Leftovers","moves":["Surf","Psychic","Rapid Spin","Recover"]},
@@ -500,6 +591,10 @@ var SETDEX_GSC = {
   "Ditto": {
     "OU The Set": {"item":"Metal Powder","moves":["Transform"]}
   },
+  "Eevee": {
+    "PU Growth Pass": {"item":"Leftovers","moves":["Growth","Baton Pass","Substitute","Reflect"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Baton Pass","Growth","Rest","Body Slam"]}
+  },
   "Vaporeon": {
     "OU Growth Sweeper": {"item":"Leftovers","moves":["Surf","Growth","Rest","Sleep Talk"]},
     "1v1 Acid Armor + Growth": {"item":"Leftovers","moves":["Acid Armor","Growth","Rest","Surf"]},
@@ -517,8 +612,8 @@ var SETDEX_GSC = {
     "NU RestTalk": {"item":"Leftovers","moves":["Fire Blast","Double-Edge","Rest","Sleep Talk"]}
   },
   "Porygon": {
-    "NU BoltBeam": {"item":"Leftovers","moves":["Thunder","Ice Beam","Thunder Wave","Recover"]},
-    "NU Curse": {"item":"Leftovers","moves":["Curse","Double-Edge","Thunder Wave","Recover"]}
+    "NU Curse": {"item":"Leftovers","moves":["Curse","Double-Edge","Thunder Wave","Recover"]},
+    "NU BoltBeam": {"item":"Leftovers","moves":["Thunder","Ice Beam","Thunder Wave","Recover"]}
   },
   "Omastar": {
     "OU Support": {"item":"Leftovers","moves":["Surf","Rest","Haze","Reflect"]},
@@ -546,6 +641,10 @@ var SETDEX_GSC = {
     "Ubers Restless Snorlax": {"item":"Leftovers","moves":["Double-Edge","Curse","Earthquake","Self-Destruct"]},
     "Ubers DrumLax": {"item":"Leftovers","moves":["Body Slam","Belly Drum","Rest","Lovely Kiss"]}
   },
+  "Dratini": {
+    "ZU Thunder Wave": {"item":"Leftovers","ivs":{"hp":22,"at":26,"df":24},"moves":["Thunderbolt","Ice Beam","Thunder Wave","Hidden Power Rock"]},
+    "ZU RestTalk": {"item":"Leftovers","moves":["Thunderbolt","Ice Beam","Rest","Sleep Talk"]}
+  },
   "Dragonair": {
     "NU Dual Screens": {"item":"Leftovers","moves":["Thunder Wave","Reflect","Light Screen","Fire Blast"]},
     "NU 3 Attacks": {"item":"Leftovers","moves":["Thunder Wave","Fire Blast","Thunder","Surf"]}
@@ -569,8 +668,12 @@ var SETDEX_GSC = {
     "OU Curse": {"item":"Leftovers","moves":["Double-Edge","Rest","Curse","Shadow Ball"]},
     "NU Showdown Usage": {"moves":["Surf","Double-Edge","Thief","Iron Tail"]}
   },
+  "Ledyba": {
+    "ZU Baton Pass": {"moves":["Agility","Baton Pass","Light Screen","Thief"]}
+  },
   "Ledian": {
-    "OU Baton Pass": {"item":"Leftovers","moves":["Baton Pass","Agility","Light Screen","Reflect"]}
+    "OU Baton Pass": {"item":"Leftovers","moves":["Baton Pass","Agility","Light Screen","Reflect"]},
+    "NU Baton Pass": {"item":"Leftovers","moves":["Light Screen","Barrier","Agility","Baton Pass"]}
   },
   "Crobat": {
     "UU Haze": {"moves":["Haze","Wing Attack","Thief","Confuse Ray"]},
@@ -586,11 +689,17 @@ var SETDEX_GSC = {
     "UU RestTalk": {"item":"Leftovers","moves":["Thunder","Surf","Rest","Sleep Talk"]},
     "1v1 Mint Berry + Rest": {"item":"Mint Berry","moves":["Surf","Thunderbolt","Curse","Rest"]}
   },
+  "Natu": {
+    "ZU Wallbreaker": {"item":"Twisted Spoon","moves":["Psychic","Steel Wing","Giga Drain","Nightmare"]}
+  },
   "Xatu": {
     "NU King Xatu (RestTalk)": {"item":"Leftovers","moves":["Psychic","Drill Peck","Rest","Sleep Talk"]},
     "NU Utility": {"moves":["Psychic","Haze","Rest","Thief"]},
     "1v1 Mixed Attacker": {"item":"Leftovers","moves":["Psychic","Drill Peck","Rest","Sleep Talk"]},
     "1v1 Anti-Marowak": {"moves":["Psychic","Giga Drain","Thief","Haze"]}
+  },
+  "Mareep": {
+    "ZU Thunder Wave": {"item":"Mint Berry","ivs":{"df":26},"moves":["Thunderbolt","Hidden Power Ice","Thunder Wave","Rest"]}
   },
   "Flaaffy": {
     "PU Restalk": {"item":"Leftovers","ivs":{"df":26},"moves":["Thunder","Hidden Power Ice","Rest","Sleep Talk"]}
@@ -606,7 +715,9 @@ var SETDEX_GSC = {
     "1v1 Amnesia + Growth": {"item":"Mint Berry","moves":["Amnesia","Growth","Surf","Rest"]}
   },
   "Aipom": {
-    "OU Baton Pass": {"item":"Leftovers","moves":["Agility","Baton Pass","Return","Counter"]}
+    "OU Baton Pass": {"item":"Leftovers","moves":["Agility","Baton Pass","Return","Counter"]},
+    "PU Agility Pass": {"moves":["Agility","Baton Pass","Return","Thief"]},
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Return","Curse","Sleep Talk","Rest"]}
   },
   "Sunflora": {
     "OU Growth": {"item":"Leftovers","ivs":{"hp":14,"at":28,"df":26},"moves":["Growth","Razor Leaf","Hidden Power Water","Synthesis"]},
@@ -701,7 +812,11 @@ var SETDEX_GSC = {
   "Sneasel": {
     "NU Defensive": {"item":"Leftovers","moves":["Return","Moonlight","Toxic","Dynamic Punch"]},
     "NU Offensive Nightmare": {"item":"Leftovers","moves":["Return","Nightmare","Moonlight","Toxic"]},
-    "PU Mixed": {"item":"Leftovers","moves":["Return","Ice Beam","Toxic","Moonlight"]}
+    "PU Mixed": {"item":"Leftovers","moves":["Return","Ice Beam","Screech","Moonlight"]}
+  },
+  "Teddiursa": {
+    "ZU RestTalk": {"item":"Leftovers","moves":["Return","Earthquake","Rest","Sleep Talk"]},
+    "ZU Curse + Protect": {"item":"Leftovers","moves":["Curse","Return","Earthquake","Protect"]}
   },
   "Ursaring": {
     "OU Curse Phazer": {"item":"Leftovers","moves":["Curse","Return","Earthquake","Roar"]},
@@ -766,9 +881,17 @@ var SETDEX_GSC = {
     "1v1 Counter + Mirror Coat": {"item":"Miracle Berry","moves":["Counter","Mirror Coat","Seismic Toss","Encore"]},
     "Ubers Showdown Usage": {"item":"Miracle Berry","moves":["Spore","Baton Pass","Swords Dance","Agility"]}
   },
+  "Smoochum": {
+    "ZU Special Attacker": {"moves":["Psychic","Ice Beam","Shadow Ball","Thief"]}
+  },
   "Elekid": {
     "PU All-Out-Attacker": {"moves":["Thunder","Ice Punch","Psychic","Thief"]},
     "PU RestTalk": {"item":"Leftovers","moves":["Thunder","Ice Punch","Rest","Sleep Talk"]}
+  },
+  "Magby": {
+    "ZU Thief": {"ivs":{"hp":14,"at":28,"df":26},"moves":["Fire Blast","Thunder Punch","Hidden Power Water","Thief"]},
+    "ZU Rest": {"item":"Mint Berry","ivs":{"hp":14,"at":28,"df":26},"moves":["Fire Blast","Thunder Punch","Hidden Power Water","Rest"]},
+    "ZU Barrier": {"item":"Leftovers","ivs":{"hp":14,"at":28,"df":26},"moves":["Fire Blast","Thunder Punch","Hidden Power Water","Barrier"]}
   },
   "Miltank": {
     "OU Standard Cleric": {"item":"Leftovers","moves":["Heal Bell","Milk Drink","Growl","Body Slam"]},
@@ -803,13 +926,22 @@ var SETDEX_GSC = {
   "Celebi": {
     "Ubers Standard": {"item":"Leftovers","moves":["Heal Bell","Recover","Leech Seed","Psychic"]}
   },
-  "Tentacool": {
-    "NU Showdown Usage": {"item":"Leftovers","moves":["Toxic","Hydro Pump","Rapid Spin","Sludge Bomb"]}
+  "Wartortle": {
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Surf","Rest","Sleep Talk","Zap Cannon"]}
   },
-  "Bayleef": {
-    "NU Showdown Usage": {"item":"Leftovers","moves":["Synthesis","Razor Leaf","Light Screen","Leech Seed"]}
+  "Quilava": {
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Fire Blast","Rest","Sleep Talk","Double-Edge"]}
   },
-  "Slowpoke": {
-    "NU Showdown Usage": {"item":"Leftovers","moves":["Earthquake","Thunder Wave","Return","Curse"]}
+  "Machop": {
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Cross Chop","Rest","Sleep Talk","Earthquake"]}
+  },
+  "Geodude": {
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Rock Slide","Explosion","Earthquake","Protect"]}
+  },
+  "Poliwag": {
+    "ZU Showdown Usage": {"item":"Leftovers","ivs":{"hp":14,"at":24},"moves":["Belly Drum","Return","Surf","Hidden Power Ground"]}
+  },
+  "Omanyte": {
+    "ZU Showdown Usage": {"item":"Leftovers","moves":["Ancient Power","Ice Beam","Surf","Hydro Pump"]}
   }
 };

@@ -1,9 +1,9 @@
-import {Generation} from '../data/interface';
+import type {Generation} from '../data/interface';
 import {getItemBoostType} from '../items';
-import {RawDesc} from '../desc';
-import {Field} from '../field';
-import {Move} from '../move';
-import {Pokemon} from '../pokemon';
+import type {RawDesc} from '../desc';
+import type {Field} from '../field';
+import type {Move} from '../move';
+import type {Pokemon} from '../pokemon';
 import {Result} from '../result';
 import {computeFinalStats, getMoveEffectiveness, handleFixedDamageMoves} from './util';
 
@@ -30,6 +30,13 @@ export function calculateRBYGSC(
 
   if (field.defenderSide.isProtected) {
     desc.isProtected = true;
+    return result;
+  }
+
+  if (move.name === 'Pain Split') {
+    const average = Math.floor((attacker.curHP() + defender.curHP()) / 2);
+    const damage = Math.max(0, defender.curHP() - average);
+    result.damage = damage;
     return result;
   }
 
@@ -73,7 +80,6 @@ export function calculateRBYGSC(
       [firstDefenderType, secondDefenderType] = [secondDefenderType, firstDefenderType];
     }
   }
-
 
   const type1Effectiveness =
     getMoveEffectiveness(gen, move, firstDefenderType, field.defenderSide.isForesight);
