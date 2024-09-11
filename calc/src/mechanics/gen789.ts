@@ -352,14 +352,17 @@ export function calculateSMSSSV(
     attacker.hasAbility('Scrappy') || attacker.hasAbility('Mind\'s Eye') ||
       field.defenderSide.isForesight;
   const isRingTarget =
-    defender.hasItem('Ring Target') && !defender.hasAbility('Klutz');
+      (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz')) ||
+       (attacker.hasAbility('Corrosion') && move.type === 'Poison');
+  const isDauntless = attacker.hasAbility('Dauntless');
   const type1Effectiveness = getMoveEffectiveness(
     gen,
     move,
     defender.types[0],
     isGhostRevealed,
     field.isGravity,
-    isRingTarget
+    isRingTarget,
+    isDauntless,
   );
   const type2Effectiveness = defender.types[1]
     ? getMoveEffectiveness(
@@ -368,7 +371,8 @@ export function calculateSMSSSV(
       defender.types[1],
       isGhostRevealed,
       field.isGravity,
-      isRingTarget
+      isRingTarget,
+      isDauntless,
     )
     : 1;
   let typeEffectiveness = type1Effectiveness * type2Effectiveness;
@@ -380,7 +384,8 @@ export function calculateSMSSSV(
       defender.teraType,
       isGhostRevealed,
       field.isGravity,
-      isRingTarget
+      isRingTarget,
+      isDauntless,
     );
   }
 
@@ -1058,8 +1063,8 @@ export function calculateBPModsSMSSSV(
     const isGhostRevealed =
       attacker.hasAbility('Scrappy') || attacker.hasAbility('Mind\'s Eye') || attacker.hasAbility('Normalize') ||
       field.defenderSide.isForesight;
-    const isRingTarget =
-      (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz')) || (attacker.hasAbility('Corrosion') && move.type === 'Poison');
+    const isRingTarget = (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz'));
+    const isDauntless = attacker.hasAbility('Dauntless');
     const types = defender.teraType && defender.teraType !== 'Stellar'
       ? [defender.teraType] : defender.types;
     const type1Effectiveness = getMoveEffectiveness(
@@ -1068,7 +1073,8 @@ export function calculateBPModsSMSSSV(
       types[0],
       isGhostRevealed,
       field.isGravity,
-      isRingTarget
+      isRingTarget,
+      isDauntless,
     );
     const type2Effectiveness = types[1] ? getMoveEffectiveness(
       gen,
@@ -1076,7 +1082,8 @@ export function calculateBPModsSMSSSV(
       types[1],
       isGhostRevealed,
       field.isGravity,
-      isRingTarget
+      isRingTarget,
+      isDauntless,
     ) : 1;
     if (type1Effectiveness * type2Effectiveness >= 2) {
       bpMods.push(5461);
@@ -1373,7 +1380,7 @@ export function calculateAtModsSMSSSV(
      attacker.hasAbility('Flower Gift') &&
      field.hasWeather('Sun', 'Harsh Sunshine') &&
      move.category === 'Physical')) {
-    atMods.push(6144);
+    atMods.push(5325);
     desc.attackerAbility = attacker.ability;
     desc.weather = field.weather;
   } else if (
@@ -1383,12 +1390,6 @@ export function calculateAtModsSMSSSV(
     (attacker.hasAbility('Monkey Business') && move.category === 'Special'))) {
     atMods.push(6144);
     desc.attackerAbility = attacker.ability;
-  } else if (
-    field.attackerSide.isFlowerGift &&
-    field.hasWeather('Sun', 'Harsh Sunshine')) {
-    atMods.push(5325);
-    desc.weather = field.weather;
-    desc.isFlowerGiftAttacker = true;
   } else if (
     (attacker.hasAbility('Guts') && attacker.status && move.category === 'Physical') ||
     (attacker.hasAbility('The Flock') && attacker.status && move.category === 'Physical') ||
@@ -1430,7 +1431,7 @@ export function calculateAtModsSMSSSV(
     !attacker.hasAbility('Flower Gift') &&
     field.hasWeather('Sun', 'Harsh Sunshine') &&
     move.category === 'Physical') {
-    atMods.push(6144);
+    atMods.push(5325);
     desc.weather = field.weather;
     desc.isFlowerGiftAttacker = true;
   }
@@ -1574,7 +1575,7 @@ export function calculateDfModsSMSSSV(
     field.hasWeather('Sun', 'Harsh Sunshine') &&
     !hitsPhysical
   ) {
-    dfMods.push(6144);
+    dfMods.push(5325);
     desc.defenderAbility = defender.ability;
     desc.weather = field.weather;
   } else if (

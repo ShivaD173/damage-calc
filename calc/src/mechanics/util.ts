@@ -142,11 +142,14 @@ export function getMoveEffectiveness(
   isGhostRevealed?: boolean,
   isGravity?: boolean,
   isRingTarget?: boolean,
+  isDauntless?: boolean,
 ) {
   if ((isRingTarget || isGhostRevealed) && type === 'Ghost' && move.hasType('Normal', 'Fighting')) {
     return 1;
   } else if ((isRingTarget || isGravity) && type === 'Flying' && move.hasType('Ground')) {
     return 1;
+  } else if ((isDauntless) && type === 'Dark' && move.hasType('Psychic')) {
+    return 0.5;
   } else if (move.named('Freeze-Dry') && type === 'Water') {
     return 2;
   } else if (move.named('Sky Uppercut') && type === 'Flying') {
@@ -610,7 +613,7 @@ export function getStabMod(pokemon: Pokemon, move: Move, desc: RawDesc) {
   let stabMod = 4096;
   if (pokemon.hasOriginalType(move.type)) {
     stabMod += 2048;
-  } else if (pokemon.hasAbility('Protean', 'Libero') && !pokemon.teraType) {
+  } else if (pokemon.hasAbility('Protean', 'Libero', 'Ancestor') && !pokemon.teraType) {
     stabMod += 2048;
     desc.attackerAbility = pokemon.ability;
   }
