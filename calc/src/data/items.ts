@@ -320,7 +320,8 @@ export const MEGA_STONES: {[species: string]: string} = {
 
 const XY = BW.concat(
   [
-    // ...Object.keys(MEGA_STONES),
+    // Idk why this is needed
+    ...RBY,
     'Assault Vest',
     'Blue Orb',
     'Fairy Gem',
