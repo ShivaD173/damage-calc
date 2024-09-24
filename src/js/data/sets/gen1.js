@@ -61,8 +61,7 @@ var SETDEX_RBY = {
     "NU Swords Dance": {"moves":["Swords Dance","Earthquake","Rock Slide","Body Slam"]},
     "PU Swords Dance": {"moves":["Earthquake","Rock Slide","Swords Dance","Substitute"]},
     "ZU Swords Dance": {"moves":["Earthquake","Rock Slide","Swords Dance","Substitute"]},
-    "UU Showdown Usage": {"moves":["Earthquake","Swords Dance","Rock Slide","Body Slam"]},
-    "Ubers Showdown Usage": {"moves":["Earthquake","Swords Dance","Substitute","Sand Attack"]}
+    "UU Showdown Usage": {"moves":["Earthquake","Swords Dance","Rock Slide","Body Slam"]}
   },
   "Nidoqueen": {
     "NU All-Out Attacker": {"moves":["Earthquake","Thunderbolt","Rock Slide","Blizzard"]},
@@ -107,7 +106,8 @@ var SETDEX_RBY = {
   },
   "Dugtrio": {
     "UU Dugtrio": {"moves":["Earthquake","Rock Slide","Slash","Substitute"]},
-    "UU Physical Attacker": {"moves":["Earthquake","Rock Slide","Slash","Toxic"]}
+    "UU Physical Attacker": {"moves":["Earthquake","Rock Slide","Slash","Toxic"]},
+    "OU Showdown Usage": {"moves":["Earthquake","Slash","Substitute","Sand Attack"]}
   },
   "Persian": {
     "OU Slash": {"moves":["Slash","Hyper Beam","Bubble Beam","Thunderbolt"]},
@@ -131,8 +131,7 @@ var SETDEX_RBY = {
   "Arcanine": {
     "UU Agility Sweeper": {"moves":["Agility","Body Slam","Hyper Beam","Fire Blast"]},
     "NU Defensive": {"moves":["Fire Blast","Body Slam","Hyper Beam","Rest"]},
-    "PU Bulky Attacker": {"moves":["Fire Blast","Body Slam","Hyper Beam","Agility"]},
-    "OU Showdown Usage": {"moves":["Fire Blast","Body Slam","Agility","Hyper Beam"]}
+    "PU Bulky Attacker": {"moves":["Fire Blast","Body Slam","Hyper Beam","Agility"]}
   },
   "Poliwag": {
     "PU Amnesia Sweeper": {"moves":["Hypnosis","Amnesia","Hydro Pump","Psychic"]},
@@ -246,13 +245,12 @@ var SETDEX_RBY = {
   },
   "Cloyster": {
     "OU Standard": {"moves":["Clamp","Blizzard","Rest","Explosion"]},
-    "Ubers Clamp": {"moves":["Clamp","Blizzard","Explosion","Rest"]},
+    "Ubers Physical Tank": {"moves":["Blizzard","Clamp","Explosion","Rest"]},
     "1v1 Standard": {"moves":["Blizzard","Surf","Toxic","Rest"]},
     "Tradebacks OU Standard": {"moves":["Clamp","Explosion","Blizzard","Rest"]}
   },
   "Gastly": {
-    "NU Hypnosis": {"moves":["Hypnosis","Thunderbolt","Mega Drain","Night Shade"]},
-    "PU Offensive Sleeper": {"moves":["Hypnosis","Thunderbolt","Psychic","Substitute"]}
+    "NU Hypnosis": {"moves":["Hypnosis","Thunderbolt","Mega Drain","Night Shade"]}
   },
   "Haunter": {
     "UU Haunter": {"moves":["Thunderbolt","Explosion","Psychic","Night Shade"]},
@@ -334,8 +332,8 @@ var SETDEX_RBY = {
     "OU BoltBeam": {"moves":["Thunderbolt","Ice Beam","Soft-Boiled","Thunder Wave"]},
     "OU Sing": {"moves":["Sing","Ice Beam","Soft-Boiled","Thunder Wave"]},
     "OU Reflect": {"moves":["Reflect","Seismic Toss","Soft-Boiled","Thunder Wave"]},
-    "Ubers Light Screen": {"moves":["Light Screen","Seismic Toss","Soft-Boiled","Thunder Wave"]},
-    "Ubers Sing": {"moves":["Sing","Seismic Toss","Soft-Boiled","Thunder Wave"]},
+    "Ubers Sing": {"moves":["Sing","Seismic Toss","Thunder Wave","Soft-Boiled"]},
+    "Ubers Light Screen": {"moves":["Light Screen","Seismic Toss","Thunder Wave","Soft-Boiled"]},
     "1v1 The Egg": {"moves":["Ice Beam","Soft-Boiled","Thunder Wave","Reflect"]},
     "Tradebacks OU Reflect": {"moves":["Reflect","Thunder Wave","Seismic Toss","Soft-Boiled"]},
     "Tradebacks OU BoltBeam": {"moves":["Ice Beam","Thunderbolt","Soft-Boiled","Thunder Wave"]},
@@ -392,7 +390,7 @@ var SETDEX_RBY = {
     "Tradebacks OU Offensive": {"moves":["Thunder Wave","Thunderbolt","Ice Punch","Rolling Kick"]}
   },
   "Magmar": {
-    "PU Swagmar": {"moves":["Fire Blast","Body Slam","Confuse Ray","Counter"]}
+    "PU Swagmar": {"moves":["Fire Blast","Body Slam","Hyper Beam","Confuse Ray"]}
   },
   "Pinsir": {
     "OU Swords Dance": {"moves":["Swords Dance","Hyper Beam","Slash","Submission"]},
@@ -424,7 +422,8 @@ var SETDEX_RBY = {
   },
   "Vaporeon": {
     "UU Bulky Special Attacker": {"moves":["Surf","Blizzard","Body Slam","Rest"]},
-    "Tradebacks OU Growth": {"moves":["Growth","Surf","Acid Armor","Rest"]}
+    "Tradebacks OU Growth": {"moves":["Growth","Surf","Acid Armor","Rest"]},
+    "OU Showdown Usage": {"moves":["Rest","Body Slam","Ice Beam","Acid Armor"]}
   },
   "Jolteon": {
     "OU Offensive": {"moves":["Thunder Wave","Thunderbolt","Double Kick","Rest"]},
@@ -444,8 +443,7 @@ var SETDEX_RBY = {
     "NU Conversion": {"moves":["Conversion","Ice Beam","Thunder Wave","Recover"]},
     "PU Agility": {"moves":["Agility","Recover","Psychic","Thunder Wave"]},
     "PU Support": {"moves":["Thunder Wave","Recover","Psychic","Thunderbolt"]},
-    "Tradebacks OU Bulky Support": {"moves":["Recover","Thunder Wave","Ice Beam","Thunderbolt"]},
-    "Ubers Showdown Usage": {"moves":["Recover","Reflect","Thunder Wave","Psybeam"]}
+    "Tradebacks OU Bulky Support": {"moves":["Recover","Thunder Wave","Ice Beam","Thunderbolt"]}
   },
   "Omanyte": {
     "PU Standard": {"moves":["Surf","Blizzard","Body Slam","Rest"]}
@@ -477,14 +475,14 @@ var SETDEX_RBY = {
     "Ubers PhysLax (All-out Attacker)": {"moves":["Body Slam","Self-Destruct","Hyper Beam","Earthquake"]},
     "Ubers Reflect": {"moves":["Body Slam","Reflect","Rest","Earthquake"]},
     "1v1 Amnesia Attacker": {"moves":["Body Slam","Hyper Beam","Amnesia","Ice Beam"]},
-    "Tradebacks OU Sleeper": {"moves":["Lovely Kiss","Body Slam","Self-Destruct","Earthquake"]},
-    "Tradebacks OU Reflect": {"moves":["Reflect","Rest","Body Slam","Lovely Kiss"]},
-    "Tradebacks OU Amnesia": {"moves":["Amnesia","Blizzard","Body Slam","Rest"]}
+    "Tradebacks OU Offensive Sleeper": {"moves":["Lovely Kiss","Body Slam","Earthquake","Self-Destruct"]},
+    "Tradebacks OU Mixed Attacker (Amnesia)": {"moves":["Amnesia","Body Slam","Blizzard","Lovely Kiss"]},
+    "Tradebacks OU Reflect": {"moves":["Body Slam","Reflect","Rest","Earthquake"]},
+    "Tradebacks OU PhysLax (All-Out Attacker)": {"moves":["Body Slam","Hyper Beam","Earthquake","Self-Destruct"]}
   },
   "Articuno": {
     "OU Standard": {"moves":["Blizzard","Agility","Double-Edge","Hyper Beam"]},
     "Ubers Bulky Attacker": {"moves":["Blizzard","Hyper Beam","Rest","Agility"]},
-    "UU Agility Sweeper": {"moves":["Blizzard","Double-Edge","Hyper Beam","Agility"]},
     "1v1 Reflect + Rest": {"moves":["Blizzard","Ice Beam","Reflect","Rest"]},
     "Tradebacks OU Sweeper": {"moves":["Agility","Blizzard","Ice Beam","Hyper Beam"]}
   },
@@ -505,8 +503,7 @@ var SETDEX_RBY = {
   "Dragonair": {
     "OU Wrap": {"moves":["Thunder Wave","Wrap","Blizzard","Thunderbolt"]},
     "NU Wrap": {"moves":["Wrap","Thunder Wave","Blizzard","Thunderbolt"]},
-    "PU Support": {"moves":["Thunder Wave","Wrap","Blizzard","Thunderbolt"]},
-    "PU AgiliWrap": {"moves":["Agility","Wrap","Blizzard","Thunderbolt"]}
+    "PU Support": {"moves":["Wrap","Agility","Thunder Wave","Surf"]}
   },
   "Dragonite": {
     "OU Wrap": {"moves":["Wrap","Hyper Beam","Blizzard","Thunder Wave"]},
@@ -527,5 +524,8 @@ var SETDEX_RBY = {
     "Ubers GGMew (Reflect Sweeper)": {"moves":["Reflect","Swords Dance","Body Slam","Soft-Boiled"]},
     "Ubers Explosive Lure": {"moves":["Thunder Wave","Swords Dance","Body Slam","Explosion"]},
     "Ubers Lutrew / PaRaSiTe Mew (Transform)": {"moves":["Transform","Thunder Wave","Soft-Boiled","Reflect"]}
+  },
+  "Dratini": {
+    "ZU Showdown Usage": {"moves":["Blizzard","Wrap","Hyper Beam","Agility"]}
   }
 };

@@ -45,8 +45,8 @@
 
 import { type ShowdexCalcMods } from './showdex';
 import {Generations} from './data';
-import {State} from './state';
-import * as I from './data/interface';
+import type {State} from './state';
+import type * as I from './data/interface';
 import * as A from './adaptable';
 
 // The loading strategy outlined in the comment above breaks in the browser when we start reusing
@@ -170,7 +170,7 @@ export {
 } from './data/interface';
 export {Generations} from './data/index';
 export {toID} from './util';
-export {State} from './state';
+export {type State} from './state';
 
 export {ABILITIES} from './data/abilities';
 export {ITEMS, MEGA_STONES} from './data/items';
