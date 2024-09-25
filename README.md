@@ -83,7 +83,7 @@ Many of these modifications were made to account for real-time battle conditions
 > [!TIP]
 > Creating the Patchfile in step 8 is completely optional if you just want to quickly test some changes.
 
-> [!INFO]
+> [!NOTE]
 > Technically, copying the `showdex-calc/calc/dist/src` directory into `node_modules/@smogon/calc` has no effect (uses the files in `dist` instead) & is completely optional, but I do it anyway so you can peep the source code. Fun fact: You can look through your local Showdex's `node_modules/@smogon/calc/src` right now to see the source code you see here!
 
 > [!TIP]
