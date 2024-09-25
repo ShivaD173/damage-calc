@@ -520,10 +520,10 @@ export function calculateBasePowerBWXY(
     basePower = move.bp * (defender.hasStatus('par') ? 2 : 1);
     desc.moveBP = basePower;
     break;
-  // case 'Weather Ball': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Weather Ball':
+    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Fling':
     basePower = getFlingPower(attacker.item);
     desc.moveBP = basePower;

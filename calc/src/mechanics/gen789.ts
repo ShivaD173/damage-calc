@@ -838,16 +838,16 @@ export function calculateBasePowerSMSSSV(
     basePower = move.bp * (defender.hasStatus('par') ? 2 : 1);
     desc.moveBP = basePower;
     break;
-  // case 'Weather Ball': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
-  //   if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
-  //     attacker.hasItem('Utility Umbrella')) basePower = move.bp;
-  //   desc.moveBP = basePower;
-  //   break;
-  // case 'Terrain Pulse': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (isGrounded(attacker, field) && field.terrain ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Weather Ball':
+    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+    if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
+      attacker.hasItem('Utility Umbrella')) basePower = move.bp;
+    desc.moveBP = basePower;
+    break;
+  case 'Terrain Pulse':
+    basePower = move.bp * (isGrounded(attacker, field) && field.terrain ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Rising Voltage':
     basePower = move.bp * ((isGrounded(defender, field) && field.hasTerrain('Electric')) ? 2 : 1);
     desc.moveBP = basePower;
@@ -951,10 +951,10 @@ export function calculateBasePowerSMSSSV(
     basePower = Math.floor(Math.floor((100 * basePower + 2048 - 1) / 4096) / 100) || 1;
     desc.moveBP = basePower;
     break;
-  // case 'Tera Blast': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = attacker.teraType === 'Stellar' ? 100 : 80;
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Tera Blast':
+    basePower = attacker.teraType === 'Stellar' ? 100 : 80;
+    desc.moveBP = basePower;
+    break;
   default:
     basePower = move.bp;
   }
