@@ -569,7 +569,7 @@ export function calculateBasePowerBWXY(
     }
     break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers() to more seamlessly integrate this w/ the UI
+  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 10;
   //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
   //   break;
@@ -734,7 +734,7 @@ export function calculateBPModsBWXY(
   }
 
   if (hasAteAbilityTypeChange) {
-    // bpMods.push(5325); // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+    // bpMods.push(5325); // handled in Showdex via calcMoveBasePower()
     desc.attackerAbility = attacker.ability;
   } else if (
     (attacker.hasAbility('Mega Launcher') && move.flags.pulse) ||

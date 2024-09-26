@@ -926,17 +926,17 @@ export function calculateBasePowerSMSSSV(
       desc.moveName = 'Tri Attack';
     }
     break;
-  // case 'Water Shuriken': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Water Shuriken': // handled in Showdex via calcMoveBasePower()
   //   basePower = attacker.named('Greninja-Ash') && attacker.hasAbility('Battle Bond') ? 20 : 15;
   //   desc.moveBP = basePower;
   //   break;
   // Triple Axel's damage increases after each consecutive hit (20, 40, 60)
-  // case 'Triple Axel': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Triple Axel': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 20;
   //   desc.moveBP = move.hits === 2 ? 60 : move.hits === 3 ? 120 : 20;
   //   break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 10;
   //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
   //   break;
