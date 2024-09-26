@@ -1026,11 +1026,11 @@ export function calculateBPModsSMSSSV(
     (defender.named('Kyogre', 'Kyogre-Primal') && defender.hasItem('Blue Orb')) ||
     (defender.name.includes('Silvally') && defender.item.includes('Memory')) ||
     defender.item.includes(' Z') ||
-    (defender.named('Zacian') && defender.hasItem('Rusted Sword')) ||
-    (defender.named('Zamazenta') && defender.hasItem('Rusted Shield')) ||
-    (defender.name.includes('Ogerpon-Cornerstone') && defender.hasItem('Cornerstone Mask')) ||
-    (defender.name.includes('Ogerpon-Hearthflame') && defender.hasItem('Hearthflame Mask')) ||
-    (defender.name.includes('Ogerpon-Wellspring') && defender.hasItem('Wellspring Mask')) ||
+    (defender.named('Zacian', 'Zacian-Crowned') && defender.hasItem('Rusted Sword')) ||
+    (defender.named('Zamazenta', 'Zamazenta-Crowned') && defender.hasItem('Rusted Shield')) ||
+    (defender.named('Ogerpon', 'Ogerpon-Cornerstone') && defender.hasItem('Cornerstone Mask')) ||
+    (defender.named('Ogerpon', 'Ogerpon-Hearthflame') && defender.hasItem('Hearthflame Mask')) ||
+    (defender.named('Ogerpon', 'Ogerpon-Wellspring') && defender.hasItem('Wellspring Mask')) ||
     (defender.named('Venomicon-Epilogue') && defender.hasItem('Vile Vial'));
 
   // The last case only applies when the Pokemon has the Mega Stone that matches its species
