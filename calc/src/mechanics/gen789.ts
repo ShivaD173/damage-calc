@@ -820,11 +820,11 @@ export function calculateBasePowerSMSSSV(
     basePower = 20 + 20 * countBoosts(gen, attacker.boosts);
     desc.moveBP = basePower;
     break;
-  // case 'Acrobatics': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (attacker.hasItem('Flying Gem') ||
-  //       (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Acrobatics':
+    basePower = move.bp * (attacker.hasItem('Flying Gem') ||
+        (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Assurance':
     basePower = move.bp * (defender.hasAbility('Parental Bond (Child)') ? 2 : 1);
     // NOTE: desc.attackerAbility = 'Parental Bond' will already reflect this boost
