@@ -24,7 +24,7 @@ var SETDEX_SS = {
     "Ubers Physical Attacker": {"ability":"Levitate","item":"Griseous Orb","nature":"Adamant","evs":{"hp":176,"at":252,"df":4,"sp":76},"moves":["Poltergeist","Stone Edge","Shadow Sneak","Defog"]}
   },
   "Cresselia": {
-    "OU Calm Mind": {"ability":"Levitate","item":"Kee Berry","nature":"Bold","evs":{"hp":252,"df":200,"sp":56},"moves":["Calm Mind","Stored Power","Moonblast","Moonlight"]},
+    "OU Choice Scarf": {"ability":"Levitate","item":"Choice Scarf","nature":"Timid","evs":{"hp":252,"df":40,"sp":216},"moves":["Moonblast","Lunar Dance","Trick","Moonlight"]},
     "UU Trick Room Setter": {"ability":"Levitate","item":"Colbur Berry","nature":"Relaxed","ivs":{"at":0,"sp":0},"evs":{"hp":248,"df":84,"sd":176},"moves":["Trick Room","Moonblast","Lunar Dance","Shadow Ball"]},
     "RU Choice Scarf": {"ability":"Levitate","item":"Choice Scarf","nature":"Timid","evs":{"hp":64,"sa":192,"sp":252},"moves":["Ice Beam","Thunder Wave","Lunar Dance","Trick"]},
     "Doubles OU Calm Mind": {"ability":"Levitate","item":"Leftovers","nature":"Bold","evs":{"hp":252,"df":252,"sd":4},"moves":["Stored Power","Calm Mind","Moonlight","Icy Wind"]},
@@ -839,7 +839,8 @@ var SETDEX_SS = {
     "ZU Swords Dance": {"ability":"Intimidate","item":"Black Sludge","nature":"Adamant","evs":{"at":252,"df":4,"sp":252},"moves":["Swords Dance","Liquidation","Poison Jab","Aqua Jet"]}
   },
   "Scizor": {
-    "OU Bulky Swords Dance": {"ability":"Technician","item":"Heavy-Duty Boots","nature":"Impish","evs":{"hp":248,"df":172,"sd":88},"moves":["Swords Dance","Bullet Punch","Knock Off","Roost"]},
+    "OU Bulky Swords Dance": {"ability":"Technician","item":"Heavy-Duty Boots","nature":"Careful","evs":{"hp":248,"at":12,"df":100,"sd":148},"moves":["Swords Dance","Bullet Punch","Knock Off","Roost"]},
+    "OU Defensive Pivot": {"ability":"Technician","item":"Heavy-Duty Boots","nature":"Careful","evs":{"hp":248,"df":20,"sd":240},"moves":["Bullet Punch","Knock Off","U-turn","Roost"]},
     "OU Offensive Swords Dance": {"ability":"Technician","item":"Life Orb","nature":"Adamant","evs":{"at":252,"sd":4,"sp":252},"moves":["Swords Dance","Bullet Punch","Knock Off","Sand Tomb"]},
     "UU 3 Attacks + Roost": {"ability":"Technician","item":"Heavy-Duty Boots","nature":"Adamant","evs":{"hp":248,"at":16,"df":104,"sd":140},"moves":["Bullet Punch","U-turn","Knock Off","Roost"]},
     "UU Bulky Swords Dance": {"ability":"Technician","item":"Heavy-Duty Boots","nature":"Adamant","evs":{"hp":248,"at":16,"df":244},"moves":["Swords Dance","Bullet Punch","Knock Off","Roost"]},
@@ -1739,7 +1740,7 @@ var SETDEX_SS = {
   "Froslass": {
     "Ubers Suicide Lead": {"ability":"Cursed Body","item":"Focus Sash","nature":"Timid","ivs":{"at":0},"evs":{"df":4,"sa":252,"sp":252},"moves":["Icy Wind","Spikes","Taunt","Destiny Bond"]},
     "UU Suicide Lead": {"ability":"Cursed Body","item":"Focus Sash","nature":"Jolly","evs":{"hp":248,"at":8,"sp":252},"moves":["Spikes","Poltergeist","Taunt","Destiny Bond"]},
-    "RU Spikes": {"ability":"Cursed Body","item":"Focus Sash","nature":"Timid","evs":{"hp":4,"sa":252,"sp":252},"moves":["Spikes","Taunt","Icy Wind","Destiny Bond"]},
+    "RU Spikes": {"ability":"Cursed Body","item":"Focus Sash","nature":"Timid","ivs":{"at":0},"evs":{"hp":4,"sa":252,"sp":252},"moves":["Spikes","Taunt","Icy Wind","Destiny Bond"]},
     "NU Dedicated Lead": {"ability":"Cursed Body","item":"Focus Sash","nature":"Timid","evs":{"sa":252,"sd":4,"sp":252},"moves":["Spikes","Taunt","Thunder Wave","Icy Wind"]},
     "PU Choice Band": {"ability":"Cursed Body","item":"Choice Band","nature":"Jolly","evs":{"at":252,"df":4,"sp":252},"moves":["Poltergeist","Triple Axel","Trick","Spikes"]},
     "PU Spikes": {"ability":"Cursed Body","item":"Heavy-Duty Boots","nature":"Timid","evs":{"df":4,"sa":252,"sp":252},"moves":["Spikes","Taunt","Ice Beam","Shadow Ball"]},
@@ -1924,6 +1925,7 @@ var SETDEX_SS = {
     "PU Showdown Usage": {"ability":"Super Luck","item":"Heavy-Duty Boots","nature":"Jolly","evs":{"at":252,"df":4,"sp":252},"moves":["U-turn","Brave Bird","Quick Attack","Defog"]}
   },
   "Gigalith": {
+    "RU Specially Defensive": {"ability":"Sand Stream","item":"Leftovers","nature":"Adamant","evs":{"hp":252,"at":40,"sd":172,"sp":44},"moves":["Stealth Rock","Stone Edge","Earthquake","Toxic"]},
     "NU Specially Defensive": {"ability":"Sand Stream","item":"Leftovers","nature":"Careful","evs":{"hp":252,"df":4,"sd":252},"moves":["Stealth Rock","Rock Blast","Toxic","Earthquake"]},
     "PU Specially Defensive": {"ability":"Sand Stream","item":"Leftovers","nature":"Careful","evs":{"hp":252,"df":4,"sd":252},"moves":["Stealth Rock","Rock Blast","Earthquake","Protect"]}
   },
@@ -2307,7 +2309,8 @@ var SETDEX_SS = {
     "ZU Special Wall": {"ability":"Mimicry","item":"Leftovers","nature":"Careful","evs":{"hp":252,"df":4,"sd":252},"moves":["Stealth Rock","Earthquake","Rock Slide","Curse"]}
   },
   "Mienfoo": {
-    "LC Bulky Pivot": {"level":5,"ability":"Regenerator","item":"Eviolite","nature":"Jolly","evs":{"df":196,"sd":36,"sp":236},"moves":["High Jump Kick","U-turn","Knock Off","Fake Out"]},
+    "LC Fast Pivot": {"level":5,"ability":"Regenerator","item":"Eviolite","nature":"Jolly","evs":{"df":196,"sd":36,"sp":236},"moves":["High Jump Kick","U-turn","Knock Off","Fake Out"]},
+    "LC Slow Pivot": {"level":5,"ability":"Regenerator","item":"Eviolite","nature":"Impish","evs":{"hp":76,"df":196,"sd":196},"moves":["Fake Out","High Jump Kick","Knock Off","U-turn"]},
     "LC Choice Scarf": {"level":5,"ability":"Reckless","item":"Choice Scarf","nature":"Jolly","evs":{"at":236,"df":36,"sp":236},"moves":["High Jump Kick","U-turn","Knock Off","Close Combat"]}
   },
   "Mienshao": {

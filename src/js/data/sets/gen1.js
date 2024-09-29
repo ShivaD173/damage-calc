@@ -324,7 +324,7 @@ var SETDEX_RBY = {
   },
   "Rhydon": {
     "OU Standard": {"moves":["Earthquake","Rock Slide","Body Slam","Substitute"]},
-    "Ubers Standard": {"moves":["Earthquake","Rock Slide","Body Slam","Substitute"]},
+    "Ubers Physical Attacker": {"moves":["Earthquake","Body Slam","Substitute","Rock Slide"]},
     "1v1 Standard": {"moves":["Earthquake","Rock Slide","Body Slam","Bubble Beam"]},
     "Tradebacks OU Standard": {"moves":["Earthquake","Body Slam","Rock Slide","Substitute"]}
   },
@@ -332,8 +332,8 @@ var SETDEX_RBY = {
     "OU BoltBeam": {"moves":["Thunderbolt","Ice Beam","Soft-Boiled","Thunder Wave"]},
     "OU Sing": {"moves":["Sing","Ice Beam","Soft-Boiled","Thunder Wave"]},
     "OU Reflect": {"moves":["Reflect","Seismic Toss","Soft-Boiled","Thunder Wave"]},
-    "Ubers Light Screen": {"moves":["Light Screen","Seismic Toss","Soft-Boiled","Thunder Wave"]},
-    "Ubers Sing": {"moves":["Sing","Seismic Toss","Soft-Boiled","Thunder Wave"]},
+    "Ubers Sing": {"moves":["Sing","Seismic Toss","Thunder Wave","Soft-Boiled"]},
+    "Ubers Light Screen": {"moves":["Light Screen","Seismic Toss","Thunder Wave","Soft-Boiled"]},
     "1v1 The Egg": {"moves":["Ice Beam","Soft-Boiled","Thunder Wave","Reflect"]},
     "Tradebacks OU Reflect": {"moves":["Reflect","Thunder Wave","Seismic Toss","Soft-Boiled"]},
     "Tradebacks OU BoltBeam": {"moves":["Ice Beam","Thunderbolt","Soft-Boiled","Thunder Wave"]},
