@@ -1218,7 +1218,7 @@ export function calculateBPModsSMSSSV(
     move.target = 'allAdjacentFoes';
   }
   if (attacker.hasAbility('Triple Threat') && (move.hits === 1 || desc.attackerAbility === attacker.ability)) {
-    bpMods.push(1638);
+    bpMods.push(1366); // 1/3
     move.hits = 3;
     desc.attackerAbility = attacker.ability;
   }
