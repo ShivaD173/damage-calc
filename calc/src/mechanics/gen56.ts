@@ -1,5 +1,5 @@
-﻿import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
-import {Generation, AbilityName} from '../data/interface';
+import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
+import type {Generation, AbilityName} from '../data/interface';
 import {toID} from '../util';
 import {
   getItemBoostType,
@@ -8,10 +8,10 @@ import {
   getBerryResistType,
   getTechnoBlast,
 } from '../items';
-import {RawDesc} from '../desc';
-import {Field} from '../field';
-import {Move} from '../move';
-import {Pokemon} from '../pokemon';
+import type {RawDesc} from '../desc';
+import type {Field} from '../field';
+import type {Move} from '../move';
+import type {Pokemon} from '../pokemon';
 import {Result} from '../result';
 import {
   chainMods,
@@ -504,10 +504,10 @@ export function calculateBasePowerBWXY(
     basePower = 20 + 20 * countBoosts(gen, attacker.boosts);
     desc.moveBP = basePower;
     break;
-  // case 'Acrobatics': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (attacker.hasItem('Flying Gem') || !attacker.item ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Acrobatics':
+    basePower = move.bp * (attacker.hasItem('Flying Gem') || !attacker.item ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Assurance':
     basePower = move.bp * (defender.hasAbility('Parental Bond (Child)') ? 2 : 1);
     // NOTE: desc.attackerAbility = 'Parental Bond' will already reflect this boost
@@ -520,10 +520,10 @@ export function calculateBasePowerBWXY(
     basePower = move.bp * (defender.hasStatus('par') ? 2 : 1);
     desc.moveBP = basePower;
     break;
-  // case 'Weather Ball': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Weather Ball':
+    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Fling':
     basePower = getFlingPower(attacker.item);
     desc.moveBP = basePower;
@@ -569,7 +569,7 @@ export function calculateBasePowerBWXY(
     }
     break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers() to more seamlessly integrate this w/ the UI
+  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 10;
   //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
   //   break;
@@ -734,7 +734,7 @@ export function calculateBPModsBWXY(
   }
 
   if (hasAteAbilityTypeChange) {
-    // bpMods.push(5325); // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+    // bpMods.push(5325); // handled in Showdex via calcMoveBasePower()
     desc.attackerAbility = attacker.ability;
   } else if (
     (attacker.hasAbility('Mega Launcher') && move.flags.pulse) ||

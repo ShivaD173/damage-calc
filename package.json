@@ -4,6 +4,7 @@
   "homepage": "https://github.com/doshidak/showdex-calc",
   "repository": "github:doshidak/showdex-calc",
   "license": "MIT",
+  "packageManager": "yarn@1.22.22",
   "devDependencies": {
     "eslint": "^8.57.0",
     "express": "^4.19.2",

@@ -1,10 +1,10 @@
 import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
-import {Generation, AbilityName} from '../data/interface';
+import type {Generation, AbilityName} from '../data/interface';
 import {getItemBoostType, getNaturalGift, getFlingPower, getBerryResistType} from '../items';
-import {RawDesc} from '../desc';
-import {Field} from '../field';
-import {Move} from '../move';
-import {Pokemon} from '../pokemon';
+import type {RawDesc} from '../desc';
+import type {Field} from '../field';
+import type {Move} from '../move';
+import type {Pokemon} from '../pokemon';
 import {Result} from '../result';
 import {
   getModifiedStat,
@@ -404,7 +404,7 @@ export function calculateBasePowerDPP(
     basePower = Math.floor((defender.curHP() * 120) / defender.maxHP()) + 1;
     desc.moveBP = basePower;
     break;
-  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 10;
   //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
   //   break;

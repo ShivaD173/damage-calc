@@ -1,23 +1,24 @@
 <h1 align="center">
   <img alt="showdex-lib" width="360px" src=".github/showdex-lib.png">
   <br>
-  <code>showdex-calc</code>
+  <a href="https://github.com/doshidak/showdex-calc"><code>showdex-calc</code></a>
 </h1>
 
 <table align="center">
   <thead>
     <tr>
-      <th align="center">&nbsp;Showdex <a href="https://github.com/doshidak/showdex/releases/tag/v1.2.4">v1.2.4</a>&nbsp;</th>
-      <th align="center">&nbsp;Patched <a href="https://npmjs.com/package/@smogon/calc/v/0.10.0">v0.10.0</a> @ <a href="https://github.com/smogon/damage-calc/commit/98b687c9304762fc4d16842db778bd5a16877927"><code>98b687c</code></a>&nbsp;</th>
+      <th align="center">&nbsp;Currently <a href="https://github.com/doshidak/showdex-calc/releases/tag/v1.2.5">v1.2.5</a>&nbsp;</th>
+      <th align="center">&nbsp;Powering <a href="https://github.com/doshidak/showdex"><code>showdex</code></a> · <a href="https://github.com/doshidak/showdex/releases/tag/v1.2.5">v1.2.5</a>&nbsp;</th>
+      <th align="center">&nbsp;Patches <a href="https://github.com/smogon/damage-calc/tree/master/calc"><code>@smogon/calc</code></a> · <a href="https://npmjs.com/package/@smogon/calc/v/0.10.0">v0.10.0</a> &rarr; <a href="https://github.com/smogon/damage-calc/commit/60ee461014469b655db8ab0d294f1b4d70c798a0"><code>60ee461</code></a>&nbsp;</th>
     </tr>
   </thead>
 </table>
 
 <br>
 
-[**Showdex**](https://github.com/doshidak/showdex)'s fork of the [**`@smogon/calc`**](https://github.com/smogon/damage-calc) package, sometimes referred to as the "underlying damage calculator." This is the modified source of the aforementioned package that's patched in & bundled with official releases of Showdex.
+[**Showdex**](https://smogon.com/forums/threads/showdex-an-auto-updating-damage-calculator-built-into-showdown.3707265/post-9368925)'s fork of the [**`@smogon/calc`**](https://github.com/smogon/damage-calc/tree/master/calc) package, sometimes referred to as the "underlying damage calculator." This is the modified source of the aforementioned package that's patched in & bundled with official releases of Showdex.
 
-If you're looking for Showdex's source code, this **isn't** it ([try here](https://github.com/doshidak/showdex) instead!). You're looking at a supporting package that supplies all the damage calculations that Showdex displays to you. But if you're looking for a sign, here's a pointer: `int*` <sub>✧ﾟ･: *ヽ(◕ヮ◕ヽ)</sub>
+If you're looking for Showdex's source code, this **isn't** it ([**try here**](https://github.com/doshidak/showdex) instead!). You're looking at a supporting package that supplies all the damage calculations that Showdex displays to you. But if you're looking for a sign, here's a pointer: `int*` <sub>✧ﾟ･: *ヽ(◕ヮ◕ヽ)</sub>
 
 <br>
 <br>
@@ -44,14 +45,16 @@ Sooo... what's different?
 **More specifically:**
 
 * Hacky [*Beat Up*](https://smogon.com/dex/sv/moves/beat-up) implementation requiring [`getBaseDamage()`'s to be subbed for this fork's special `modBaseDamage()` wrapper](/calc/src/mechanics/gen3.ts#L157-L158) instead.
-  - Since this requires [knowledge about all party Pokémon](https://bulbapedia.bulbagarden.net/wiki/Beat_Up_(move)#Effect), Showdex passes a special [`ShowdexCalcMods`](/calc/src/showdex.ts#L67) object to [`modBaseDamage()`](/calc/src/showdex.ts#L106), which is a generic wrapper (to support more mods in the future, as needed) that basically only contains a `strikes[]` array for *Beat Up* & `hitBasePowers[]` for overriding each hit's BP.
+  - Since this requires [knowledge about all party Pokémon](https://bulbapedia.bulbagarden.net/wiki/Beat_Up_(move)#Effect), Showdex passes a special [`ShowdexCalcMods`](/calc/src/showdex.ts#L67) object to [`modBaseDamage()`](/calc/src/showdex.ts#L106), which is a generic wrapper (to support more mods in the future, as needed) that basically only contains a `strikes[]` array for *Beat Up* & `hitBasePowers[]` for overriding the BPs of each hit for multi-hitting moves such as [*Triple Axel*](https://smogon.com/dex/sv/moves/triple-axel).
   - Every single mechanics file from [`gen12.ts`](/calc/src/mechanics/gen12.ts#L205) to [`gen789.ts`](/calc/src/mechanics/gen789.ts#L1611) has this modification.
-* Disabled auto-BP calculations for some moves like [*Triple Kick*](/calc/src/mechanics/gen789.ts#L943-L947) (but not all!) so that what you see (in the Calcdex &mdash; especially when editing moves) is what you *calc*.
-* Disabled auto-boosting of some abilities like [*Intrepid Sword*](/calc/src/util.ts#L250-L257), especially since Showdown *also* reports those boosts in the battle!
+* [Disabled auto-BP calculations for some moves like *Triple Kick*](/calc/src/mechanics/gen789.ts#L943-L947) (but not all!) so that what you see (in the Calcdex &mdash; especially when editing moves) is what you *calc*... sorta:
+  - As of [Showdex v1.2.5](https://github.com/doshidak/showdex/releases/tag/v1.2.5), many of the previously disabled moves, such as *Acrobatics* (but not *Triple Kick* — still disabled!), have been [re-enabled in some of the mechanics files](/calc/src/mechanics/gen789.ts#L823-L827).
+  - Showdex will display an "AUTO" label in these instances where the mechanics files will be calculating dynamic move properties, i.e., [category](/calc/src/mechanics/gen789.ts#L123-L126) &/or [BP](/calc/src/mechanics/gen789.ts#L954-L957), for moves such as [*Tera Blast*](https://smogon.com/dex/sv/moves/tera-blast).
+* [Disabled auto-boosting of some abilities like *Intrepid Sword*](/calc/src/util.ts#L250-L257), especially since Showdown *also* reports those boosts in the battle!
 * [Persistent final move BPs in matchup descriptions](/calc/src/mechanics/gen789.ts#L990) to assist with debugging calculations from Showdex.
-* Extra exported types in [`src/index.ts`](/calc/src/index.ts#L147-L170) that I frequently use like `GameType` & `GenerationNum`, conveniently importable from `'@smogon/calc'` directly.
+* [Extra exported types in `src/index.ts`](/calc/src/index.ts#L147-L170) that I frequently use like `GameType` & `GenerationNum`, conveniently importable from `'@smogon/calc'` directly.
 
-Many of these modifications were made to account for real-time battle conditions that don't apply to the original web-based version. Hence, I'm not intending on pushing any of them to the master [`@smogon/calc`](https://github.com/smogon/damage-calc/tree/master/calc) repo (also would seriously break the good 'ol [Damage Calculator](https://calc.pokemonshowdown.com) we know & love!).
+Many of these modifications were made to account for real-time battle conditions that don't apply to the original web-based version. Hence, I'm not intending on pushing any of them to the master [`smogon/damage-calc`](https://github.com/smogon/damage-calc) repo (also would seriously break the good 'ol [Damage Calculator](https://calc.pokemonshowdown.com) we know & love!).
 
 ### Requirements
 
@@ -83,7 +86,7 @@ Many of these modifications were made to account for real-time battle conditions
 > [!TIP]
 > Creating the Patchfile in step 8 is completely optional if you just want to quickly test some changes.
 
-> [!INFO]
+> [!NOTE]
 > Technically, copying the `showdex-calc/calc/dist/src` directory into `node_modules/@smogon/calc` has no effect (uses the files in `dist` instead) & is completely optional, but I do it anyway so you can peep the source code. Fun fact: You can look through your local Showdex's `node_modules/@smogon/calc/src` right now to see the source code you see here!
 
 > [!TIP]

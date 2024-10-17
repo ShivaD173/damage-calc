@@ -528,7 +528,7 @@ $(".move-selector").change(function () {
 				moveGroupObj.children(".move-hits").append("<option value=" + i + ">" + i + " hits</option>");
 			}
 		} else {
-			for (var i = move.multihit[0]; i <= move.multihit[1]; i++) {
+			for (var i = 1; i <= move.multihit[1]; i++) {
 				moveGroupObj.children(".move-hits").append("<option value=" + i + ">" + i + " hits</option>");
 			}
 		}
@@ -1103,7 +1103,7 @@ function createPokemon(pokeInfo) {
 			boosts: boosts,
 			curHP: curHP,
 			status: CALC_STATUS[pokeInfo.find(".status").val()],
-			toxicCounter: status === 'Badly Poisoned' ? ~~pokeInfo.find(".toxic-counter").val() : 0,
+			toxicCounter: pokeInfo.find(".status").val() === 'Badly Poisoned' ? ~~pokeInfo.find(".toxic-counter").val() : 0,
 			moves: [
 				getMoveDetails(pokeInfo.find(".move1"), opts),
 				getMoveDetails(pokeInfo.find(".move2"), opts),

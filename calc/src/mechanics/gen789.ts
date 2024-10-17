@@ -1,5 +1,5 @@
 import { type ShowdexCalcMods, modBaseDamage } from '../showdex';
-import {Generation, AbilityName, StatID, Terrain} from '../data/interface';
+import type {Generation, AbilityName, StatID, Terrain} from '../data/interface';
 import {toID} from '../util';
 import {
   getBerryResistType,
@@ -10,10 +10,10 @@ import {
   getTechnoBlast,
   SEED_BOOSTED_STAT,
 } from '../items';
-import {RawDesc} from '../desc';
-import {Field} from '../field';
-import {Move} from '../move';
-import {Pokemon} from '../pokemon';
+import type {RawDesc} from '../desc';
+import type {Field} from '../field';
+import type {Move} from '../move';
+import type {Pokemon} from '../pokemon';
 import {Result} from '../result';
 import {
   chainMods,
@@ -828,11 +828,11 @@ export function calculateBasePowerSMSSSV(
     basePower = 20 + 20 * countBoosts(gen, attacker.boosts);
     desc.moveBP = basePower;
     break;
-  // case 'Acrobatics': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (attacker.hasItem('Flying Gem') ||
-  //       (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Acrobatics':
+    basePower = move.bp * (attacker.hasItem('Flying Gem') ||
+        (!attacker.item || isQPActive(attacker, field)) ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Assurance':
     basePower = move.bp * (defender.hasAbility('Parental Bond (Child)') ? 2 : 1);
     // NOTE: desc.attackerAbility = 'Parental Bond' will already reflect this boost
@@ -846,16 +846,16 @@ export function calculateBasePowerSMSSSV(
     basePower = move.bp * (defender.hasStatus('par') ? 2 : 1);
     desc.moveBP = basePower;
     break;
-  // case 'Weather Ball': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
-  //   if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
-  //     attacker.hasItem('Utility Umbrella')) basePower = move.bp;
-  //   desc.moveBP = basePower;
-  //   break;
-  // case 'Terrain Pulse': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = move.bp * (isGrounded(attacker, field) && field.terrain ? 2 : 1);
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Weather Ball':
+    basePower = move.bp * (field.weather && !field.hasWeather('Strong Winds') ? 2 : 1);
+    if (field.hasWeather('Sun', 'Harsh Sunshine', 'Rain', 'Heavy Rain') &&
+      attacker.hasItem('Utility Umbrella')) basePower = move.bp;
+    desc.moveBP = basePower;
+    break;
+  case 'Terrain Pulse':
+    basePower = move.bp * (isGrounded(attacker, field) && field.terrain ? 2 : 1);
+    desc.moveBP = basePower;
+    break;
   case 'Rising Voltage':
     basePower = move.bp * ((isGrounded(defender, field) && field.hasTerrain('Electric')) ? 2 : 1);
     desc.moveBP = basePower;
@@ -934,17 +934,17 @@ export function calculateBasePowerSMSSSV(
       desc.moveName = 'Tri Attack';
     }
     break;
-  // case 'Water Shuriken': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Water Shuriken': // handled in Showdex via calcMoveBasePower()
   //   basePower = attacker.named('Greninja-Ash') && attacker.hasAbility('Battle Bond') ? 20 : 15;
   //   desc.moveBP = basePower;
   //   break;
   // Triple Axel's damage increases after each consecutive hit (20, 40, 60)
-  // case 'Triple Axel': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Triple Axel': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 20;
   //   desc.moveBP = move.hits === 2 ? 60 : move.hits === 3 ? 120 : 20;
   //   break;
   // Triple Kick's damage increases after each consecutive hit (10, 20, 30)
-  // case 'Triple Kick': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
+  // case 'Triple Kick': // handled in Showdex via calcMoveHitBasePowers()
   //   basePower = hit * 10;
   //   desc.moveBP = move.hits === 2 ? 30 : move.hits === 3 ? 60 : 10;
   //   break;
@@ -959,10 +959,10 @@ export function calculateBasePowerSMSSSV(
     basePower = Math.floor(Math.floor((100 * basePower + 2048 - 1) / 4096) / 100) || 1;
     desc.moveBP = basePower;
     break;
-  // case 'Tera Blast': // handled in Showdex via calcMoveBasePower() to more seamlessly integrate this w/ the UI
-  //   basePower = attacker.teraType === 'Stellar' ? 100 : 80;
-  //   desc.moveBP = basePower;
-  //   break;
+  case 'Tera Blast':
+    basePower = attacker.teraType === 'Stellar' ? 100 : 80;
+    desc.moveBP = basePower;
+    break;
   default:
     basePower = move.bp;
   }
@@ -1034,11 +1034,11 @@ export function calculateBPModsSMSSSV(
     (defender.named('Kyogre', 'Kyogre-Primal') && defender.hasItem('Blue Orb')) ||
     (defender.name.includes('Silvally') && defender.item.includes('Memory')) ||
     defender.item.includes(' Z') ||
-    (defender.named('Zacian') && defender.hasItem('Rusted Sword')) ||
-    (defender.named('Zamazenta') && defender.hasItem('Rusted Shield')) ||
-    (defender.name.includes('Ogerpon-Cornerstone') && defender.hasItem('Cornerstone Mask')) ||
-    (defender.name.includes('Ogerpon-Hearthflame') && defender.hasItem('Hearthflame Mask')) ||
-    (defender.name.includes('Ogerpon-Wellspring') && defender.hasItem('Wellspring Mask')) ||
+    (defender.named('Zacian', 'Zacian-Crowned') && defender.hasItem('Rusted Sword')) ||
+    (defender.named('Zamazenta', 'Zamazenta-Crowned') && defender.hasItem('Rusted Shield')) ||
+    (defender.named('Ogerpon', 'Ogerpon-Cornerstone') && defender.hasItem('Cornerstone Mask')) ||
+    (defender.named('Ogerpon', 'Ogerpon-Hearthflame') && defender.hasItem('Hearthflame Mask')) ||
+    (defender.named('Ogerpon', 'Ogerpon-Wellspring') && defender.hasItem('Wellspring Mask')) ||
     (defender.named('Venomicon-Epilogue') && defender.hasItem('Vile Vial'));
 
   // The last case only applies when the Pokemon has the Mega Stone that matches its species
