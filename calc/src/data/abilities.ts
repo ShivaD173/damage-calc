@@ -381,6 +381,16 @@ const SV = SV_orig.concat([
   'Mystic Fist',
   "Ballin'",
   'Running Start',
+  'Dauntless',
+  'Copy Core',
+  'Onslaught Core',
+  'Barrier Core',
+  'Hazard Core',
+  'Hyperbolic Time',
+  'Mega Shift X',
+  'Mega Shift Y',
+  'Ancestor',
+  'Serene Gracidea',
 ]);
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];

@@ -1,4 +1,4 @@
-import type * as I from './interface';
+﻿import type * as I from './interface';
 import {type DeepPartial, toID, extend, assignWithout} from '../util';
 
 export interface SpeciesData {
@@ -10386,11 +10386,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 65,
-      "at": 100,
-      "df": 80,
+      "at": 110,
+      "df": 75,
       "sa": 50,
-      "sd": 90,
-      "sp": 120
+      "sd": 85,
+      "sp": 135
     },
     "abilities": {
       "0": "Triple Threat"
@@ -10606,12 +10606,12 @@ const GAY_PATCH = {
       "Flying"
     ],
     "bs": {
-      "hp": 65,
-      "at": 110,
+      "hp": 75,
+      "at": 125,
       "df": 70,
       "sa": 60,
       "sd": 60,
-      "sp": 110
+      "sp": 125
     },
     "abilities": {
       "0": "Run Away"
@@ -11696,9 +11696,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 200,
       "at": 33,
-      "df": 68,
+      "df": 63,
       "sa": 33,
-      "sd": 68,
+      "sd": 63,
       "sp": 33
     },
     "abilities": {
@@ -11966,15 +11966,15 @@ const GAY_PATCH = {
       "Dragon"
     ],
     "bs": {
-      "hp": 85,
-      "at": 105,
-      "df": 105,
-      "sa": 105,
-      "sd": 105,
-      "sp": 95
+      "hp": 80,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 85
     },
     "abilities": {
-      "0": "Super Luck"
+      "0": "Swift Swim"
     }
   },
   "Donphan": {
@@ -12239,11 +12239,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 70,
-      "at": 90,
+      "at": 70,
       "df": 60,
       "sa": 150,
       "sd": 60,
-      "sp": 70
+      "sp": 90
     },
     "abilities": {
       "0": "Shield Dust"
@@ -12461,9 +12461,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 144,
       "at": 120,
-      "df": 70,
+      "df": 60,
       "sa": 40,
-      "sd": 70,
+      "sd": 60,
       "sp": 50
     },
     "abilities": {
@@ -12545,7 +12545,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 60,
-      "at": 80,
+      "at": 75,
       "df": 80,
       "sa": 70,
       "sd": 80,
@@ -12851,9 +12851,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 90,
-      "at": 60,
+      "at": 50,
       "df": 65,
-      "sa": 90,
+      "sa": 105,
       "sd": 85,
       "sp": 70
     },
@@ -12868,7 +12868,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 90,
-      "at": 100,
+      "at": 105,
       "df": 85,
       "sa": 50,
       "sd": 65,
@@ -13243,9 +13243,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 55,
       "at": 30,
-      "df": 75,
+      "df": 70,
       "sa": 105,
-      "sd": 75,
+      "sd": 70,
       "sp": 125
     },
     "abilities": {
@@ -13378,7 +13378,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 100,
-      "at": 119,
+      "at": 114,
       "df": 105,
       "sa": 75,
       "sd": 85,
@@ -13394,10 +13394,10 @@ const GAY_PATCH = {
       "Fighting"
     ],
     "bs": {
-      "hp": 80,
-      "at": 105,
+      "hp": 77,
+      "at": 104,
       "df": 71,
-      "sa": 105,
+      "sa": 104,
       "sd": 71,
       "sp": 108
     },
@@ -13411,7 +13411,7 @@ const GAY_PATCH = {
       "Steel"
     ],
     "bs": {
-      "hp": 94,
+      "hp": 89,
       "at": 86,
       "df": 88,
       "sa": 111,
@@ -13505,6 +13505,23 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Natural Cure"
+    }
+  },
+  "Cranidos": {
+    "types": [
+      "Rock",
+      ""
+    ],
+    "bs": {
+      "hp": 67,
+      "at": 125,
+      "df": 40,
+      "sa": 30,
+      "sd": 30,
+      "sp": 58
+    },
+    "abilities": {
+      "0": "Rock Head"
     }
   },
   "Rampardos": {
@@ -13667,10 +13684,10 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 70,
-      "at": 60,
-      "df": 70,
-      "sa": 87,
-      "sd": 78,
+      "at": 65,
+      "df": 80,
+      "sa": 97,
+      "sd": 88,
       "sp": 85
     },
     "abilities": {
@@ -13684,7 +13701,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 70,
-      "at": 70,
+      "at": 65,
       "df": 80,
       "sa": 97,
       "sd": 88,
@@ -14303,7 +14320,7 @@ const GAY_PATCH = {
       "sp": 45
     },
     "abilities": {
-      "0": "Singularity"
+      "0": "Pressure"
     }
   },
   "Froslass": {
@@ -14725,10 +14742,10 @@ const GAY_PATCH = {
       "df": 63,
       "sa": 80,
       "sd": 63,
-      "sp": 121
+      "sp": 126
     },
     "abilities": {
-      "0": "Galvanize"
+      "0": "Reckless"
     }
   },
   "Gigalith": {
@@ -15120,23 +15137,6 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Putrid Stench"
-    }
-  },
-  "Zoroark": {
-    "types": [
-      "Dark",
-      ""
-    ],
-    "bs": {
-      "hp": 60,
-      "at": 105,
-      "df": 60,
-      "sa": 125,
-      "sd": 60,
-      "sp": 110
-    },
-    "abilities": {
-      "0": "Illusion"
     }
   },
   "Zoroark-Hisui": {
@@ -15571,7 +15571,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 94,
-      "at": 124,
+      "at": 129,
       "df": 80,
       "sa": 55,
       "sd": 80,
@@ -15673,10 +15673,10 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 68,
-      "at": 114,
+      "at": 119,
       "df": 122,
-      "sa": 63,
-      "sd": 48,
+      "sa": 53,
+      "sd": 53,
       "sp": 114
     },
     "abilities": {
@@ -16647,14 +16647,14 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 102,
-      "at": 137,
+      "at": 142,
       "df": 77,
       "sa": 62,
-      "sd": 67,
+      "sd": 62,
       "sp": 43
     },
     "abilities": {
-      "0": "Fluffy"
+      "0": "Fur Coat"
     }
   },
   "Oricorio": {
@@ -16756,7 +16756,7 @@ const GAY_PATCH = {
       "sp": 122
     },
     "abilities": {
-      "0": "Keen Eye"
+      "0": "Sand Force"
     }
   },
   "Lycanroc-Midnight": {
@@ -17371,7 +17371,7 @@ const GAY_PATCH = {
       "0": "RKS System"
     }
   },
-  "Minior-Meteor": {
+  "Minior Meteor": {
     "types": [
       "Rock",
       "Flying"
@@ -17875,7 +17875,7 @@ const GAY_PATCH = {
       "df": 110,
       "sa": 85,
       "sd": 120,
-      "sp": 95
+      "sp": 105
     },
     "abilities": {
       "0": "Swarm"
@@ -19044,9 +19044,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 75,
-      "at": 125,
+      "at": 120,
       "df": 80,
-      "sa": 60,
+      "sa": 65,
       "sd": 100,
       "sp": 85
     },
@@ -19146,11 +19146,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 90,
-      "at": 75,
+      "at": 70,
       "df": 70,
-      "sa": 90,
+      "sa": 105,
       "sd": 125,
-      "sp": 105
+      "sp": 100
     },
     "abilities": {
       "0": "Mycelium Might"
@@ -19349,7 +19349,7 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 75,
+      "hp": 90,
       "at": 85,
       "df": 145,
       "sa": 60,
@@ -20166,9 +20166,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 90,
-      "at": 105,
-      "df": 130,
-      "sa": 125,
+      "at": 115,
+      "df": 125,
+      "sa": 120,
       "sd": 65,
       "sp": 85
     },
@@ -20216,11 +20216,11 @@ const GAY_PATCH = {
       "Dragon"
     ],
     "bs": {
-      "hp": 125,
-      "at": 73,
-      "df": 91,
+      "hp": 115,
+      "at": 79,
+      "df": 93,
       "sa": 137,
-      "sd": 89,
+      "sd": 91,
       "sp": 75
     },
     "abilities": {
@@ -20259,6 +20259,1485 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Quark Drive"
+    }
+  },
+  "Mewtwo": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 106,
+      "at": 130,
+      "df": 80,
+      "sa": 154,
+      "sd": 80,
+      "sp": 130
+    },
+    "abilities": {
+      "0": "Neuroforce"
+    }
+  },
+  "Mewtwo-Mega-X": {
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "bs": {
+      "hp": 106,
+      "at": 190,
+      "df": 100,
+      "sa": 154,
+      "sd": 100,
+      "sp": 130
+    },
+    "abilities": {
+      "0": "Scrappy"
+    }
+  },
+  "Mewtwo-Mega-Y": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 106,
+      "at": 150,
+      "df": 70,
+      "sa": 194,
+      "sd": 120,
+      "sp": 140
+    },
+    "abilities": {
+      "0": "Dauntless"
+    }
+  },
+  "Mew": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 100,
+      "df": 100,
+      "sa": 100,
+      "sd": 100,
+      "sp": 100
+    },
+    "abilities": {
+      "0": "Synchronize"
+    }
+  },
+  "Lugia": {
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "bs": {
+      "hp": 106,
+      "at": 90,
+      "df": 130,
+      "sa": 110,
+      "sd": 154,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Ho-Oh": {
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "bs": {
+      "hp": 106,
+      "at": 130,
+      "df": 90,
+      "sa": 110,
+      "sd": 154,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Celebi": {
+    "types": [
+      "Psychic",
+      "Grass"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 100,
+      "df": 100,
+      "sa": 100,
+      "sd": 100,
+      "sp": 100
+    },
+    "abilities": {
+      "0": "Natural Cure"
+    }
+  },
+  "Kyogre": {
+    "types": [
+      "Water",
+      ""
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 100,
+      "df": 90,
+      "sa": 140,
+      "sd": 140,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Drizzle"
+    }
+  },
+  "Groudon": {
+    "types": [
+      "Ground",
+      ""
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 140,
+      "df": 140,
+      "sa": 100,
+      "sd": 90,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Drought"
+    }
+  },
+  "Rayquaza": {
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "bs": {
+      "hp": 105,
+      "at": 170,
+      "df": 90,
+      "sa": 170,
+      "sd": 90,
+      "sp": 95
+    },
+    "abilities": {
+      "0": "Air Lock"
+    }
+  },
+  "Jirachi": {
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 100,
+      "df": 100,
+      "sa": 100,
+      "sd": 100,
+      "sp": 100
+    },
+    "abilities": {
+      "0": "Serene Grace"
+    }
+  },
+  "Deoxys": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 75,
+      "at": 105,
+      "df": 105,
+      "sa": 105,
+      "sd": 105,
+      "sp": 105
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Deoxys-Attack": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 75,
+      "at": 175,
+      "df": 15,
+      "sa": 175,
+      "sd": 15,
+      "sp": 145
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Deoxys-Defense": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 75,
+      "at": 65,
+      "df": 155,
+      "sa": 65,
+      "sd": 155,
+      "sp": 85
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Deoxys-Speed": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 75,
+      "at": 90,
+      "df": 85,
+      "sa": 90,
+      "sd": 85,
+      "sp": 175
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Dialga": {
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 120,
+      "df": 120,
+      "sa": 150,
+      "sd": 100,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Dialga-Origin": {
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 100,
+      "df": 120,
+      "sa": 150,
+      "sd": 120,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Time Lord"
+    }
+  },
+  "Palkia": {
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 120,
+      "df": 100,
+      "sa": 150,
+      "sd": 120,
+      "sp": 100
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Palkia-Origin": {
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 100,
+      "df": 100,
+      "sa": 150,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Stalwart"
+    }
+  },
+  "Giratina": {
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 150,
+      "at": 100,
+      "df": 125,
+      "sa": 100,
+      "sd": 125,
+      "sp": 80
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Giratina-Origin": {
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 150,
+      "at": 125,
+      "df": 100,
+      "sa": 125,
+      "sd": 100,
+      "sp": 80
+    },
+    "abilities": {
+      "0": "Levitate"
+    }
+  },
+  "Manaphy": {
+    "types": [
+      "Water",
+      ""
+    ],
+    "bs": {
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
+    },
+    "abilities": {
+      "0": "Hydration"
+    }
+  },
+  "Darkrai": {
+    "types": [
+      "Dark",
+      ""
+    ],
+    "bs": {
+      "hp": 70,
+      "at": 90,
+      "df": 90,
+      "sa": 135,
+      "sd": 90,
+      "sp": 125
+    },
+    "abilities": {
+      "0": "Bad Dreams"
+    }
+  },
+  "Shaymin-Sky": {
+    "types": [
+      "Grass",
+      "Flying"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 103,
+      "df": 75,
+      "sa": 120,
+      "sd": 75,
+      "sp": 127
+    },
+    "abilities": {
+      "0": "Serene Gracidea"
+    }
+  },
+  "Arceus": {
+    "types": [
+      "Normal",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Bug": {
+    "types": [
+      "Bug",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Dark": {
+    "types": [
+      "Dark",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Dragon": {
+    "types": [
+      "Dragon",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Electric": {
+    "types": [
+      "Electric",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Fairy": {
+    "types": [
+      "Fairy",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Fighting": {
+    "types": [
+      "Fighting",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Fire": {
+    "types": [
+      "Fire",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Flying": {
+    "types": [
+      "Flying",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Ghost": {
+    "types": [
+      "Ghost",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Grass": {
+    "types": [
+      "Grass",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Ground": {
+    "types": [
+      "Ground",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Ice": {
+    "types": [
+      "Ice",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Poison": {
+    "types": [
+      "Poison",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Psychic": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Rock": {
+    "types": [
+      "Rock",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Steel": {
+    "types": [
+      "Steel",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Arceus-Water": {
+    "types": [
+      "Water",
+      ""
+    ],
+    "bs": {
+      "hp": 120,
+      "at": 120,
+      "df": 120,
+      "sa": 120,
+      "sd": 120,
+      "sp": 120
+    },
+    "abilities": {
+      "0": "Multitype"
+    }
+  },
+  "Victini": {
+    "types": [
+      "Psychic",
+      "Fire"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 90,
+      "df": 90,
+      "sa": 90,
+      "sd": 90,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Victory Star"
+    }
+  },
+  "Reshiram": {
+    "types": [
+      "Dragon",
+      "Fire"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 120,
+      "df": 100,
+      "sa": 150,
+      "sd": 120,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Turboblaze"
+    }
+  },
+  "Zekrom": {
+    "types": [
+      "Dragon",
+      "Electric"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 150,
+      "df": 120,
+      "sa": 120,
+      "sd": 100,
+      "sp": 90
+    },
+    "abilities": {
+      "0": "Teravolt"
+    }
+  },
+  "Kyurem-White": {
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "bs": {
+      "hp": 125,
+      "at": 120,
+      "df": 90,
+      "sa": 170,
+      "sd": 100,
+      "sp": 95
+    },
+    "abilities": {
+      "0": "Turboblaze"
+    }
+  },
+  "Kyurem-Black": {
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "bs": {
+      "hp": 125,
+      "at": 170,
+      "df": 100,
+      "sa": 120,
+      "sd": 90,
+      "sp": 95
+    },
+    "abilities": {
+      "0": "Teravolt"
+    }
+  },
+  "Keldeo": {
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "bs": {
+      "hp": 91,
+      "at": 72,
+      "df": 85,
+      "sa": 129,
+      "sd": 85,
+      "sp": 108
+    },
+    "abilities": {
+      "0": "Justified"
+    }
+  },
+  "Keldeo-Resolute": {
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "bs": {
+      "hp": 91,
+      "at": 72,
+      "df": 85,
+      "sa": 129,
+      "sd": 85,
+      "sp": 108
+    },
+    "abilities": {
+      "0": "Justified"
+    }
+  },
+  "Meloetta": {
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 70,
+      "df": 74,
+      "sa": 100,
+      "sd": 128,
+      "sp": 128
+    },
+    "abilities": {
+      "0": "Serene Grace"
+    }
+  },
+  "Meloetta-Pirouette": {
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 128,
+      "df": 100,
+      "sa": 70,
+      "sd": 74,
+      "sp": 128
+    },
+    "abilities": {
+      "0": "Serene Grace"
+    }
+  },
+  "Genesect": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 66,
+      "at": 115,
+      "df": 90,
+      "sa": 115,
+      "sd": 90,
+      "sp": 94
+    },
+    "abilities": {
+      "0": "Download"
+    }
+  },
+  "Genesect-Douse": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 66,
+      "at": 115,
+      "df": 90,
+      "sa": 115,
+      "sd": 90,
+      "sp": 94
+    },
+    "abilities": {
+      "0": "Download"
+    }
+  },
+  "Genesect-Shock": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 66,
+      "at": 115,
+      "df": 90,
+      "sa": 115,
+      "sd": 90,
+      "sp": 94
+    },
+    "abilities": {
+      "0": "Download"
+    }
+  },
+  "Genesect-Burn": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 66,
+      "at": 115,
+      "df": 90,
+      "sa": 115,
+      "sd": 90,
+      "sp": 94
+    },
+    "abilities": {
+      "0": "Download"
+    }
+  },
+  "Genesect-Chill": {
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 66,
+      "at": 115,
+      "df": 90,
+      "sa": 115,
+      "sd": 90,
+      "sp": 94
+    },
+    "abilities": {
+      "0": "Download"
+    }
+  },
+  "Xerneas": {
+    "types": [
+      "Fairy",
+      ""
+    ],
+    "bs": {
+      "hp": 126,
+      "at": 131,
+      "df": 95,
+      "sa": 131,
+      "sd": 98,
+      "sp": 99
+    },
+    "abilities": {
+      "0": "Fairy Aura"
+    }
+  },
+  "Yveltal": {
+    "types": [
+      "Dark",
+      "Flying"
+    ],
+    "bs": {
+      "hp": 126,
+      "at": 131,
+      "df": 95,
+      "sa": 131,
+      "sd": 98,
+      "sp": 99
+    },
+    "abilities": {
+      "0": "Dark Aura"
+    }
+  },
+  "Zygarde": {
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 100,
+      "df": 123,
+      "sa": 85,
+      "sd": 97,
+      "sp": 95
+    },
+    "abilities": {
+      "0": "Aura Break"
+    }
+  },
+  "Zygarde-10%": {
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "bs": {
+      "hp": 64,
+      "at": 135,
+      "df": 76,
+      "sa": 95,
+      "sd": 90,
+      "sp": 140
+    },
+    "abilities": {
+      "0": "Aura Break"
+    }
+  },
+  "Zygarde-Complete": {
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "bs": {
+      "hp": 200,
+      "at": 100,
+      "df": 123,
+      "sa": 95,
+      "sd": 97,
+      "sp": 85
+    },
+    "abilities": {
+      "0": "Power Construct"
+    }
+  },
+  "Diancie": {
+    "types": [
+      "Rock",
+      "Fairy"
+    ],
+    "bs": {
+      "hp": 50,
+      "at": 160,
+      "df": 110,
+      "sa": 160,
+      "sd": 110,
+      "sp": 110
+    },
+    "abilities": {
+      "0": "Magic Bounce"
+    }
+  },
+  "Hoopa-Unbound": {
+    "types": [
+      "Psychic",
+      "Dark"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 160,
+      "df": 60,
+      "sa": 160,
+      "sd": 120,
+      "sp": 80
+    },
+    "abilities": {
+      "0": "Magician"
+    }
+  },
+  "Volcanion": {
+    "types": [
+      "Fire",
+      "Water"
+    ],
+    "bs": {
+      "hp": 70,
+      "at": 100,
+      "df": 110,
+      "sa": 120,
+      "sd": 80,
+      "sp": 60
+    },
+    "abilities": {
+      "0": "Water Absorb"
+    }
+  },
+  "Cosmoem": {
+    "types": [
+      "Psychic",
+      ""
+    ],
+    "bs": {
+      "hp": 43,
+      "at": 29,
+      "df": 131,
+      "sa": 29,
+      "sd": 131,
+      "sp": 37
+    },
+    "abilities": {
+      "0": "Sturdy"
+    }
+  },
+  "Solgaleo": {
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 127,
+      "at": 137,
+      "df": 107,
+      "sa": 113,
+      "sd": 89,
+      "sp": 97
+    },
+    "abilities": {
+      "0": "Full Metal Body"
+    }
+  },
+  "Lunala": {
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "bs": {
+      "hp": 127,
+      "at": 113,
+      "df": 89,
+      "sa": 137,
+      "sd": 107,
+      "sp": 97
+    },
+    "abilities": {
+      "0": "Shadow Shield"
+    }
+  },
+  "Necrozma-Dusk-Mane": {
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 97,
+      "at": 157,
+      "df": 127,
+      "sa": 108,
+      "sd": 104,
+      "sp": 77
+    },
+    "abilities": {
+      "0": "Neuroforce"
+    }
+  },
+  "Necrozma-Dawn-Wings": {
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "bs": {
+      "hp": 97,
+      "at": 108,
+      "df": 104,
+      "sa": 157,
+      "sd": 127,
+      "sp": 77
+    },
+    "abilities": {
+      "0": "Neuroforce"
+    }
+  },
+  "Magearna": {
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "bs": {
+      "hp": 80,
+      "at": 95,
+      "df": 115,
+      "sa": 130,
+      "sd": 115,
+      "sp": 65
+    },
+    "abilities": {
+      "0": "Soul-Heart"
+    }
+  },
+  "Marshadow": {
+    "types": [
+      "Fighting",
+      "Ghost"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 135,
+      "df": 85,
+      "sa": 90,
+      "sd": 95,
+      "sp": 125
+    },
+    "abilities": {
+      "0": "Technician"
+    }
+  },
+  "Zeraora": {
+    "types": [
+      "Electric",
+      ""
+    ],
+    "bs": {
+      "hp": 78,
+      "at": 107,
+      "df": 70,
+      "sa": 97,
+      "sd": 75,
+      "sp": 143
+    },
+    "abilities": {
+      "0": "Volt Absorb"
+    }
+  },
+  "Melmetal": {
+    "types": [
+      "Steel",
+      ""
+    ],
+    "bs": {
+      "hp": 125,
+      "at": 133,
+      "df": 133,
+      "sa": 85,
+      "sd": 60,
+      "sp": 34
+    },
+    "abilities": {
+      "0": "Iron Fist"
+    }
+  },
+  "Zacian": {
+    "types": [
+      "Fairy",
+      ""
+    ],
+    "bs": {
+      "hp": 92,
+      "at": 120,
+      "df": 115,
+      "sa": 80,
+      "sd": 115,
+      "sp": 138
+    },
+    "abilities": {
+      "0": "Intrepid Sword"
+    }
+  },
+  "Zacian-Crowned": {
+    "types": [
+      "Fairy",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 92,
+      "at": 150,
+      "df": 115,
+      "sa": 90,
+      "sd": 115,
+      "sp": 138
+    },
+    "abilities": {
+      "0": "Intrepid Sword"
+    }
+  },
+  "Zamazenta": {
+    "types": [
+      "Fighting",
+      ""
+    ],
+    "bs": {
+      "hp": 92,
+      "at": 120,
+      "df": 115,
+      "sa": 80,
+      "sd": 115,
+      "sp": 138
+    },
+    "abilities": {
+      "0": "Dauntless Shield"
+    }
+  },
+  "Zamazenta-Crowned": {
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "bs": {
+      "hp": 92,
+      "at": 120,
+      "df": 135,
+      "sa": 90,
+      "sd": 135,
+      "sp": 128
+    },
+    "abilities": {
+      "0": "Dauntless Shield"
+    }
+  },
+  "Eternatus": {
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 140,
+      "at": 85,
+      "df": 95,
+      "sa": 145,
+      "sd": 95,
+      "sp": 130
+    },
+    "abilities": {
+      "0": "Pressure"
+    }
+  },
+  "Zarude": {
+    "types": [
+      "Dark",
+      "Grass"
+    ],
+    "bs": {
+      "hp": 105,
+      "at": 120,
+      "df": 105,
+      "sa": 70,
+      "sd": 95,
+      "sp": 105
+    },
+    "abilities": {
+      "0": "Leaf Guard"
+    }
+  },
+  "Calyrex-Ice": {
+    "types": [
+      "Psychic",
+      "Ice"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 165,
+      "df": 150,
+      "sa": 85,
+      "sd": 130,
+      "sp": 50
+    },
+    "abilities": {
+      "0": "As One (Glastrier)"
+    }
+  },
+  "Calyrex-Shadow": {
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 85,
+      "df": 80,
+      "sa": 165,
+      "sd": 100,
+      "sp": 150
+    },
+    "abilities": {
+      "0": "As One (Spectrier)"
+    }
+  },
+  "Koraidon": {
+    "types": [
+      "Fighting",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 140,
+      "df": 120,
+      "sa": 85,
+      "sd": 100,
+      "sp": 135
+    },
+    "abilities": {
+      "0": "Orichalcum Pulse"
+    }
+  },
+  "Miraidon": {
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "bs": {
+      "hp": 100,
+      "at": 85,
+      "df": 100,
+      "sa": 140,
+      "sd": 120,
+      "sp": 135
+    },
+    "abilities": {
+      "0": "Hadron Engine"
+    }
+  },
+  "Pecharunt": {
+    "types": [
+      "Poison",
+      "Ghost"
+    ],
+    "bs": {
+      "hp": 88,
+      "at": 88,
+      "df": 160,
+      "sa": 88,
+      "sd": 88,
+      "sp": 88
+    },
+    "abilities": {
+      "0": "Poison Puppeteer"
+    }
+  },
+  "Terapagos": {
+    "types": [
+      "Normal",
+      ""
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 65,
+      "df": 85,
+      "sa": 65,
+      "sd": 85,
+      "sp": 60
+    },
+    "abilities": {
+      "0": "Tera Shift"
+    }
+  },
+  "Terapagos-Terastal": {
+    "types": [
+      "Normal",
+      ""
+    ],
+    "bs": {
+      "hp": 95,
+      "at": 95,
+      "df": 110,
+      "sa": 105,
+      "sd": 110,
+      "sp": 85
+    },
+    "abilities": {
+      "0": "Tera Shell"
+    }
+  },
+  "Terapagos-Stellar": {
+    "types": [
+      "Normal",
+      ""
+    ],
+    "bs": {
+      "hp": 160,
+      "at": 105,
+      "df": 110,
+      "sa": 130,
+      "sd": 110,
+      "sp": 85
+    },
+    "abilities": {
+      "0": "Teraform Zero"
     }
   }
 }
