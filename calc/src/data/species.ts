@@ -11696,9 +11696,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 200,
       "at": 33,
-      "df": 68,
+      "df": 63,
       "sa": 33,
-      "sd": 68,
+      "sd": 63,
       "sp": 33
     },
     "abilities": {
@@ -12239,11 +12239,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 70,
-      "at": 90,
+      "at": 70,
       "df": 60,
       "sa": 150,
       "sd": 60,
-      "sp": 70
+      "sp": 90
     },
     "abilities": {
       "0": "Shield Dust"
@@ -12461,9 +12461,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 144,
       "at": 120,
-      "df": 70,
+      "df": 60,
       "sa": 40,
-      "sd": 70,
+      "sd": 60,
       "sp": 50
     },
     "abilities": {
@@ -12545,7 +12545,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 60,
-      "at": 80,
+      "at": 75,
       "df": 80,
       "sa": 70,
       "sd": 80,
@@ -13507,6 +13507,23 @@ const GAY_PATCH = {
       "0": "Natural Cure"
     }
   },
+  "Cranidos": {
+    "types": [
+      "Rock",
+      ""
+    ],
+    "bs": {
+      "hp": 67,
+      "at": 125,
+      "df": 40,
+      "sa": 30,
+      "sd": 30,
+      "sp": 58
+    },
+    "abilities": {
+      "0": "Rock Head"
+    }
+  },
   "Rampardos": {
     "types": [
       "Rock",
@@ -13671,7 +13688,7 @@ const GAY_PATCH = {
       "df": 80,
       "sa": 97,
       "sd": 88,
-      "sp": 90
+      "sp": 85
     },
     "abilities": {
       "0": "Flower Gift"
@@ -13688,7 +13705,7 @@ const GAY_PATCH = {
       "df": 80,
       "sa": 97,
       "sd": 88,
-      "sp": 90
+      "sp": 85
     },
     "abilities": {
       "0": "Flower Gift"
@@ -19332,7 +19349,7 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 75,
+      "hp": 90,
       "at": 85,
       "df": 145,
       "sa": 60,
@@ -20437,12 +20454,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 50,
-      "at": 110,
-      "df": 110,
-      "sa": 110,
-      "sd": 110,
-      "sp": 110
+      "hp": 75,
+      "at": 105,
+      "df": 105,
+      "sa": 105,
+      "sd": 105,
+      "sp": 105
     },
     "abilities": {
       "0": "Pressure"
@@ -20454,12 +20471,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 50,
-      "at": 180,
-      "df": 20,
-      "sa": 180,
-      "sd": 20,
-      "sp": 150
+      "hp": 75,
+      "at": 175,
+      "df": 15,
+      "sa": 175,
+      "sd": 15,
+      "sp": 145
     },
     "abilities": {
       "0": "Pressure"
@@ -20471,12 +20488,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 50,
-      "at": 70,
-      "df": 160,
-      "sa": 70,
-      "sd": 160,
-      "sp": 90
+      "hp": 75,
+      "at": 65,
+      "df": 155,
+      "sa": 65,
+      "sd": 155,
+      "sp": 85
     },
     "abilities": {
       "0": "Pressure"
@@ -20488,12 +20505,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 50,
-      "at": 95,
-      "df": 90,
-      "sa": 95,
-      "sd": 90,
-      "sp": 180
+      "hp": 75,
+      "at": 90,
+      "df": 85,
+      "sa": 90,
+      "sd": 85,
+      "sp": 175
     },
     "abilities": {
       "0": "Pressure"
@@ -20530,7 +20547,7 @@ const GAY_PATCH = {
       "sp": 90
     },
     "abilities": {
-      "0": "Pressure"
+      "0": "Time Lord"
     }
   },
   "Palkia": {
@@ -20564,7 +20581,7 @@ const GAY_PATCH = {
       "sp": 120
     },
     "abilities": {
-      "0": "Pressure"
+      "0": "Stalwart"
     }
   },
   "Giratina": {
@@ -20575,10 +20592,10 @@ const GAY_PATCH = {
     "bs": {
       "hp": 150,
       "at": 100,
-      "df": 120,
+      "df": 125,
       "sa": 100,
-      "sd": 120,
-      "sp": 90
+      "sd": 125,
+      "sp": 80
     },
     "abilities": {
       "0": "Pressure"
@@ -20591,11 +20608,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 150,
-      "at": 120,
+      "at": 125,
       "df": 100,
-      "sa": 120,
+      "sa": 125,
       "sd": 100,
-      "sp": 90
+      "sp": 80
     },
     "abilities": {
       "0": "Levitate"
@@ -21051,9 +21068,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 91,
       "at": 72,
-      "df": 90,
+      "df": 85,
       "sa": 129,
-      "sd": 90,
+      "sd": 85,
       "sp": 108
     },
     "abilities": {
@@ -21068,9 +21085,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 91,
       "at": 72,
-      "df": 90,
+      "df": 85,
       "sa": 129,
-      "sd": 90,
+      "sd": 85,
       "sp": 108
     },
     "abilities": {
@@ -21236,11 +21253,11 @@ const GAY_PATCH = {
       "Ground"
     ],
     "bs": {
-      "hp": 108,
+      "hp": 100,
       "at": 100,
-      "df": 121,
-      "sa": 81,
-      "sd": 95,
+      "df": 123,
+      "sa": 85,
+      "sd": 97,
       "sp": 95
     },
     "abilities": {
@@ -21254,10 +21271,10 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 64,
-      "at": 140,
-      "df": 71,
-      "sa": 100,
-      "sd": 85,
+      "at": 135,
+      "df": 76,
+      "sa": 95,
+      "sd": 90,
       "sp": 140
     },
     "abilities": {
@@ -21270,11 +21287,11 @@ const GAY_PATCH = {
       "Ground"
     ],
     "bs": {
-      "hp": 216,
+      "hp": 200,
       "at": 100,
-      "df": 121,
-      "sa": 91,
-      "sd": 95,
+      "df": 123,
+      "sa": 95,
+      "sd": 97,
       "sp": 85
     },
     "abilities": {
@@ -21304,11 +21321,11 @@ const GAY_PATCH = {
       "Dark"
     ],
     "bs": {
-      "hp": 80,
+      "hp": 100,
       "at": 160,
       "df": 60,
-      "sa": 170,
-      "sd": 130,
+      "sa": 160,
+      "sd": 120,
       "sp": 80
     },
     "abilities": {
@@ -21511,9 +21528,9 @@ const GAY_PATCH = {
       "hp": 92,
       "at": 150,
       "df": 115,
-      "sa": 80,
+      "sa": 90,
       "sd": 115,
-      "sp": 148
+      "sp": 138
     },
     "abilities": {
       "0": "Intrepid Sword"
@@ -21544,9 +21561,9 @@ const GAY_PATCH = {
     "bs": {
       "hp": 92,
       "at": 120,
-      "df": 140,
-      "sa": 80,
-      "sd": 140,
+      "df": 135,
+      "sa": 90,
+      "sd": 135,
       "sp": 128
     },
     "abilities": {
@@ -21695,11 +21712,11 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 105,
+      "hp": 95,
       "at": 95,
-      "df": 100,
-      "sa": 115,
-      "sd": 100,
+      "df": 110,
+      "sa": 105,
+      "sd": 110,
       "sp": 85
     },
     "abilities": {
