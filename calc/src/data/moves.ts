@@ -4143,9 +4143,9 @@ const LGPE_MOVES = [
   'Sparkly Swirl',
   'Zippy Zap',
   'Floaty Fall',
-  'Pika Papow',
+  // 'Pika Papow',
   'Splishy Splash',
-  'Veevee Volley',
+  // 'Veevee Volley',
 ];
 for (const m of LGPE_MOVES) {
   delete SS[m];

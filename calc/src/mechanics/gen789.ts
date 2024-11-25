@@ -118,9 +118,12 @@ export function calculateSMSSSV(
   }
   if (defender.teraType !== 'Stellar') desc.defenderTera = defender.teraType;
 
-  if (move.named('Photon Geyser', 'Light That Burns The Sky', 'Hydro Cannon', 'Blast Burn', 'Frenzy Plant', 'Confusion') ||
+  if (move.named('Photon Geyser', 'Light That Burns The Sky', 'Hydro Cannon', 'Blast Burn', 'Frenzy Plant', 'Confusion', 'Veevee Volley') ||
       (move.named('Tera Blast') && attacker.teraType)) {
     move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
+  }
+  if (move.named('Veevee Volley')) {
+    move.type = attacker.types[0]
   }
   if (attacker.hasAbility("Ballin'") && move.flags.bullet) {
     move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
@@ -602,6 +605,10 @@ export function calculateSMSSSV(
   let preStellarStabMod = getStabMod(attacker, move, desc);
   let stabMod = getStellarStabMod(attacker, move, preStellarStabMod);
 
+  const applyFrz =
+    attacker.hasStatus('frz') &&
+    move.category === 'Special';
+  desc.isFrozen = applyFrz;
   const applyBurn =
     attacker.hasStatus('brn') &&
     move.category === 'Physical' &&
@@ -644,7 +651,7 @@ export function calculateSMSSSV(
   let damage = [];
   for (let i = 0; i < 16; i++) {
     damage[i] =
-      getFinalDamage(baseDamage, i, typeEffectiveness, applyBurn, stabMod, finalMod, protect);
+      getFinalDamage(baseDamage, i, typeEffectiveness, applyBurn || applyFrz, stabMod, finalMod, protect);
   }
 
   desc.attackBoost =
@@ -725,7 +732,7 @@ export function calculateSMSSSV(
           newBaseDamage,
           damageMultiplier,
           typeEffectiveness,
-          applyBurn,
+          applyBurn || applyFrz,
           stabMod,
           newFinalMod,
           protect
@@ -1279,15 +1286,11 @@ export function calculateBPModsSMSSSV(
     bpMods.push(5325);
     desc.attackerItem = attacker.item;
   } else if (
-    (((attacker.hasItem('Adamant Crystal') && attacker.named('Dialga-Origin')) ||
-      (attacker.hasItem('Adamant Orb') && attacker.named('Dialga'))) &&
+    ((attacker.hasItem('Adamant Orb') && attacker.named('Dialga')) &&
      move.hasType('Steel', 'Dragon')) ||
-    (((attacker.hasItem('Lustrous Orb') &&
-     attacker.named('Palkia')) ||
-      (attacker.hasItem('Lustrous Globe') && attacker.named('Palkia-Origin'))) &&
+    ((attacker.hasItem('Lustrous Orb') && attacker.named('Palkia')) &&
      move.hasType('Water', 'Dragon')) ||
-    (((attacker.hasItem('Griseous Orb') || attacker.hasItem('Griseous Core')) &&
-     (attacker.named('Giratina-Origin') || attacker.named('Giratina'))) &&
+    ((attacker.hasItem('Griseous Orb') && attacker.named('Giratina')) &&
      move.hasType('Ghost', 'Dragon')) ||
     (attacker.hasItem('Vile Vial') &&
      attacker.named('Venomicon-Epilogue') &&
