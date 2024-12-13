@@ -1075,7 +1075,9 @@ export function calculateBPModsSMSSSV(
       attacker.hasAbility('Scrappy') || attacker.hasAbility('Mind\'s Eye') || attacker.hasAbility('Normalize') ||
       field.defenderSide.isForesight;
     const isRingTarget = (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz'));
-    const isDauntless = attacker.hasAbility('Dauntless');
+    const isDauntless = attacker.hasAbility('Dauntless') ||
+      (attacker.hasAbility('Turboblaze') && move.hasType('Fire')) ||
+      (attacker.hasAbility('Teravolt') && move.hasType('Electric'));
     const types = defender.teraType && defender.teraType !== 'Stellar'
       ? [defender.teraType] : defender.types;
     const type1Effectiveness = getMoveEffectiveness(
@@ -1741,7 +1743,8 @@ export function calculateFinalModsSMSSSV(
   } else if (attacker.hasAbility('Sniper') && isCritical) {
     finalMods.push(6144);
     desc.attackerAbility = attacker.ability;
-  } else if (attacker.hasAbility('Turboblaze', 'Teravolt') && typeEffectiveness < 1) {
+  } else if ((attacker.hasAbility('Turboblaze') && move.hasType('Fire') && typeEffectiveness < 1) ||
+    (attacker.hasAbility('Teravolt') && move.hasType('Electric') && typeEffectiveness < 1)) {
     finalMods.push(6144);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Tinted Lens') && typeEffectiveness < 1) {
