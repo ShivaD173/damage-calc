@@ -53,8 +53,7 @@ var SETDEX_RBY = {
   },
   "Raichu": {
     "OU Mixed Attacker": {"moves":["Thunderbolt","Thunder Wave","Submission","Surf"]},
-    "UU Agility Sweeper": {"moves":["Thunderbolt","Surf","Thunder Wave","Agility"]},
-    "Tradebacks OU Sleeper": {"moves":["Sing","Thunderbolt","Surf","Hyper Beam"]}
+    "UU Agility Sweeper": {"moves":["Thunderbolt","Surf","Thunder Wave","Agility"]}
   },
   "Sandslash": {
     "OU Swords Dance": {"moves":["Swords Dance","Earthquake","Body Slam","Hyper Beam"]},
@@ -106,8 +105,7 @@ var SETDEX_RBY = {
   },
   "Dugtrio": {
     "UU Dugtrio": {"moves":["Earthquake","Rock Slide","Slash","Substitute"]},
-    "UU Physical Attacker": {"moves":["Earthquake","Rock Slide","Slash","Toxic"]},
-    "OU Showdown Usage": {"moves":["Earthquake","Slash","Substitute","Sand Attack"]}
+    "UU Physical Attacker": {"moves":["Earthquake","Rock Slide","Slash","Toxic"]}
   },
   "Persian": {
     "OU Slash": {"moves":["Slash","Hyper Beam","Bubble Beam","Thunderbolt"]},
@@ -250,7 +248,8 @@ var SETDEX_RBY = {
     "Tradebacks OU Standard": {"moves":["Clamp","Explosion","Blizzard","Rest"]}
   },
   "Gastly": {
-    "NU Hypnosis": {"moves":["Hypnosis","Thunderbolt","Mega Drain","Night Shade"]}
+    "NU Hypnosis": {"moves":["Hypnosis","Thunderbolt","Mega Drain","Night Shade"]},
+    "PU Offensive Sleeper": {"moves":["Hypnosis","Thunderbolt","Psychic","Substitute"]}
   },
   "Haunter": {
     "UU Haunter": {"moves":["Thunderbolt","Explosion","Psychic","Night Shade"]},
@@ -272,8 +271,7 @@ var SETDEX_RBY = {
   },
   "Hypno": {
     "OU Double Status": {"moves":["Hypnosis","Thunder Wave","Psychic","Seismic Toss"]},
-    "Ubers Lead Sleeper": {"moves":["Psychic","Hypnosis","Thunder Wave","Seismic Toss"]},
-    "Tradebacks OU Amnesia": {"moves":["Amnesia","Psychic","Reflect","Rest"]}
+    "Ubers Lead Sleeper": {"moves":["Psychic","Hypnosis","Thunder Wave","Seismic Toss"]}
   },
   "Kingler": {
     "OU Swords Dance": {"moves":["Swords Dance","Hyper Beam","Body Slam","Crabhammer"]},
@@ -286,7 +284,8 @@ var SETDEX_RBY = {
   "Electrode": {
     "Ubers Explosion": {"moves":["Thunder Wave","Thunderbolt","Screech","Explosion"]},
     "UU Fast Attacker": {"moves":["Thunderbolt","Thunder Wave","Explosion","Screech"]},
-    "1v1 Screech + Hyper Beam": {"moves":["Thunderbolt","Hyper Beam","Screech","Rest"]}
+    "1v1 Screech + Hyper Beam": {"moves":["Thunderbolt","Hyper Beam","Screech","Rest"]},
+    "OU Showdown Usage": {"moves":["Explosion","Thunder Wave","Thunder","Hyper Beam"]}
   },
   "Exeggcute": {
     "NU Support": {"moves":["Sleep Powder","Stun Spore","Psychic","Explosion"]},
@@ -418,12 +417,12 @@ var SETDEX_RBY = {
     "Tradebacks OU Standard": {"moves":["Sing","Blizzard","Thunderbolt","Hyper Beam"]}
   },
   "Ditto": {
+    "Ubers Blob": {"moves":["Transform"]},
     "PU Transformer": {"moves":["Transform"]}
   },
   "Vaporeon": {
     "UU Bulky Special Attacker": {"moves":["Surf","Blizzard","Body Slam","Rest"]},
-    "Tradebacks OU Growth": {"moves":["Growth","Surf","Acid Armor","Rest"]},
-    "OU Showdown Usage": {"moves":["Rest","Body Slam","Ice Beam","Acid Armor"]}
+    "Tradebacks OU Growth": {"moves":["Growth","Surf","Acid Armor","Rest"]}
   },
   "Jolteon": {
     "OU Offensive": {"moves":["Thunder Wave","Thunderbolt","Double Kick","Rest"]},
@@ -489,7 +488,7 @@ var SETDEX_RBY = {
   "Zapdos": {
     "OU Mixed Attacker": {"moves":["Thunderbolt","Drill Peck","Thunder Wave","Agility"]},
     "Ubers Mixed Attacker": {"moves":["Thunderbolt","Drill Peck","Thunder Wave","Agility"]},
-    "1v1 Mixed Attacker": {"moves":["Thunderbolt","Drill Peck","Thunder","Reflect"]},
+    "1v1 Offensive": {"moves":["Thunderbolt","Drill Peck","Thunder","Thunder Wave"]},
     "Tradebacks OU Agility": {"moves":["Agility","Thunderbolt","Drill Peck","Thunder Wave"]}
   },
   "Moltres": {

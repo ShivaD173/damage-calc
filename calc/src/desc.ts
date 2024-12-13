@@ -31,6 +31,7 @@ export interface RawDesc {
   isAuroraVeil?: boolean;
   isFlowerGiftAttacker?: boolean;
   isFlowerGiftDefender?: boolean;
+  isSteelySpiritAttacker?: boolean;
   isFriendGuard?: boolean;
   isHelpingHand?: boolean;
   isCritical?: boolean;
@@ -950,6 +951,9 @@ function buildDescription(description: RawDesc, attacker: Pokemon, defender: Pok
   }
   if (description.isFlowerGiftAttacker) {
     output += 'with an ally\'s Flower Gift ';
+  }
+  if (description.isSteelySpiritAttacker) {
+    output += 'with an ally\'s Steely Spirit ';
   }
   if (description.isBattery) {
     output += 'Battery boosted ';

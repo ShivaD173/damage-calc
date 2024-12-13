@@ -141,6 +141,11 @@ export function calculateSMSSSV(
     move.flags.contact = 0;
   }
 
+  if (move.named('Shell Side Arm') &&
+    getShellSideArmCategory(attacker, defender) === 'Physical') {
+    move.flags.contact = 1;
+  }
+
   const breaksProtect = move.breaksProtect || move.isZ || attacker.isDynamaxed ||
   (attacker.hasAbility('Unseen Fist') && move.flags.contact);
 
@@ -156,12 +161,28 @@ export function calculateSMSSSV(
     return result;
   }
 
-  const defenderIgnoresAbility = defender.hasAbility(
-    'Full Metal Body',
-    'Prism Armor',
-    'Shadow Shield',
-    'Tablets of Ruin',
-    'Vessel of Ruin'
+  const defenderAbilityIgnored = defender.hasAbility(
+    'Armor Tail', 'Aroma Veil', 'Aura Break', 'Battle Armor',
+    'Big Pecks', 'Bulletproof', 'Clear Body', 'Contrary',
+    'Damp', 'Dazzling', 'Disguise', 'Dry Skin',
+    'Earth Eater', 'Filter', 'Flash Fire', 'Flower Gift',
+    'Flower Veil', 'Fluffy', 'Friend Guard', 'Fur Coat',
+    'Good as Gold', 'Grass Pelt', 'Guard Dog', 'Heatproof',
+    'Heavy Metal', 'Hyper Cutter', 'Ice Face', 'Ice Scales',
+    'Illuminate', 'Immunity', 'Inner Focus', 'Insomnia',
+    'Keen Eye', 'Leaf Guard', 'Levitate', 'Light Metal',
+    'Lightning Rod', 'Limber', 'Magic Bounce', 'Magma Armor',
+    'Marvel Scale', "Mind's Eye", 'Mirror Armor', 'Motor Drive',
+    'Multiscale', 'Oblivious', 'Overcoat', 'Own Tempo',
+    'Pastel Veil', 'Punk Rock', 'Purifying Salt', 'Queenly Majesty',
+    'Sand Veil', 'Sap Sipper', 'Shell Armor', 'Shield Dust',
+    'Simple', 'Snow Cloak', 'Solid Rock', 'Soundproof',
+    'Sticky Hold', 'Storm Drain', 'Sturdy', 'Suction Cups',
+    'Sweet Veil', 'Tangled Feet', 'Telepathy', 'Tera Shell',
+    'Thermal Exchange', 'Thick Fat', 'Unaware', 'Vital Spirit',
+    'Volt Absorb', 'Water Absorb', 'Water Bubble', 'Water Veil',
+    'Well-Baked Body', 'White Smoke', 'Wind Rider', 'Wonder Guard',
+    'Wonder Skin'
   );
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
@@ -176,8 +197,8 @@ export function calculateSMSSSV(
     'Searing Sunraze Smash',
     'Sunsteel Strike'
   );
-  if (!defenderIgnoresAbility && !defender.hasAbility('Poison Heal') &&
-    (attackerIgnoresAbility || moveIgnoresAbility)) {
+
+  if (defenderAbilityIgnored && (attackerIgnoresAbility || moveIgnoresAbility)) {
     if (attackerIgnoresAbility) desc.attackerAbility = attacker.ability;
     if (defender.hasItem('Ability Shield')) {
       desc.defenderItem = defender.item;
@@ -196,13 +217,21 @@ export function calculateSMSSSV(
   if (attacker.hasAbility('Neutralizing Gas') &&
     !ignoresNeutralizingGas.includes(defender.ability || '')) {
     desc.attackerAbility = attacker.ability;
-    defender.ability = '' as AbilityName;
+    if (defender.hasItem('Ability Shield')) {
+      desc.defenderItem = defender.item;
+    } else {
+      defender.ability = '' as AbilityName;
+    }
   }
 
   if (defender.hasAbility('Neutralizing Gas') &&
     !ignoresNeutralizingGas.includes(attacker.ability || '')) {
     desc.defenderAbility = defender.ability;
-    attacker.ability = '' as AbilityName;
+    if (attacker.hasItem('Ability Shield')) {
+      desc.attackerItem = attacker.item;
+    } else {
+      attacker.ability = '' as AbilityName;
+    }
   }
 
   // Merciless does not ignore Shell Armor, damage dealt to a poisoned Pokemon with Shell Armor
@@ -281,6 +310,10 @@ export function calculateSMSSSV(
     } else if (attacker.named('Tauros-Paldea-Aqua')) {
       type = 'Water';
     }
+
+    field.defenderSide.isReflect = false;
+    field.defenderSide.isLightScreen = false;
+    field.defenderSide.isAuroraVeil = false;
   } else if (move.named('Ivy Cudgel')) {
     if (attacker.name.includes('Ogerpon-Cornerstone')) {
       type = 'Rock';
@@ -294,6 +327,10 @@ export function calculateSMSSSV(
   ) {
     move.target = 'allAdjacentFoes';
     type = 'Stellar';
+  } else if (move.named('Brick Break', 'Psychic Fangs')) {
+    field.defenderSide.isReflect = false;
+    field.defenderSide.isLightScreen = false;
+    field.defenderSide.isAuroraVeil = false;
   }
 
   let hasAteAbilityTypeChange = false;
@@ -357,7 +394,9 @@ export function calculateSMSSSV(
   const isRingTarget =
       (defender.hasItem('Ring Target') && !defender.hasAbility('Klutz')) ||
        (attacker.hasAbility('Corrosion') && move.type === 'Poison');
-  const isDauntless = attacker.hasAbility('Dauntless');
+  const isDauntless = attacker.hasAbility('Dauntless') ||
+    (attacker.hasAbility('Turboblaze') && move.hasType('Fire')) ||
+    (attacker.hasAbility('Teravolt') && move.hasType('Electric'));
   const type1Effectiveness = getMoveEffectiveness(
     gen,
     move,
@@ -569,6 +608,7 @@ export function calculateSMSSSV(
           ? 'spa'
           : 'atk';
   // #endregion
+
   // #region (Special) Defense
 
   const defense = calculateDefenseSMSSSV(gen, attacker, defender, move, field, desc, isCritical);
@@ -1015,30 +1055,31 @@ export function calculateBPModsSMSSSV(
   const bpMods = [];
 
   // Move effects
-
+  const defenderItem = (defender.item && defender.item !== '')
+    ? defender.item : defender.disabledItem;
   let resistedKnockOffDamage =
-    (!defender.item || isQPActive(defender, field)) ||
-    (defender.named('Dialga-Origin') && defender.hasItem('Adamant Crystal')) ||
-    (defender.named('Palkia-Origin') && defender.hasItem('Lustrous Globe')) ||
+    (!defenderItem || isQPActive(defender, field)) ||
+    (defender.named('Dialga-Origin') && defenderItem === 'Adamant Crystal') ||
+    (defender.named('Palkia-Origin') && defenderItem === 'Lustrous Globe') ||
     // Griseous Core for gen 9, Griseous Orb otherwise
-    (defender.name.includes('Giratina-Origin') && defender.item.includes('Griseous')) ||
-    (defender.name.includes('Arceus') && defender.item.includes('Plate')) ||
-    (defender.name.includes('Genesect') && defender.item.includes('Drive')) ||
-    (defender.named('Groudon', 'Groudon-Primal') && defender.hasItem('Red Orb')) ||
-    (defender.named('Kyogre', 'Kyogre-Primal') && defender.hasItem('Blue Orb')) ||
-    (defender.name.includes('Silvally') && defender.item.includes('Memory')) ||
-    defender.item.includes(' Z') ||
-    (defender.named('Zacian') && defender.hasItem('Rusted Sword')) ||
-    (defender.named('Zamazenta') && defender.hasItem('Rusted Shield')) ||
-    (defender.name.includes('Ogerpon-Cornerstone') && defender.hasItem('Cornerstone Mask')) ||
-    (defender.name.includes('Ogerpon-Hearthflame') && defender.hasItem('Hearthflame Mask')) ||
-    (defender.name.includes('Ogerpon-Wellspring') && defender.hasItem('Wellspring Mask')) ||
-    (defender.named('Venomicon-Epilogue') && defender.hasItem('Vile Vial'));
+    (defender.name.includes('Giratina-Origin') && defenderItem.includes('Griseous')) ||
+    (defender.name.includes('Arceus') && defenderItem.includes('Plate')) ||
+    (defender.name.includes('Genesect') && defenderItem.includes('Drive')) ||
+    (defender.named('Groudon', 'Groudon-Primal') && defenderItem === 'Red Orb') ||
+    (defender.named('Kyogre', 'Kyogre-Primal') && defenderItem === 'Blue Orb') ||
+    (defender.name.includes('Silvally') && defenderItem.includes('Memory')) ||
+    defenderItem.includes(' Z') ||
+    (defender.named('Zacian') && defenderItem === 'Rusted Sword') ||
+    (defender.named('Zamazenta') && defenderItem === 'Rusted Shield') ||
+    (defender.name.includes('Ogerpon-Cornerstone') && defenderItem === 'Cornerstone Mask') ||
+    (defender.name.includes('Ogerpon-Hearthflame') && defenderItem === 'Hearthflame Mask') ||
+    (defender.name.includes('Ogerpon-Wellspring') && defenderItem === 'Wellspring Mask') ||
+    (defender.named('Venomicon-Epilogue') && defenderItem === 'Vile Vial');
 
   // The last case only applies when the Pokemon has the Mega Stone that matches its species
   // (or when it's already a Mega-Evolution)
-  if (!resistedKnockOffDamage && defender.item) {
-    const item = gen.items.get(toID(defender.item))!;
+  if (!resistedKnockOffDamage && defenderItem) {
+    const item = gen.items.get(toID(defenderItem))!;
     resistedKnockOffDamage = !!item.megaEvolves && defender.name.includes(item.megaEvolves);
   }
 
@@ -1170,7 +1211,7 @@ export function calculateBPModsSMSSSV(
   // Sheer Force does not power up max moves or remove the effects (SadisticMystic)
   if (
     ((attacker.hasAbility('Sheer Force') || attacker.hasAbility('The Flock')) &&
-      (move.secondaries || move.named('Jet Punch', 'Order Up')) && !move.isMax) ||
+      (move.secondaries || move.named('Order Up')) && !move.isMax) ||
     (attacker.hasAbility('Mega Launcher') && (move.flags.pulse || move.flags.bullet || move.name.endsWith('Cannon'))) ||
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
@@ -1259,10 +1300,6 @@ export function calculateBPModsSMSSSV(
     desc.attackerAbility = attacker.ability;
   }
 
-  if (attacker.hasItem('Punching Glove') && move.flags.punch) {
-    bpMods.push(4506);
-  }
-
   if (gen.num <= 8 && defender.hasAbility('Heatproof') && move.hasType('Fire')) {
     bpMods.push(1024);
     desc.defenderAbility = defender.ability;
@@ -1313,6 +1350,8 @@ export function calculateBPModsSMSSSV(
   ) {
     bpMods.push(4505);
     desc.attackerItem = attacker.item;
+  } else if (attacker.hasItem('Punching Glove') && move.flags.punch) {
+    bpMods.push(4506);
   }
   return bpMods;
 }
@@ -1441,6 +1480,14 @@ export function calculateAtModsSMSSSV(
     atMods.push(5325);
     desc.weather = field.weather;
     desc.isFlowerGiftAttacker = true;
+  }
+
+  if (
+    field.attackerSide.isSteelySpirit &&
+    move.hasType('Steel')
+  ) {
+    atMods.push(6144);
+    desc.isSteelySpiritAttacker = true;
   }
 
   if ((defender.hasAbility('Thick Fat') && move.hasType('Fire', 'Ice')) ||
@@ -1745,7 +1792,7 @@ export function calculateFinalModsSMSSSV(
     desc.attackerAbility = attacker.ability;
   } else if ((attacker.hasAbility('Turboblaze') && move.hasType('Fire') && typeEffectiveness < 1) ||
     (attacker.hasAbility('Teravolt') && move.hasType('Electric') && typeEffectiveness < 1)) {
-    finalMods.push(6144);
+    finalMods.push(5325);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Tinted Lens') && typeEffectiveness < 1) {
     finalMods.push(8192);

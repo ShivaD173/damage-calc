@@ -140,6 +140,9 @@ $(".sd .base, .sd .evs, .sd .ivs").bind("keyup change", function () {
 $(".sp .base, .sp .evs, .sp .ivs").bind("keyup change", function () {
 	calcStat($(this).closest(".poke-info"), 'sp');
 });
+$(".evs").bind('keyup change', function () {
+	totalEVs($(this).closest(".poke-info"));
+});
 $(".sl .base").keyup(function () {
 	calcStat($(this).closest(".poke-info"), 'sl');
 });
@@ -746,6 +749,7 @@ $(".set-selector").change(function () {
 				$(this).closest('.poke-info').find(".move-pool").hide();
 			}
 		}
+		totalEVs(pokeObj);
 		if (typeof getSelectedTiers === "function") { // doesn't exist when in 1vs1 mode
 			var format = getSelectedTiers()[0];
 			var is50lvl = startsWith(format, "VGC") || startsWith(format, "Battle Spot");
@@ -968,29 +972,33 @@ function correctHiddenPower(pokemon) {
 	for (var i = 0; i < pokemon.moves.length; i++) {
 		var m = pokemon.moves[i].match(HIDDEN_POWER_REGEX);
 		if (!m) continue;
+		// The Hidden Power type matches the IVs provided so we don't need to do anything else
+		if (expected.type === m[1]) {
+			continue;
+		}
 		// The Pokemon has Hidden Power and is not maxed but the types don't match we don't
 		// want to attempt to reconcile the user's IVs so instead just correct the HP type
-		if (!maxed && expected.type !== m[1]) {
+		if (!maxed) {
 			pokemon.moves[i] = "Hidden Power " + expected.type;
-		} else {
-			// Otherwise, use the default preset hidden power IVs that PS would use
-			var hpIVs = calc.Stats.getHiddenPowerIVs(GENERATION, m[1]);
-			if (!hpIVs) continue; // some impossible type was specified, ignore
-			pokemon.ivs = pokemon.ivs || {hp: 31, at: 31, df: 31, sa: 31, sd: 31, sp: 31};
-			pokemon.dvs = pokemon.dvs || {hp: 15, at: 15, df: 15, sa: 15, sd: 15, sp: 15};
-			for (var stat in hpIVs) {
-				pokemon.ivs[calc.Stats.shortForm(stat)] = hpIVs[stat];
-				pokemon.dvs[calc.Stats.shortForm(stat)] = calc.Stats.IVToDV(hpIVs[stat]);
-			}
-			if (gen < 3) {
-				pokemon.dvs.hp = calc.Stats.getHPDV({
-					atk: pokemon.ivs.at || 31,
-					def: pokemon.ivs.df || 31,
-					spe: pokemon.ivs.sp || 31,
-					spc: pokemon.ivs.sa || 31
-				});
-				pokemon.ivs.hp = calc.Stats.DVToIV(pokemon.dvs.hp);
-			}
+			continue;
+		}
+		// Otherwise, use the default preset hidden power IVs that PS would use
+		var hpIVs = calc.Stats.getHiddenPowerIVs(GENERATION, m[1]);
+		if (!hpIVs) continue; // some impossible type was specified, ignore
+		pokemon.ivs = pokemon.ivs || {hp: 31, at: 31, df: 31, sa: 31, sd: 31, sp: 31};
+		pokemon.dvs = pokemon.dvs || {hp: 15, at: 15, df: 15, sa: 15, sd: 15, sp: 15};
+		for (var stat in hpIVs) {
+			pokemon.ivs[calc.Stats.shortForm(stat)] = hpIVs[stat];
+			pokemon.dvs[calc.Stats.shortForm(stat)] = calc.Stats.IVToDV(hpIVs[stat]);
+		}
+		if (gen < 3) {
+			pokemon.dvs.hp = calc.Stats.getHPDV({
+				atk: pokemon.ivs.at || 31,
+				def: pokemon.ivs.df || 31,
+				spe: pokemon.ivs.sp || 31,
+				spc: pokemon.ivs.sa || 31
+			});
+			pokemon.ivs.hp = calc.Stats.DVToIV(pokemon.dvs.hp);
 		}
 	}
 	return pokemon;
@@ -1188,6 +1196,7 @@ function createField() {
 	var isHelpingHand = [$("#helpingHandL").prop("checked"), $("#helpingHandR").prop("checked")];
 	var isTailwind = [$("#tailwindL").prop("checked"), $("#tailwindR").prop("checked")];
 	var isFlowerGift = [$("#flowerGiftL").prop("checked"), $("#flowerGiftR").prop("checked")];
+	var isSteelySpirit = [$("#steelySpiritL").prop("checked"), $("#steelySpiritR").prop("checked")];
 	var isFriendGuard = [$("#friendGuardL").prop("checked"), $("#friendGuardR").prop("checked")];
 	var isAuroraVeil = [$("#auroraVeilL").prop("checked"), $("#auroraVeilR").prop("checked")];
 	var isBattery = [$("#batteryL").prop("checked"), $("#batteryR").prop("checked")];
@@ -1197,20 +1206,42 @@ function createField() {
 
 	var createSide = function (i) {
 		return new calc.Side({
-			spikes: spikes[i], isSR: isSR[i], steelsurge: steelsurge[i],
-			vinelash: vinelash[i], wildfire: wildfire[i], cannonade: cannonade[i], volcalith: volcalith[i],
-			isReflect: isReflect[i], isLightScreen: isLightScreen[i],
-			isProtected: isProtected[i], isSeeded: isSeeded[i], isForesight: isForesight[i],
-			isTailwind: isTailwind[i], isHelpingHand: isHelpingHand[i], isFlowerGift: isFlowerGift[i], isFriendGuard: isFriendGuard[i],
-			isAuroraVeil: isAuroraVeil[i], isBattery: isBattery[i], isPowerSpot: isPowerSpot[i], isSwitching: isSwitchingOut[i] ? 'out' : undefined
+			spikes: spikes[i],
+			isSR: isSR[i],
+			steelsurge: steelsurge[i],
+			vinelash: vinelash[i],
+			wildfire: wildfire[i],
+			cannonade: cannonade[i],
+			volcalith: volcalith[i],
+			isReflect: isReflect[i],
+			isLightScreen: isLightScreen[i],
+			isProtected: isProtected[i],
+			isSeeded: isSeeded[i],
+			isForesight: isForesight[i],
+			isTailwind: isTailwind[i],
+			isHelpingHand: isHelpingHand[i],
+			isFlowerGift: isFlowerGift[i],
+			isSteelySpirit: isSteelySpirit[i],
+			isFriendGuard: isFriendGuard[i],
+			isAuroraVeil: isAuroraVeil[i],
+			isBattery: isBattery[i],
+			isPowerSpot: isPowerSpot[i],
+			isSwitching: isSwitchingOut[i] ? 'out' : undefined
 		});
 	};
 	return new calc.Field({
-		gameType: gameType, weather: weather, terrain: terrain,
-		isMagicRoom: isMagicRoom, isWonderRoom: isWonderRoom, isGravity: isGravity,
-		isBeadsOfRuin: isBeadsOfRuin, isTabletsOfRuin: isTabletsOfRuin,
-		isSwordOfRuin: isSwordOfRuin, isVesselOfRuin: isVesselOfRuin,
-		attackerSide: createSide(0), defenderSide: createSide(1)
+		gameType: gameType,
+		terrain: terrain,
+		isBeadsOfRuin: isBeadsOfRuin,
+		isTabletsOfRuin: isTabletsOfRuin,
+		isSwordOfRuin: isSwordOfRuin,
+		isVesselOfRuin: isVesselOfRuin,
+		weather: weather,
+		isMagicRoom: isMagicRoom,
+		isWonderRoom: isWonderRoom,
+		isGravity: isGravity,
+		attackerSide: createSide(0),
+		defenderSide: createSide(1)
 	});
 }
 
@@ -1231,6 +1262,18 @@ function calcHP(poke) {
 	calcPercentHP(poke, total, newCurrentHP);
 
 	$currentHP.attr('data-set', true);
+}
+
+function totalEVs(poke) {
+	var totalEVs = 0;
+	for (var i = 0; i < LEGACY_STATS[gen].length; i++) {
+		var statName = LEGACY_STATS[gen][i];
+		var stat = poke.find("." + statName);
+		var evs = ~~stat.find(".evs").val();
+		totalEVs += evs;
+	}
+	poke.find(".totalevs").find(".evs").text(totalEVs);
+	return totalEVs;
 }
 
 function calcStat(poke, StatID) {

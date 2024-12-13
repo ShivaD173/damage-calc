@@ -95,7 +95,26 @@ export function calculateBWXY(
     return result;
   }
 
-  if (attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze')) {
+  const defenderAbilityIgnored = defender.hasAbility(
+    'Aroma Veil', 'Aura Break', 'Battle Armor', 'Big Pecks',
+    'Bulletproof', 'Clear Body', 'Contrary', 'Damp',
+    'Dark Aura', 'Dry Skin', 'Fairy Aura', 'Filter',
+    'Flash Fire', 'Flower Gift', 'Flower Veil', 'Friend Guard',
+    'Fur Coat', 'Grass Pelt', 'Heatproof', 'Heavy Metal',
+    'Hyper Cutter', 'Immunity', 'Inner Focus', 'Insomnia',
+    'Keen Eye', 'Leaf Guard', 'Levitate', 'Light Metal',
+    'Lightning Rod', 'Limber', 'Magic Bounce', 'Magma Armor',
+    'Marvel Scale', 'Motor Drive', 'Multiscale', 'Oblivious',
+    'Overcoat', 'Own Tempo', 'Sand Veil', 'Sap Sipper',
+    'Shell Armor', 'Shield Dust', 'Simple', 'Snow Cloak',
+    'Solid Rock', 'Soundproof', 'Sticky Hold', 'Storm Drain',
+    'Sturdy', 'Suction Cups', 'Sweet Veil', 'Tangled Feet',
+    'Telepathy', 'Thick Fat', 'Unaware', 'Vital Spirit',
+    'Volt Absorb', 'Water Absorb', 'Water Veil', 'White Smoke',
+    'Wonder Guard', 'Wonder Skin'
+  );
+
+  if (attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze') && defenderAbilityIgnored) {
     defender.ability = '' as AbilityName;
     desc.attackerAbility = attacker.ability;
   }
@@ -133,6 +152,9 @@ export function calculateBWXY(
         : field.hasTerrain('Misty') ? 'Fairy'
         : 'Normal';
     }
+  } else if (move.named('Brick Break')) {
+    field.defenderSide.isReflect = false;
+    field.defenderSide.isLightScreen = false;
   }
 
   let hasAteAbilityTypeChange = false;
@@ -169,10 +191,13 @@ export function calculateBWXY(
   }
 
   const isGhostRevealed = attacker.hasAbility('Scrappy') || field.defenderSide.isForesight;
+  const isRingTarget = defender.hasItem('Ring Target') && !defender.hasAbility('Klutz');
   const type1Effectiveness =
-    getMoveEffectiveness(gen, move, defender.types[0], isGhostRevealed, field.isGravity);
+    getMoveEffectiveness(gen, move, defender.types[0], isGhostRevealed, field.isGravity,
+      isRingTarget);
   const type2Effectiveness = defender.types[1]
-    ? getMoveEffectiveness(gen, move, defender.types[1], isGhostRevealed, field.isGravity)
+    ? getMoveEffectiveness(gen, move, defender.types[1], isGhostRevealed, field.isGravity,
+      isRingTarget)
     : 1;
   let typeEffectiveness = type1Effectiveness * type2Effectiveness;
 
@@ -181,13 +206,6 @@ export function calculateBWXY(
   } else if (typeEffectiveness === 0 && move.hasType('Ground') &&
     defender.hasItem('Iron Ball') && !defender.hasAbility('Klutz')) {
     typeEffectiveness = 1;
-  } else if (typeEffectiveness === 0 && defender.hasItem('Ring Target')) {
-    const effectiveness = gen.types.get(toID(move.type))!.effectiveness;
-    if (effectiveness[defender.types[0]]! === 0) {
-      typeEffectiveness = type2Effectiveness;
-    } else if (defender.types[1] && effectiveness[defender.types[1]]! === 0) {
-      typeEffectiveness = type1Effectiveness;
-    }
   }
 
   if (typeEffectiveness === 0) {
@@ -289,6 +307,7 @@ export function calculateBWXY(
   const attackStat = move.category === 'Special' ? 'spa' : 'atk';
 
   // #endregion
+
   // #region (Special) Defense
 
   const defense = calculateDefenseBWXY(gen, attacker, defender, move, field, desc, isCritical);
@@ -601,18 +620,20 @@ export function calculateBPModsBWXY(
 ) {
   const bpMods = [];
 
+  const defenderItem = (defender.item && defender.item !== '')
+    ? defender.item : defender.disabledItem;
   let resistedKnockOffDamage =
-    !defender.item ||
-    (defender.named('Giratina-Origin') && defender.hasItem('Griseous Orb')) ||
-    (defender.name.includes('Arceus') && defender.item.includes('Plate')) ||
-    (defender.name.includes('Genesect') && defender.item.includes('Drive')) ||
-    (defender.named('Groudon', 'Groudon-Primal') && defender.hasItem('Red Orb')) ||
-    (defender.named('Kyogre', 'Kyogre-Primal') && defender.hasItem('Blue Orb'));
+    !defenderItem ||
+    (defender.named('Giratina-Origin') && defenderItem === 'Griseous Orb') ||
+    (defender.name.includes('Arceus') && defenderItem.includes('Plate')) ||
+    (defender.name.includes('Genesect') && defenderItem.includes('Drive')) ||
+    (defender.named('Groudon', 'Groudon-Primal') && defenderItem === 'Red Orb') ||
+    (defender.named('Kyogre', 'Kyogre-Primal') && defenderItem === 'Blue Orb');
 
   // The last case only applies when the Pokemon is holding the Mega Stone that matches its species
   // (or when it's already a Mega-Evolution)
-  if (!resistedKnockOffDamage && defender.item) {
-    const item = gen.items.get(toID(defender.item))!;
+  if (!resistedKnockOffDamage && defenderItem) {
+    const item = gen.items.get(toID(defenderItem))!;
     resistedKnockOffDamage = !!(item.megaEvolves && defender.name.includes(item.megaEvolves));
   }
 
