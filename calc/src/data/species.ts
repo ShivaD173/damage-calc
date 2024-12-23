@@ -10117,7 +10117,7 @@ const GAY_PATCH = {
       "hp": 83,
       "at": 80,
       "df": 75,
-      "sa": 130,
+      "sa": 120,
       "sd": 75,
       "sp": 116
     },
@@ -10601,6 +10601,23 @@ const GAY_PATCH = {
       "0": "Run Away"
     }
   },
+  "Slowbro": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 95,
+      "at": 100,
+      "df": 100,
+      "sa": 100,
+      "sd": 75,
+      "sp": 30
+    },
+    "abilities": {
+      "0": "Oblivious"
+    }
+  },
   "Slowbro-Galar": {
     "types": [
       "Poison",
@@ -10794,7 +10811,7 @@ const GAY_PATCH = {
       "Ghost"
     ],
     "bs": {
-      "hp": 65,
+      "hp": 60,
       "at": 80,
       "df": 110,
       "sa": 50,
@@ -11670,6 +11687,23 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Synchronize"
+    }
+  },
+  "Slowking": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 95,
+      "at": 65,
+      "df": 85,
+      "sa": 110,
+      "sd": 115,
+      "sp": 30
+    },
+    "abilities": {
+      "0": "Toxic Boost"
     }
   },
   "Slowking-Galar": {
@@ -13658,7 +13692,7 @@ const GAY_PATCH = {
       "sp": 50
     },
     "abilities": {
-      "0": "Intimidate"
+      "0": "Swarm"
     }
   },
   "Pachirisu": {
@@ -16149,11 +16183,11 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 111,
+      "hp": 106,
       "at": 82,
-      "df": 82,
+      "df": 77,
       "sa": 109,
-      "sd": 99,
+      "sd": 94,
       "sp": 29
     },
     "abilities": {
@@ -19826,12 +19860,12 @@ const GAY_PATCH = {
       "Grass"
     ],
     "bs": {
-      "hp": 155,
-      "at": 55,
-      "df": 75,
-      "sa": 110,
-      "sd": 120,
-      "sp": 45
+      "hp": 115,
+      "at": 80,
+      "df": 90,
+      "sa": 95,
+      "sd": 125,
+      "sp": 55
     },
     "abilities": {
       "0": "Tablets of Ruin"
@@ -21458,8 +21492,8 @@ const GAY_PATCH = {
       "Fairy"
     ],
     "bs": {
-      "hp": 80,
-      "at": 95,
+      "hp": 75,
+      "at": 100,
       "df": 115,
       "sa": 130,
       "sd": 115,
@@ -21629,9 +21663,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 90,
-      "at": 165,
+      "at": 160,
       "df": 150,
-      "sa": 95,
+      "sa": 100,
       "sd": 130,
       "sp": 50
     },
@@ -21646,9 +21680,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 90,
-      "at": 95,
+      "at": 100,
       "df": 80,
-      "sa": 165,
+      "sa": 160,
       "sd": 100,
       "sp": 150
     },

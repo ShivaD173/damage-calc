@@ -162,6 +162,8 @@ export function calculateSMSSSV(
   }
 
   const defenderAbilityIgnored = defender.hasAbility(
+    'Arctic Rush', 'Heat Sink', 'Molten Down', 'Tremor Sense', 
+    'Regal Majesty', 'Time Lord',
     'Armor Tail', 'Aroma Veil', 'Aura Break', 'Battle Armor',
     'Big Pecks', 'Bulletproof', 'Clear Body', 'Contrary',
     'Damp', 'Dazzling', 'Disguise', 'Dry Skin',
@@ -498,7 +500,7 @@ export function calculateSMSSSV(
         !defender.hasItem('Iron Ball') && defender.hasAbility('Levitate', 'Tremor Sense')) ||
       (move.flags.bullet && defender.hasAbility('Bulletproof')) ||
       (move.flags.sound && !move.named('Clangorous Soul') && defender.hasAbility('Soundproof')) ||
-      (move.priority > 0 && defender.hasAbility('Queenly Majesty', 'Dazzling', 'Armor Tail', 'Regal Majesty')) ||
+      (move.priority > 0 && defender.hasAbility('Queenly Majesty', 'Dazzling', 'Armor Tail', 'Regal Majesty', 'Time Lord')) ||
       (move.hasType('Ground') && defender.hasAbility('Earth Eater')) ||
       (move.flags.wind && defender.hasAbility('Wind Rider'))
   ) {
@@ -604,9 +606,11 @@ export function calculateSMSSSV(
       ? 'atk'
       : move.named('Body Press')
         ? 'def'
-        : move.category === 'Special'
-          ? 'spa'
-          : 'atk';
+        : attacker.hasAbility('Stuck In The Past')
+          ? 'spd'
+          : move.category === 'Special'
+            ? 'spa'
+            : 'atk';
   // #endregion
 
   // #region (Special) Defense
@@ -1372,9 +1376,11 @@ export function calculateAttackSMSSSV(
       ? 'atk'
       : move.named('Body Press')
         ? 'def'
-        : move.category === 'Special'
-          ? 'spa'
-          : 'atk';
+        : attacker.hasAbility('Stuck In The Past')
+          ? 'spd'
+          : move.category === 'Special'
+            ? 'spa'
+            : 'atk';
   desc.attackEVs =
     move.named('Foul Play')
       ? getStatDescriptionText(gen, defender, attackStat, defender.nature)
@@ -1792,7 +1798,7 @@ export function calculateFinalModsSMSSSV(
     desc.attackerAbility = attacker.ability;
   } else if ((attacker.hasAbility('Turboblaze') && move.hasType('Fire') && typeEffectiveness < 1) ||
     (attacker.hasAbility('Teravolt') && move.hasType('Electric') && typeEffectiveness < 1)) {
-    finalMods.push(5325);
+    finalMods.push(4915);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Tinted Lens') && typeEffectiveness < 1) {
     finalMods.push(8192);
