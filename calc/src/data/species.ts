@@ -8988,6 +8988,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   Dunsparce: {nfe: true},
   Duraludon: {nfe: true},
   Girafarig: {nfe: true},
+  Kitsunoh: {bs: {at: 117, sp: 128}},
   Primeape: {nfe: true},
   Tauros: {otherFormes: ['Tauros-Paldea-Aqua', 'Tauros-Paldea-Blaze', 'Tauros-Paldea-Combat']},
   Wooper: {otherFormes: ['Wooper-Paldea']},
@@ -9120,7 +9121,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Chuggalong: {
     types: ['Dragon', 'Poison'],
-    bs: {hp: 45, at: 43, df: 117, sa: 120, sd: 110, sp: 115},
+    bs: {hp: 45, at: 43, df: 117, sa: 120, sd: 110, sp: 108},
     weightkg: 201.6,
     abilities: {0: 'Armor Tail'},
   },
@@ -10116,7 +10117,7 @@ const GAY_PATCH = {
       "hp": 83,
       "at": 80,
       "df": 75,
-      "sa": 130,
+      "sa": 120,
       "sd": 75,
       "sp": 116
     },
@@ -10403,11 +10404,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 75,
-      "at": 95,
+      "at": 99,
       "df": 70,
-      "sa": 85,
+      "sa": 89,
       "sd": 75,
-      "sp": 125
+      "sp": 127
     },
     "abilities": {
       "0": "Limber"
@@ -10538,7 +10539,7 @@ const GAY_PATCH = {
       "Poison"
     ],
     "bs": {
-      "hp": 80,
+      "hp": 85,
       "at": 70,
       "df": 65,
       "sa": 120,
@@ -10547,6 +10548,23 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Clear Body"
+    }
+  },
+  "Golem": {
+    "types": [
+      "Rock",
+      "Ground"
+    ],
+    "bs": {
+      "hp": 90,
+      "at": 130,
+      "df": 130,
+      "sa": 55,
+      "sd": 65,
+      "sp": 65
+    },
+    "abilities": {
+      "0": "Rock Head"
     }
   },
   "Golem-Alola": {
@@ -10581,6 +10599,23 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Run Away"
+    }
+  },
+  "Slowbro": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 95,
+      "at": 100,
+      "df": 100,
+      "sa": 100,
+      "sd": 75,
+      "sp": 30
+    },
+    "abilities": {
+      "0": "Oblivious"
     }
   },
   "Slowbro-Galar": {
@@ -10725,12 +10760,12 @@ const GAY_PATCH = {
       "Grass"
     ],
     "bs": {
-      "hp": 70,
+      "hp": 60,
       "at": 50,
       "df": 70,
       "sa": 80,
       "sd": 80,
-      "sp": 160
+      "sp": 150
     },
     "abilities": {
       "0": "Soundproof"
@@ -10776,7 +10811,7 @@ const GAY_PATCH = {
       "Ghost"
     ],
     "bs": {
-      "hp": 65,
+      "hp": 60,
       "at": 80,
       "df": 110,
       "sa": 50,
@@ -11490,7 +11525,7 @@ const GAY_PATCH = {
       "Flying"
     ],
     "bs": {
-      "hp": 70,
+      "hp": 65,
       "at": 80,
       "df": 75,
       "sa": 100,
@@ -11612,7 +11647,7 @@ const GAY_PATCH = {
       "hp": 85,
       "at": 76,
       "df": 60,
-      "sa": 145,
+      "sa": 150,
       "sd": 90,
       "sp": 29
     },
@@ -11652,6 +11687,23 @@ const GAY_PATCH = {
     },
     "abilities": {
       "0": "Synchronize"
+    }
+  },
+  "Slowking": {
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "bs": {
+      "hp": 95,
+      "at": 65,
+      "df": 85,
+      "sa": 110,
+      "sd": 115,
+      "sp": 30
+    },
+    "abilities": {
+      "0": "Toxic Boost"
     }
   },
   "Slowking-Galar": {
@@ -12646,10 +12698,10 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 115,
+      "hp": 120,
       "at": 83,
       "df": 93,
-      "sa": 83,
+      "sa": 78,
       "sd": 93,
       "sp": 55
     },
@@ -12664,7 +12716,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 70,
-      "at": 130,
+      "at": 135,
       "df": 50,
       "sa": 105,
       "sd": 50,
@@ -13640,7 +13692,7 @@ const GAY_PATCH = {
       "sp": 50
     },
     "abilities": {
-      "0": "Intimidate"
+      "0": "Swarm"
     }
   },
   "Pachirisu": {
@@ -13820,9 +13872,9 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 81,
-      "at": 87,
+      "at": 85,
       "df": 74,
-      "sa": 74,
+      "sa": 68,
       "sd": 69,
       "sp": 143
     },
@@ -14312,8 +14364,8 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 45,
-      "at": 110,
+      "hp": 50,
+      "at": 115,
       "df": 135,
       "sa": 65,
       "sd": 135,
@@ -14754,7 +14806,7 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 85,
+      "hp": 80,
       "at": 60,
       "df": 130,
       "sa": 135,
@@ -15060,11 +15112,11 @@ const GAY_PATCH = {
       "Flying"
     ],
     "bs": {
-      "hp": 82,
+      "hp": 77,
       "at": 58,
-      "df": 85,
+      "df": 80,
       "sa": 108,
-      "sd": 85,
+      "sd": 80,
       "sp": 97
     },
     "abilities": {
@@ -16131,11 +16183,11 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 111,
+      "hp": 106,
       "at": 82,
-      "df": 82,
+      "df": 77,
       "sa": 109,
-      "sd": 99,
+      "sd": 94,
       "sp": 29
     },
     "abilities": {
@@ -16918,12 +16970,12 @@ const GAY_PATCH = {
       "Fire"
     ],
     "bs": {
-      "hp": 68,
+      "hp": 78,
       "at": 64,
       "df": 60,
-      "sa": 111,
+      "sa": 116,
       "sd": 60,
-      "sp": 117
+      "sp": 127
     },
     "abilities": {
       "0": "Corrosion"
@@ -17071,12 +17123,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17088,12 +17140,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17105,12 +17157,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17122,12 +17174,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17139,12 +17191,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17156,12 +17208,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17173,12 +17225,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17190,12 +17242,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17207,12 +17259,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17224,12 +17276,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17241,12 +17293,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17258,12 +17310,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17275,12 +17327,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17292,12 +17344,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17309,12 +17361,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17326,12 +17378,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17343,12 +17395,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -17360,12 +17412,12 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 99,
-      "at": 99,
-      "df": 99,
-      "sa": 99,
-      "sd": 99,
-      "sp": 99
+      "hp": 95,
+      "at": 95,
+      "df": 95,
+      "sa": 95,
+      "sd": 95,
+      "sp": 95
     },
     "abilities": {
       "0": "RKS System"
@@ -18329,7 +18381,7 @@ const GAY_PATCH = {
       ""
     ],
     "bs": {
-      "hp": 68,
+      "hp": 63,
       "at": 111,
       "df": 100,
       "sa": 111,
@@ -18720,10 +18772,10 @@ const GAY_PATCH = {
       "Ground"
     ],
     "bs": {
-      "hp": 130,
+      "hp": 125,
       "at": 140,
       "df": 105,
-      "sa": 45,
+      "sa": 50,
       "sd": 80,
       "sp": 50
     },
@@ -18839,7 +18891,7 @@ const GAY_PATCH = {
       "Ghost"
     ],
     "bs": {
-      "hp": 104,
+      "hp": 109,
       "at": 75,
       "df": 100,
       "sa": 110,
@@ -18856,7 +18908,7 @@ const GAY_PATCH = {
       "Fighting"
     ],
     "bs": {
-      "hp": 90,
+      "hp": 85,
       "at": 120,
       "df": 80,
       "sa": 85,
@@ -19231,7 +19283,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 85,
-      "at": 75,
+      "at": 70,
       "df": 77,
       "sa": 70,
       "sd": 105,
@@ -19808,12 +19860,12 @@ const GAY_PATCH = {
       "Grass"
     ],
     "bs": {
-      "hp": 155,
-      "at": 55,
-      "df": 75,
-      "sa": 110,
-      "sd": 120,
-      "sp": 45
+      "hp": 115,
+      "at": 80,
+      "df": 90,
+      "sa": 95,
+      "sd": 125,
+      "sp": 55
     },
     "abilities": {
       "0": "Tablets of Ruin"
@@ -19910,12 +19962,12 @@ const GAY_PATCH = {
       "Dragon"
     ],
     "bs": {
-      "hp": 99,
-      "at": 83,
-      "df": 91,
-      "sa": 125,
-      "sd": 83,
-      "sp": 109
+      "hp": 95,
+      "at": 79,
+      "df": 87,
+      "sa": 123,
+      "sd": 79,
+      "sp": 107
     },
     "abilities": {
       "0": "Protosynthesis"
@@ -19944,7 +19996,7 @@ const GAY_PATCH = {
       "Ground"
     ],
     "bs": {
-      "hp": 113,
+      "hp": 108,
       "at": 70,
       "df": 120,
       "sa": 135,
@@ -20199,12 +20251,12 @@ const GAY_PATCH = {
       "Dragon"
     ],
     "bs": {
-      "hp": 105,
-      "at": 115,
-      "df": 121,
-      "sa": 65,
-      "sd": 93,
-      "sp": 91
+      "hp": 103,
+      "at": 113,
+      "df": 115,
+      "sa": 63,
+      "sd": 89,
+      "sp": 87
     },
     "abilities": {
       "0": "Protosynthesis"
@@ -20216,11 +20268,11 @@ const GAY_PATCH = {
       "Dragon"
     ],
     "bs": {
-      "hp": 115,
+      "hp": 109,
       "at": 79,
-      "df": 93,
-      "sa": 137,
-      "sd": 91,
+      "df": 89,
+      "sa": 131,
+      "sd": 87,
       "sp": 75
     },
     "abilities": {
@@ -20455,11 +20507,11 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 75,
-      "at": 105,
-      "df": 105,
-      "sa": 105,
-      "sd": 105,
-      "sp": 105
+      "at": 75,
+      "df": 75,
+      "sa": 75,
+      "sd": 75,
+      "sp": 75
     },
     "abilities": {
       "0": "Pressure"
@@ -21343,7 +21395,7 @@ const GAY_PATCH = {
       "df": 110,
       "sa": 120,
       "sd": 80,
-      "sp": 60
+      "sp": 70
     },
     "abilities": {
       "0": "Water Absorb"
@@ -21440,8 +21492,8 @@ const GAY_PATCH = {
       "Fairy"
     ],
     "bs": {
-      "hp": 80,
-      "at": 95,
+      "hp": 75,
+      "at": 100,
       "df": 115,
       "sa": 130,
       "sd": 115,
@@ -21577,7 +21629,7 @@ const GAY_PATCH = {
     ],
     "bs": {
       "hp": 140,
-      "at": 85,
+      "at": 95,
       "df": 95,
       "sa": 145,
       "sd": 95,
@@ -21610,10 +21662,10 @@ const GAY_PATCH = {
       "Ice"
     ],
     "bs": {
-      "hp": 100,
-      "at": 165,
+      "hp": 90,
+      "at": 160,
       "df": 150,
-      "sa": 85,
+      "sa": 100,
       "sd": 130,
       "sp": 50
     },
@@ -21627,10 +21679,10 @@ const GAY_PATCH = {
       "Ghost"
     ],
     "bs": {
-      "hp": 100,
-      "at": 85,
+      "hp": 90,
+      "at": 100,
       "df": 80,
-      "sa": 165,
+      "sa": 160,
       "sd": 100,
       "sp": 150
     },

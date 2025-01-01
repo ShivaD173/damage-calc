@@ -4143,9 +4143,9 @@ const LGPE_MOVES = [
   'Sparkly Swirl',
   'Zippy Zap',
   'Floaty Fall',
-  'Pika Papow',
+  // 'Pika Papow',
   'Splishy Splash',
-  'Veevee Volley',
+  // 'Veevee Volley',
 ];
 for (const m of LGPE_MOVES) {
   delete SS[m];
@@ -4202,7 +4202,6 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     maxPower: 130,
     secondaries: true,
     isSound: true,
-    makesContact: true,
   },
   'Aqua Step': {
     bp: 80,
@@ -4483,7 +4482,6 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     makesContact: true,
     isPunch: true,
     priority: 1,
-    // Sheer Force boost implemented in gen789.ts
   },
   'Kowtow Cleave': {
     bp: 85,

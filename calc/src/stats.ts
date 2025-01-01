@@ -168,7 +168,7 @@ export const Stats = new (class {
   getHiddenPowerIVs(gen: Generation, hpType: HPTypeName) {
     const hp = HP[hpType];
     if (!hp) return undefined;
-    return gen.num === 2 ? Stats.DVsToIVs(hp.dvs) : hp.ivs;
+    return gen.num === 2 ? Stats.DVsToIVs(hp.dvs) : {};
   }
 
   getHiddenPower(gen: Generation, ivs: StatsTable) {

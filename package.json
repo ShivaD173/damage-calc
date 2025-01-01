@@ -7,7 +7,7 @@
   "packageManager": "yarn@1.22.22",
   "devDependencies": {
     "eslint": "^8.57.0",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "subpkg": "^4.1.0"
   },
   "optionalDependencies": {

@@ -391,6 +391,8 @@ const SV = SV_orig.concat([
   'Mega Shift Y',
   'Ancestor',
   'Serene Gracidea',
+  'Loophole',
+  'Stuck In The Past'
 ]);
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];

@@ -68,7 +68,21 @@ export function calculateDPP(
     return result;
   }
 
-  if (attacker.hasAbility('Mold Breaker')) {
+  const defenderAbilityIgnored = defender.hasAbility(
+    'Battle Armor', 'Clear Body', 'Damp', 'Dry Skin',
+    'Filter', 'Flash Fire', 'Flower Gift', 'Heatproof',
+    'Hyper Cutter', 'Immunity', 'Inner Focus', 'Insomnia',
+    'Keen Eye', 'Leaf Guard', 'Levitate', 'Lightning Rod',
+    'Limber', 'Magma Armor', 'Marvel Scale', 'Motor Drive',
+    'Oblivious', 'Own Tempo', 'Sand Veil', 'Shell Armor',
+    'Shield Dust', 'Simple', 'Snow Cloak', 'Solid Rock',
+    'Soundproof', 'Sticky Hold', 'Storm Drain', 'Sturdy',
+    'Suction Cups', 'Tangled Feet', 'Thick Fat', 'Unaware',
+    'Vital Spirit', 'Volt Absorb', 'Water Absorb', 'Water Veil',
+    'White Smoke', 'Wonder Guard'
+  );
+
+  if (attacker.hasAbility('Mold Breaker') && defenderAbilityIgnored) {
     defender.ability = '' as AbilityName;
     desc.attackerAbility = attacker.ability;
   }
@@ -93,6 +107,9 @@ export function calculateDPP(
     desc.attackerItem = attacker.item;
     desc.moveBP = move.bp;
     desc.moveType = move.type;
+  } else if (move.named('Brick Break')) {
+    field.defenderSide.isReflect = false;
+    field.defenderSide.isLightScreen = false;
   }
 
   if (attacker.hasAbility('Normalize') && !move.named('Struggle')) {
@@ -198,6 +215,7 @@ export function calculateDPP(
   const attack = calculateAttackDPP(gen, attacker, defender, move, field, desc, isCritical);
 
   // #endregion
+
   // #region (Special) Defense
   const defense = calculateDefenseDPP(gen, attacker, defender, move, field, desc, isCritical);
 
