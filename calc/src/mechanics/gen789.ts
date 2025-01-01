@@ -451,7 +451,7 @@ export function calculateSMSSSV(
       (move.named('Synchronoise') && !defender.hasType(attacker.types[0]) &&
         (!attacker.types[1] || !defender.hasType(attacker.types[1]))) ||
       (move.named('Dream Eater') &&
-        (!(defender.hasStatus('slp') || defender.hasAbility('Comatose')))) ||
+        (!(defender.hasStatus('slp') || attacker.hasStatus('slp') || defender.hasAbility('Comatose')))) ||
       (move.named('Steel Roller') && !field.terrain) ||
       (move.named('Poltergeist') && (!defender.item || isQPActive(defender, field)))
   ) {
