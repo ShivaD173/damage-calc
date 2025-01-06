@@ -1260,11 +1260,6 @@ export function calculateBPModsSMSSSV(
     desc.attackerAbility = attacker.ability;
   }
 
-  if (attacker.hasAbility('Transphobia') && defender.gender === 'N') {
-    bpMods.push(5325);
-    desc.attackerAbility = attacker.ability;
-  }
-
   // The -ate abilities already changed move typing earlier, so most checks are done and desc is set
   // However, Max Moves also don't boost -ate Abilities
   if (!move.isMax && hasAteAbilityTypeChange) {
@@ -1288,13 +1283,13 @@ export function calculateBPModsSMSSSV(
 
   if ((attacker.hasAbility('Reckless') && (move.recoil || move.hasCrashDamage || move.mindBlownRecoil || move.named('Explosion', 'Self-Destruct', 'Misty Explosion'))) ||
     (attacker.hasAbility('Transphobia') && defender.gender === 'N') ||
+    (attacker.hasAbility('Iron Fist') && move.flags.punch) ||
     (attacker.hasAbility('Homophobia') && attacker.abilityOn)) {
     bpMods.push(5325);
     desc.attackerAbility = attacker.ability;
   }
-  if ((attacker.hasAbility('Iron Fist') && move.flags.punch) ||
-      (attacker.hasAbility('Il Vaticano')) && attacker.abilityOn) {
-    bpMods.push(5734);
+  if (attacker.hasAbility('Il Vaticano') && attacker.abilityOn) {
+    bpMods.push(6144);
     desc.attackerAbility = attacker.ability;
   }
 
