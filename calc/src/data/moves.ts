@@ -4951,6 +4951,8 @@ const GAY_PATCH = {
   'Egg Bomb': {bp: 90, type: 'Fire'},
   'Aurora Beam': {bp: 75},
   'Spark': {bp: 70},
+  'Supercell Slam': {bp: 110},
+  'Jump Kick': {bp: 110},
   'Poison Tail': {bp: 75, target: 'allAdjacentFoes'},
   'Feint': {bp: 40},
   'Mega Punch': {bp: 90},
