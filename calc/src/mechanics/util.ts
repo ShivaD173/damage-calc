@@ -157,7 +157,7 @@ export function getMoveEffectiveness(
     if (effectiveness === 0 && isRingTarget) {
       effectiveness = 1;
     } else if (effectiveness === 0 && isDauntless) {
-      effectiveness = 0.5
+      effectiveness = 0.5;
     }
     if (move.named('Flying Press')) {
       // Can only do this because flying has no other interactions

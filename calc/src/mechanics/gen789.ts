@@ -123,7 +123,7 @@ export function calculateSMSSSV(
     move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
   }
   if (move.named('Veevee Volley')) {
-    move.type = attacker.types[0]
+    move.type = attacker.types[0];
   }
   if (attacker.hasAbility("Ballin'") && move.flags.bullet) {
     move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
@@ -162,7 +162,7 @@ export function calculateSMSSSV(
   }
 
   const defenderAbilityIgnored = defender.hasAbility(
-    'Arctic Rush', 'Heat Sink', 'Molten Down', 'Tremor Sense', 
+    'Arctic Rush', 'Heat Sink', 'Molten Down', 'Tremor Sense',
     'Regal Majesty', 'Time Lord',
     'Armor Tail', 'Aroma Veil', 'Aura Break', 'Battle Armor',
     'Big Pecks', 'Bulletproof', 'Clear Body', 'Contrary',
@@ -1095,7 +1095,7 @@ export function calculateBPModsSMSSSV(
     bpMods.push(8192);
     desc.moveBP = basePower * 2;
   } else if (
-    move.named('Expanding Force') && isGrounded(attacker, field) && field.hasTerrain('Psychic')
+    move.named('Expanding Force', 'Expanding Maws') && isGrounded(attacker, field) && field.hasTerrain('Psychic')
   ) {
     move.target = 'allAdjacentFoes';
     bpMods.push(6144);
