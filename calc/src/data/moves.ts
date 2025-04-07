@@ -4928,7 +4928,7 @@ const GAY_PATCH = {
   'Fury Attack': {bp: 25, type: 'Flying', multihit: [2, 5]},
   'Fury Swipes': {bp: 25, multihit: [2, 5]},
   'Tail Slap': {bp: 25, multihit: [3, 5]},
-  'Pin Missile': {bp: 25, type: 'Flying', multihit: [2, 5]},
+  'Pin Missile': {bp: 25, multihit: [2, 5]},
   'Flame Burst': {bp: 20, type: 'Fire', multihit: [2, 5]},
   'Rock Blast': {bp: 25, type: 'Rock', multihit: [2, 5]},
   'Arm Thrust': {bp: 25, type: 'Fighting', multihit: [2, 5]},
