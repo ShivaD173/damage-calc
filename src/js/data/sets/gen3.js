@@ -384,7 +384,7 @@ var SETDEX_ADV = {
   "Ariados": {
     "NU Baton Pass": {"ability":"Insomnia","item":"Leftovers","nature":"Impish","evs":{"hp":252,"at":40,"df":108,"sd":108},"moves":["Sludge Bomb","Signal Beam","Spider Web","Baton Pass"]},
     "ZU Defensive Pivot": {"ability":"Swarm","item":"Leftovers","nature":"Relaxed","ivs":{"sp":20},"evs":{"hp":252,"df":252,"sd":4},"moves":["Psychic","Sludge Bomb","Baton Pass","Protect"]},
-    "ZU Agility": {"ability":"Swarm","item":"Leftovers","nature":"Adamant","ivs":{"hp":30,"at":30,"df":30,"sa":30,"sd":30},"evs":{"hp":84,"at":252,"sp":172},"moves":["Agility","Sludge Bomb","Signal Beam","Hidden Power Flying"]},
+    "ZU Agility": {"ability":"Swarm","item":"Leftovers","nature":"Adamant","ivs":{"hp":30,"at":30,"df":30,"sa":30,"sd":30},"evs":{"hp":48,"at":252,"df":12,"sp":196},"moves":["Agility","Sludge Bomb","Signal Beam","Hidden Power Flying"]},
     "ZU All-Out Attacker": {"ability":"Swarm","item":"Leftovers","nature":"Hasty","ivs":{"at":30,"sa":30},"evs":{"hp":104,"at":184,"sp":220},"moves":["Sludge Bomb","Hidden Power Grass","Psychic","Night Shade"]}
   },
   "Qwilfish": {
@@ -452,7 +452,7 @@ var SETDEX_ADV = {
   "Volbeat": {
     "NU Tail Glow Pass": {"ability":"Swarm","item":"Leftovers","nature":"Timid","evs":{"hp":252,"sa":4,"sp":252},"moves":["Tail Glow","Baton Pass","Substitute","Thunderbolt"]},
     "PU Tail Glow": {"ability":"Illuminate","item":"Leftovers","nature":"Timid","evs":{"sa":252,"sd":4,"sp":252},"moves":["Tail Glow","Thunderbolt","Ice Punch","Moonlight"]},
-    "ZU Choice Band": {"ability":"Swarm","item":"Choice Band","nature":"Jolly","evs":{"at":252,"sd":4,"sp":252},"moves":["Signal Beam","Brick Break","Quick Attack","Double-Edge"]}
+    "ZU Wallbreaker": {"ability":"Swarm","item":"Choice Band","nature":"Jolly","evs":{"at":252,"sd":4,"sp":252},"moves":["Signal Beam","Brick Break","Quick Attack","Double-Edge"]}
   },
   "Illumise": {
     "NU Baton Pass": {"ability":"Oblivious","item":"Salac Berry","nature":"Timid","evs":{"hp":96,"sa":252,"sp":160},"moves":["Substitute","Baton Pass","Ice Punch","Thunderbolt"]},
@@ -863,7 +863,7 @@ var SETDEX_ADV = {
   },
   "Flareon": {
     "RU Mixed Offensive": {"ability":"Flash Fire","item":"Silk Scarf","nature":"Hasty","ivs":{"at":30,"sa":30},"evs":{"at":152,"sa":144,"sp":212},"moves":["Fire Blast","Double-Edge","Hidden Power Grass","Quick Attack"]},
-    "NU Mixed Attacker": {"ability":"Flash Fire","item":"Silk Scarf","nature":"Hasty","ivs":{"at":30,"sa":30},"evs":{"at":228,"sa":28,"sp":252},"moves":["Double-Edge","Fire Blast","Hidden Power Grass","Quick Attack"]},
+    "NU Mixed Attacker": {"ability":"Flash Fire","item":"Silk Scarf","nature":"Lonely","ivs":{"at":30,"sa":30},"evs":{"at":228,"sa":28,"sp":252},"moves":["Double-Edge","Fire Blast","Hidden Power Grass","Quick Attack"]},
     "NU Special Attacker": {"ability":"Flash Fire","item":"Leftovers","nature":"Modest","ivs":{"at":30,"sa":30},"evs":{"hp":8,"df":84,"sa":192,"sp":224},"moves":["Fire Blast","Hidden Power Grass","Substitute","Baton Pass"]}
   },
   "Porygon": {
@@ -1444,8 +1444,7 @@ var SETDEX_ADV = {
     "RU Bulky Spikes": {"ability":"Inner Focus","item":"Leftovers","nature":"Careful","evs":{"hp":252,"sd":80,"sp":176},"moves":["Spikes","Explosion","Toxic","Shadow Ball"]},
     "RU Fast Spikes": {"ability":"Inner Focus","item":"Leftovers","nature":"Jolly","evs":{"hp":252,"sd":4,"sp":252},"moves":["Spikes","Explosion","Taunt","Earthquake"]},
     "NU Bulky Spikes": {"ability":"Inner Focus","item":"Leftovers","nature":"Naive","evs":{"hp":252,"at":4,"sp":252},"moves":["Spikes","Taunt","Ice Beam","Explosion"]},
-    "NU Physical Spikes": {"ability":"Inner Focus","item":"Leftovers","nature":"Jolly","evs":{"at":252,"df":4,"sp":252},"moves":["Spikes","Earthquake","Shadow Ball","Explosion"]},
-    "OU Showdown Usage": {"ability":"Inner Focus","item":"Choice Band","nature":"Adamant","evs":{"hp":188,"at":120,"sp":200},"moves":["Spikes","Explosion","Ice Beam","Taunt"]}
+    "NU Physical Spikes": {"ability":"Inner Focus","item":"Leftovers","nature":"Jolly","evs":{"at":252,"df":4,"sp":252},"moves":["Spikes","Earthquake","Shadow Ball","Explosion"]}
   },
   "Sealeo": {
     "PU Tank": {"ability":"Thick Fat","item":"Leftovers","nature":"Timid","ivs":{"at":2,"sa":30},"evs":{"sa":236,"sd":48,"sp":224},"moves":["Surf","Ice Beam","Hidden Power Grass","Substitute"]}

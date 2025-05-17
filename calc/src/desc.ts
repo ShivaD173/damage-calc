@@ -633,7 +633,8 @@ function getEndOfTurn(
       damage -= Math.floor(defender.maxHP() / 8);
       texts.push('Black Sludge damage');
     }
-  } else if (defender.hasItem('Sticky Barb')) {
+  } else if (defender.hasItem('Sticky Barb') && !loseItem &&
+    !defender.hasAbility('Magic Guard', 'Klutz')) {
     damage -= Math.floor(defender.maxHP() / 8);
     texts.push('Sticky Barb damage');
   }
@@ -715,9 +716,8 @@ function getEndOfTurn(
       texts.push('trapping damage');
     }
   }
-  if (defender.isSaltCure && !defender.hasAbility('Magic Guard')) {
-    const isWaterOrSteel = defender.hasType('Water', 'Steel') ||
-      (defender.teraType && ['Water', 'Steel'].includes(defender.teraType));
+  if (field.defenderSide.isSaltCured && !defender.hasAbility('Magic Guard')) {
+    const isWaterOrSteel = defender.hasType('Water', 'Steel');
     damage -= Math.floor(defender.maxHP() / (isWaterOrSteel ? 4 : 8));
     texts.push('Salt Cure');
   }
